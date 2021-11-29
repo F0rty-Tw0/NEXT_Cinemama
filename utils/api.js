@@ -1,12 +1,17 @@
-import { getApiAuthorizationHeaders } from 'utils/proxy';
+import getApiAccessToken from 'utils/proxy';
 
 const _fetchApi = async (query, isExtended) => {
-  const authorization = await getApiAuthorizationHeaders();
+  const token = await getApiAccessToken();
+  const options = {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  };
   const res = await fetch(
     `https://cine-mama.herokuapp.com/api/${query}${
       isExtended ? '?type=extended' : ''
     }`,
-    authorization
+    options
   );
   return res.json();
 };

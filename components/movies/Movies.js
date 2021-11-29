@@ -1,14 +1,14 @@
 import Movie from '@/components/movies/Movie';
 
-const AllMovies = ({ movies }) => {
+const Movies = ({ movies }) => {
   return (
     <>
       This is All Movies <br></br>
       {movies.map((movie) => (
-        <Movie movie={movie} key={movie.id} />
+        <Movie {...movie} key={movie.id} />
       ))}
     </>
   );
 };
 
-export default AllMovies;
+export default Movies;

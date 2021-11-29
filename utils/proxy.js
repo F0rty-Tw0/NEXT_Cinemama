@@ -1,9 +1,23 @@
-const url = 'https://cine-mama.herokuapp.com/api/auth/login'; //NOTE: env
+import dayjs from 'dayjs';
+import jwtDecode from 'jwt-decode';
+const url = 'https://cine-mama.herokuapp.com/api/auth/login';
 const credentials = { email: 'admin@gmail.com', password: 'test' }; //NOTE: env
-let headers;
+let accessToken;
 
-const getApiAuthorizationHeaders = async () => {
-  if (!headers) {
+const _checkIfTokenIsExpired = (token) => {
+  const decodedToken = jwtDecode(token);
+
+  const expirationDate = dayjs(decodedToken.exp * 1000);
+  const currentDate = dayjs();
+
+  if (currentDate.isAfter(expirationDate)) {
+    return true;
+  }
+  return false;
+};
+
+const getApiAccessToken = async () => {
+  if (!accessToken || _checkIfTokenIsExpired(accessToken)) {
     const options = {
       method: 'POST',
       mode: 'cors',
@@ -18,16 +32,9 @@ const getApiAuthorizationHeaders = async () => {
     };
     const authResponse = await fetch(url, options);
     const apiAccount = await authResponse.json();
-    const accessToken = apiAccount.accessToken;
-
-    const authorization = `Bearer ${accessToken}`;
-    headers = {
-      headers: {
-        authorization,
-      },
-    };
+    accessToken = apiAccount.accessToken;
   }
-  return headers;
+  return accessToken;
 };
 
-export { getApiAuthorizationHeaders };
+export default getApiAccessToken;

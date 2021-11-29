@@ -1,15 +1,14 @@
 import Link from 'next/link';
 
-const Movie = ({ movie }) => {
+const Movie = ({ id, title }) => {
   return (
     <>
       This is movie:
-      <Link href={`/movies/${movie.id}`} as={`/movies/${movie.id}`}>
-        {movie.title}
+      <Link href={`/movies/${id}`} as={`/movies/${id}`}>
+        {title}
       </Link>
     </>
   );
 };
-
 
 export default Movie;
