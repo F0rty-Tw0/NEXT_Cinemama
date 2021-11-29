@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Link from 'next/link';
-const custom404 = () => {
+const ErrorPage = () => {
   return (
     <div className={styles.container}>
       <Head>
@@ -17,4 +17,4 @@ const custom404 = () => {
     </div>
   );
 };
-export default custom404;
+export default ErrorPage;

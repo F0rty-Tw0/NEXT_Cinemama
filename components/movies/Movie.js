@@ -1,11 +1,11 @@
 import Link from 'next/link';
 
-const Movie = ({ name }) => {
+const Movie = ({ id, title }) => {
   return (
     <>
-      This is movie:{' '}
-      <Link href={`/movies/${name}`} as={`/movies/${name}`}>
-        {name}
+      This is movie:
+      <Link href={`/movies/${id}`} as={`/movies/${id}`}>
+        {title}
       </Link>
     </>
   );
