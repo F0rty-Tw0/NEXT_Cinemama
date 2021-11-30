@@ -1,13 +1,29 @@
 import Link from 'next/link';
-import { useState } from 'react';
-import Authentication from '@/components/modals/Authentication';
+import { useState, useEffect } from 'react';
+import AuthenticationModal from 'features/authentication/AuthenticationModal';
+import unAuthorizeUser from 'features/authentication/unAuthorizeUser';
+import getAuthenticatedUserEmail from 'features/authentication/getAuthenticatedUserEmail';
 
-const Nav = ({ className, email }) => {
-  const [isAuthenticationOpen, setIsAuthenticationOpen] = useState(false);
+const Nav = ({ className }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  useEffect(() => {
+    (() => {
+      if (!email) {
+        setEmail(getAuthenticatedUserEmail());
+      }
+    })();
+  });
 
-  const toggleAuthentication = () => {
-    setIsAuthenticationOpen(!isAuthenticationOpen);
+  const toggleAuthenticationModal = () => {
+    setIsOpen(!isOpen);
   };
+
+  const logout = () => {
+    unAuthorizeUser();
+    setEmail('');
+  };
+  
   return (
     <nav className={className}>
       This is Nav
@@ -21,11 +37,17 @@ const Nav = ({ className, email }) => {
         <li>
           <Link href={`/contact`}>contact</Link>
         </li>
-        <p>{email}</p>
+        {email && <p>{email}</p>}
       </ul>
-      <button onClick={toggleAuthentication}>login</button>
-      {isAuthenticationOpen && (
-        <Authentication closeModal={toggleAuthentication}></Authentication>
+      {email ? (
+        <button onClick={logout}>logout</button>
+      ) : (
+        <button onClick={toggleAuthenticationModal}>login</button>
+      )}
+      {isOpen && (
+        <AuthenticationModal
+          closeModal={toggleAuthenticationModal}
+        ></AuthenticationModal>
       )}
     </nav>
   );

@@ -12,6 +12,11 @@ const getAuthorization = async (url, credentials) => {
     body: JSON.stringify(credentials),
   };
   const authResponse = await fetch(url, options);
-  return authResponse.json();
+  const response = await authResponse.json();
+  if (authResponse.status === 200) {
+    return response;
+  } else {
+    throw new Error(response?.message);
+  }
 };
 export default getAuthorization;

@@ -1,21 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
-import getUserAccessToken from '../../utils/hooks/getUserAccessToken';
+import authorizeUser from './authorizeUser';
 
-const Authentication = ({ closeModal }) => {
+const AuthenticationModal = ({ closeModal }) => {
   const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
   const [password, setPassword] = useState('');
-  
+
   const router = useRouter();
 
-  const submit = async (event) => {
-    event.preventDefault();
-    const token = await getUserAccessToken({ email, password });
-    if (token) {
-      router.push('/');
-      closeModal();
-    }
-  };
+  const login = useCallback(
+    async (event) => {
+      event.preventDefault();
+      try {
+        await authorizeUser({ email, password });
+        router.push('/');
+        closeModal();
+      } catch (err) {
+        setError(err.message);
+      }
+    },
+    [closeModal, email, password, router]
+  );
+
+  useEffect(() => {
+    // Prefetch the dashboard page
+    router.prefetch('/');
+  }, [router]);
 
   return (
     <div>
@@ -25,9 +36,10 @@ const Authentication = ({ closeModal }) => {
         <button onClick={() => closeModal()}>X</button>
         <div>
           <h1> Modal Title</h1>
+          <h2>{error}</h2>
         </div>
         <div>
-          <form onSubmit={submit}>
+          <form onSubmit={login}>
             <label>email</label>
             <br />
             <input
@@ -54,4 +66,4 @@ const Authentication = ({ closeModal }) => {
   );
 };
 
-export default Authentication;
+export default AuthenticationModal;

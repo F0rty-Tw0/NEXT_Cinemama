@@ -1,5 +1,4 @@
-import getApiAccessToken from 'utils/hooks/getApiAccessToken';
-import getUserAccessToken from './hooks/getUserAccessToken';
+import { getApiAccessToken, getUserAccessToken } from 'services/getAccessToken';
 
 const _fetchData = async (token, query, isExtended) => {
   const options = {
@@ -8,7 +7,9 @@ const _fetchData = async (token, query, isExtended) => {
     },
   };
   const res = await fetch(
-    `https://cine-mama.herokuapp.com/api/${query}${isExtended ? '?type=extended' : ''}`,
+    `https://cine-mama.herokuapp.com/api/${query}${
+      isExtended ? '?type=extended' : ''
+    }`,
     options
   );
   return res.json();

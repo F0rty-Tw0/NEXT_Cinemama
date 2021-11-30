@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import BaseLayout from '@/components/layouts/BaseLayout';
+import BaseLayout from 'layouts/BaseLayout';
 import ErrorPage from '../404';
 import { getMovies, getMovieById } from 'endpoints/movies';
 

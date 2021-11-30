@@ -1,4 +1,4 @@
-import { fetchWithApiToken } from '../utils/fetchApi';
+import { fetchWithApiToken } from '../services/fetchApi';
 
 const getMovies = async () => {
   return fetchWithApiToken('movies', true);

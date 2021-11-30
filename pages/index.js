@@ -1,4 +1,4 @@
-import BaseLayout from 'components/layouts/BaseLayout';
+import BaseLayout from 'layouts/BaseLayout';
 import Movies from 'components/movies/Movies';
 import { getMovies } from 'endpoints/movies';
 
