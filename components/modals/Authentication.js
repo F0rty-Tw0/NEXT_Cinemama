@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import getUserAccessToken from '../../utils/hooks/getUserAccessToken';
+
 const Authentication = ({ closeModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
   const router = useRouter();
+
   const submit = async (event) => {
     event.preventDefault();
     const token = await getUserAccessToken({ email, password });
@@ -13,6 +16,7 @@ const Authentication = ({ closeModal }) => {
       closeModal();
     }
   };
+
   return (
     <div>
       Backdrop

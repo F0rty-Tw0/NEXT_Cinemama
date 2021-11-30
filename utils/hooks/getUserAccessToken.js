@@ -1,6 +1,6 @@
 import checkIfTokenIsExpired from './checkIfTokenIsExpired';
 import getAuthorization from './getAuthorization';
-const url = 'http://localhost:8080/api/auth/login';
+const url = 'https://cine-mama.herokuapp.com/api/auth/login';
 let accessToken;
 
 const getUserAccessToken = async (credentials) => {

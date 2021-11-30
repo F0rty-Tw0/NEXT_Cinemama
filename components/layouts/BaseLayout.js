@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Nav from 'components/shared/Nav';
 import Header from 'components/shared/Header';
@@ -6,10 +6,12 @@ import Footer from 'components/shared/Footer';
 import Carousel from 'components/shared/Carousel';
 
 const BaseLayout = ({ className, title, description, children }) => {
+  const [email, setEmail] = useState('');
+
   useEffect(() => {
     (async () => {
-      const userObj = JSON.parse(localStorage.getItem('user'));
-      console.log(userObj);
+      const user = JSON.parse(localStorage.getItem('user'));
+      setEmail(user.email);
     })();
   });
   return (
@@ -22,7 +24,7 @@ const BaseLayout = ({ className, title, description, children }) => {
       <main className={`${className}`}>
         <Header className='base-layout__header' />
         <Carousel className='base-layout__carousel' />
-        <Nav className='base-layout__nav' />
+        <Nav email={email} className='base-layout__nav' />
         <section className='base-layout__content'>{children}</section>
         <Footer className='base-layout__footer' />
       </main>
