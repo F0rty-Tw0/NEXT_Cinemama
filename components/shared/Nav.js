@@ -1,5 +1,13 @@
 import Link from 'next/link';
-const Nav = ({ className }) => {
+import { useState } from 'react';
+import Authentication from '@/components/modals/Authentication';
+
+const Nav = ({ className, email }) => {
+  const [isAuthenticationOpen, setIsAuthenticationOpen] = useState(false);
+
+  const toggleAuthentication = () => {
+    setIsAuthenticationOpen(!isAuthenticationOpen);
+  };
   return (
     <nav className={className}>
       This is Nav
@@ -11,9 +19,14 @@ const Nav = ({ className }) => {
           <Link href={`/about`}>About</Link>
         </li>
         <li>
-          <Link href={`/contact`}>Contact</Link>
+          <Link href={`/contact`}>contact</Link>
         </li>
+        <p>{email}</p>
       </ul>
+      <button onClick={toggleAuthentication}>login</button>
+      {isAuthenticationOpen && (
+        <Authentication closeModal={toggleAuthentication}></Authentication>
+      )}
     </nav>
   );
 };

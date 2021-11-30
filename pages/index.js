@@ -1,6 +1,6 @@
 import BaseLayout from 'components/layouts/BaseLayout';
 import Movies from 'components/movies/Movies';
-import { getMovies } from 'utils/api';
+import { getMovies } from 'endpoints/movies';
 
 const Home = ({ movies }) => {
   return (

@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router';
 import BaseLayout from '@/components/layouts/BaseLayout';
 import ErrorPage from '../404';
-import { getMovies, getMovieById } from 'utils/api';
+import { getMovies, getMovieById } from 'endpoints/movies';
+
 const Movie = ({ movie }) => {
   const router = useRouter();
   if (!router.isFallback && !movie.id) {
@@ -25,6 +26,7 @@ const Movie = ({ movie }) => {
     </BaseLayout>
   );
 };
+
 // This function gets called at build time on server-side.
 // It may be called again, on a serverless function, if
 // the path has not been generated.
@@ -52,5 +54,6 @@ const getStaticProps = async ({ params }) => {
     revalidate: 60,
   };
 };
+
 export { getStaticProps, getStaticPaths };
 export default Movie;
