@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import BaseLayout from '@/components/layouts/BaseLayout';
 import ErrorPage from '../404';
-import { getMovies, getMovieById } from 'utils/api';
+import { getMovies, getMovieById } from 'endpoints/movies';
 const Movie = ({ movie }) => {
   const router = useRouter();
   if (!router.isFallback && !movie.id) {

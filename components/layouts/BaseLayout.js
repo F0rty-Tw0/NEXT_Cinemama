@@ -1,9 +1,17 @@
+import { useEffect } from 'react';
 import Head from 'next/head';
 import Nav from 'components/shared/Nav';
 import Header from 'components/shared/Header';
 import Footer from 'components/shared/Footer';
 import Carousel from 'components/shared/Carousel';
+
 const BaseLayout = ({ className, title, description, children }) => {
+  useEffect(() => {
+    (async () => {
+      const userObj = JSON.parse(localStorage.getItem('user'));
+      console.log(userObj);
+    })();
+  });
   return (
     <>
       <Head>
