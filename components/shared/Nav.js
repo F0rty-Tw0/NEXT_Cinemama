@@ -23,7 +23,7 @@ const Nav = ({ className }) => {
     unAuthorizeUser();
     setEmail('');
   };
-  
+
   return (
     <nav className={className}>
       This is Nav
