@@ -5,7 +5,7 @@ const Movie = ({ id, title }) => {
     <>
       This is movie:
       <Link href={`/movies/${id}`} as={`/movies/${id}`}>
-        {title}
+        {`title: ${title}`}
       </Link>
     </>
   );
