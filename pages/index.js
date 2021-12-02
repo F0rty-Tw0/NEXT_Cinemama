@@ -1,15 +1,16 @@
+import dayjs from 'dayjs';
 import BaseLayout from 'layouts/BaseLayout';
-import Movies from 'components/movies/Movies';
-import { getMovies } from 'endpoints/movies';
+import Schedules from 'components/schedules/Schedules';
+import { getSchedulesBetweenDates } from 'endpoints/schedules';
 
-const Home = ({ movies }) => {
+const Home = ({ schedules }) => {
   return (
     <BaseLayout
       title='Welcome to the Cinemama Theaters'
       description='The best place to watch movies'
       className='base-layout__main'
     >
-      <Movies movies={movies} />
+      <Schedules schedules={schedules} />
     </BaseLayout>
   );
 };
@@ -18,10 +19,15 @@ const Home = ({ movies }) => {
 // It may be called again, on a serverless function, if
 // revalidation is enabled and a new request comes in
 const getStaticProps = async () => {
-  const movies = await getMovies();
+  const imaginaryDate = dayjs('2021-10-23').format('YYYY-MM-DD');
+  // const today = dayjs().format('YYYY-MM-DD');
+  const schedules = await getSchedulesBetweenDates(
+    imaginaryDate,
+    imaginaryDate
+  );
   return {
     props: {
-      movies,
+      schedules,
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in

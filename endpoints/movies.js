@@ -1,7 +1,7 @@
 import { fetchWithApiToken } from '../services/fetchApi';
 
 const getMovies = async () => {
-  return fetchWithApiToken('movies', true);
+  return fetchWithApiToken('schedules', true);
 };
 
 const getMovieById = async (id) => {
