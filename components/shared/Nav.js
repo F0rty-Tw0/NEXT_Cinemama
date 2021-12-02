@@ -7,8 +7,10 @@ import getAuthenticatedUserEmail from 'features/authentication/getAuthenticatedU
 const Nav = ({ className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState('');
+
   useEffect(() => {
     (() => {
+      console.log(email);
       if (!email) {
         setEmail(getAuthenticatedUserEmail());
       }

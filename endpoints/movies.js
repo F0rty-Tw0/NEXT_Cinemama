@@ -7,4 +7,5 @@ const getMovies = async () => {
 const getMovieById = async (id) => {
   return fetchWithApiToken(`movies/${id}`, true);
 };
+
 export { getMovies, getMovieById };

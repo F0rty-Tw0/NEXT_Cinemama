@@ -8,9 +8,9 @@ const authorizeUser = async (credentials) => {
     localStorage.setItem(
       'user',
       JSON.stringify({
-        token: authorization.accessToken,
-        id: authorization.id,
-        email: authorization.email,
+        token: authorization?.accessToken,
+        id: authorization?.id,
+        email: authorization?.email,
       })
     );
   } catch (error) {

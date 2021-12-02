@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import authorizeUser from './authorizeUser';
 
 const AuthenticationModal = ({ closeModal }) => {
+  const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
-  const [password, setPassword] = useState('');
-
+  
   const router = useRouter();
 
   const login = useCallback(
