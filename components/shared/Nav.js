@@ -10,12 +10,10 @@ const Nav = ({ className }) => {
 
   useEffect(() => {
     (() => {
-      console.log(email);
-      if (!email) {
-        setEmail(getAuthenticatedUserEmail());
-      }
+      const savedEmail = getAuthenticatedUserEmail();
+      if (savedEmail) setEmail(savedEmail);
     })();
-  });
+  }, []);
 
   const toggleAuthenticationModal = () => {
     setIsOpen(!isOpen);

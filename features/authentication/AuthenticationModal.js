@@ -6,7 +6,7 @@ const AuthenticationModal = ({ closeModal }) => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
-  
+
   const router = useRouter();
 
   const login = useCallback(
