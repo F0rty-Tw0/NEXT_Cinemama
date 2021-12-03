@@ -1,5 +1,5 @@
 import getAuthorization from '../../services/getAuthorization';
-const url = process.env.API_AUTH;
+const url = process.env.NEXT_PUBLIC_API_AUTH;
 
 const authorizeUser = async (credentials) => {
   try {
