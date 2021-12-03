@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import BaseLayout from 'layouts/BaseLayout';
 import Schedules from 'components/schedules/Schedules';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getSchedulesBetweenDates } from 'endpoints/schedules';
 
 const Home = ({ schedules }) => {
@@ -11,10 +11,6 @@ const Home = ({ schedules }) => {
       (schedule) => schedule.date === dayjs().format('YYYY-MM-DD')
     )
   );
-  const [uniqueMovieIds, setUniqueMovieIds] = useState(() => {
-    const movieIds = filteredSchedule.map((schedule) => schedule.movie.id);
-    return [...new Set(movieIds)];
-  });
 
   const changeDates = (numberOfDays) => {
     setFilteredSchedule(
@@ -28,11 +24,6 @@ const Home = ({ schedules }) => {
     setDay(dayjs().add(numberOfDays, 'day').format('YYYY-MM-DD'));
   };
 
-  useEffect(() => {
-    const movieIds = filteredSchedule.map((schedule) => schedule.movie.id);
-    setUniqueMovieIds([...new Set(movieIds)]);
-  }, [filteredSchedule]);
-
   return (
     <BaseLayout
       title='Welcome to the Cinemama Theaters'
@@ -42,11 +33,7 @@ const Home = ({ schedules }) => {
       <button onClick={() => changeDates(0)}>today</button>
       <button onClick={() => changeDates(1)}>tomorrow</button>
       <button onClick={() => changeDates(2)}>after tomorrow</button>
-      <Schedules
-        movieIds={uniqueMovieIds}
-        schedules={filteredSchedule}
-        todayDate={day}
-      />
+      <Schedules schedules={filteredSchedule} todayDate={day} />
     </BaseLayout>
   );
 };

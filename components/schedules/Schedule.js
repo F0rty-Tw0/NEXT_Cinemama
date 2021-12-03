@@ -6,7 +6,6 @@ import BookingModal from 'features/booking/BookingModal';
 const Schedule = ({ filteredSchedule }) => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedSchedule, setSelectedSchedule] = useState(null);
-
   const toggleModal = (schedule) => {
     const email = getAuthenticatedUserEmail();
     if (email) {
