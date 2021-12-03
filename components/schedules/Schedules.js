@@ -1,6 +1,7 @@
 import Schedule from './Schedule';
 
 const Schedules = ({ schedules, movieIds, todayDate }) => {
+  console.log(movieIds);
   return (
     <>
       This is All Schedules for {todayDate}

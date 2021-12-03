@@ -4,13 +4,17 @@ import Schedules from 'components/schedules/Schedules';
 import { useState, useEffect } from 'react';
 import { getSchedulesBetweenDates } from 'endpoints/schedules';
 
-const Home = ({ schedules, uniqueMovieIds }) => {
+const Home = ({ schedules }) => {
   const [day, setDay] = useState(dayjs().format('YYYY-MM-DD'));
   const [filteredSchedule, setFilteredSchedule] = useState(
     schedules.filter(
       (schedule) => schedule.date === dayjs().format('YYYY-MM-DD')
     )
   );
+  const [uniqueMovieIds, setUniqueMovieIds] = useState(() => {
+    const movieIds = filteredSchedule.map((schedule) => schedule.movie.id);
+    return [...new Set(movieIds)];
+  });
 
   const changeDates = (numberOfDays) => {
     setFilteredSchedule(
@@ -21,8 +25,13 @@ const Home = ({ schedules, uniqueMovieIds }) => {
       )
     );
 
-    // setDay(dayjs().add(numberOfDays, 'day').format('YYYY-MM-DD'));
+    setDay(dayjs().add(numberOfDays, 'day').format('YYYY-MM-DD'));
   };
+
+  useEffect(() => {
+    const movieIds = filteredSchedule.map((schedule) => schedule.movie.id);
+    setUniqueMovieIds([...new Set(movieIds)]);
+  }, [filteredSchedule]);
 
   return (
     <BaseLayout
@@ -50,12 +59,12 @@ const getStaticProps = async () => {
   const today = dayjs().format('YYYY-MM-DD');
   const dayAfterTomorrow = dayjs().add(2, 'day').format('YYYY-MM-DD');
   const schedules = await getSchedulesBetweenDates(today, dayAfterTomorrow);
-  const movieIds = schedules.map((schedule) => schedule.movie.id);
-  const uniqueMovieIds = [...new Set(movieIds)];
+  // const movieIds = schedules.map((schedule) => schedule.movie.id);
+  // const uniqueMovieIds = [...new Set(movieIds)];
   return {
     props: {
       schedules,
-      uniqueMovieIds,
+      // uniqueMovieIds,
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
