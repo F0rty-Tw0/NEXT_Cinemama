@@ -1,6 +1,6 @@
 import Seat from "@/components/seats/Seat";
 
-const BookingModal = ({ closeModal, seats }) => {
+const BookingModal = ({ closeModal, seats, movieid, schedule }) => {
   console.log(seats);
 
   return (
