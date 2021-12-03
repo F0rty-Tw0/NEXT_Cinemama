@@ -1,7 +1,10 @@
 import checkIfTokenIsExpired from '../utils/checkIfTokenIsExpired';
 import getAuthorization from './getAuthorization';
-const url = 'https://cine-mama.herokuapp.com/api/auth/login';
-const apiCredentials = { email: 'admin@gmail.com', password: 'test' }; //NOTE: env
+const url = process.env.NEXT_PUBLIC_API_AUTH;
+const apiCredentials = {
+  email: process.env.API_USERNAME,
+  password: process.env.API_PASSWORD,
+};
 let accessToken;
 let userAccessToken;
 

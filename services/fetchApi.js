@@ -7,9 +7,7 @@ const _fetchData = async (token, query, isExtended) => {
     },
   };
   const res = await fetch(
-    `https://cine-mama.herokuapp.com/api/${query}${
-      isExtended ? '?type=extended' : ''
-    }`,
+    `${process.env.API_URL}/${query}${isExtended ? '?type=extended' : ''}`,
     options
   );
   return res.json();

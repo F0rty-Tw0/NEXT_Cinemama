@@ -1,5 +1,5 @@
 import getAuthorization from '../../services/getAuthorization';
-const url = 'https://cine-mama.herokuapp.com/api/auth/login';
+const url = process.env.NEXT_PUBLIC_API_AUTH;
 
 const authorizeUser = async (credentials) => {
   try {

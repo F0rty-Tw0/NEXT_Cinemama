@@ -1,14 +1,10 @@
 import { fetchWithApiToken } from '../services/fetchApi';
 
-const getSchedules = async () => {
-  return fetchWithApiToken('schedules', true);
-};
-
-const getScheduleByDate = async (startDate, endDate) => {
+const getSchedulesBetweenDates = async (fromDate, toDate) => {
   return fetchWithApiToken(
-    `schedules/end-date/${endDate}/start-date/${startDate}`,
+    `schedules/end-date/${toDate}/start-date/${fromDate}`,
     true
   );
 };
 
-export { getScheduleByDate, getSchedules };
+export { getSchedulesBetweenDates };

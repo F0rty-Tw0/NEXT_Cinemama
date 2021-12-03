@@ -1,4 +1,6 @@
+import dayjs from 'dayjs';
 import BaseLayout from 'layouts/BaseLayout';
+<<<<<<< HEAD
 import Schedules from 'components/movies/Schedules';
 import { getMovies } from 'endpoints/movies';
 import { getSchedules, getScheduleByDate } from 'endpoints/schedules';
@@ -46,18 +48,28 @@ const Home = ({ movies, schedules }) => {
     }
   }, [day, today]); */
 
+=======
+import Schedules from 'components/schedules/Schedules';
+import { getSchedulesBetweenDates } from 'endpoints/schedules';
+
+const Home = ({ schedules, uniqueMovieIds }) => {
+>>>>>>> eebec3ea9c413a59ae8c558c2876624ae85f6763
   return (
     <BaseLayout
       title='Welcome to the Cinemama Theaters'
       description='The best place to watch movies'
       className='base-layout__main'
     >
+<<<<<<< HEAD
       <p>
         <button onClick={() => setDay(today)}>Today</button>{' '}
         <button onClick={() => setDay(tomorrow)}>Tomorrow</button>{' '}
         <button onClick={() => setDay(dayAfterTomorrow)}>After Tomorrow</button>
       </p>
       <Schedules schedule={schedules} day={day} />
+=======
+      <Schedules movieIds={uniqueMovieIds} schedules={schedules} />
+>>>>>>> eebec3ea9c413a59ae8c558c2876624ae85f6763
     </BaseLayout>
   );
 };
@@ -66,12 +78,28 @@ const Home = ({ movies, schedules }) => {
 // It may be called again, on a serverless function, if
 // revalidation is enabled and a new request comes in
 const getStaticProps = async () => {
+<<<<<<< HEAD
   const movies = await getMovies();
   const schedules = await getSchedules();
   return {
     props: {
       movies,
       schedules,
+=======
+  const imaginaryDate = dayjs('2021-10-23').format('YYYY-MM-DD');
+  // const today = dayjs().format('YYYY-MM-DD');
+  const schedules = await getSchedulesBetweenDates(
+    imaginaryDate,
+    imaginaryDate
+  );
+
+  const movieIds = schedules.map((schedule) => schedule.movie.id);
+  const uniqueMovieIds = [...new Set(movieIds)];
+  return {
+    props: {
+      schedules,
+      uniqueMovieIds,
+>>>>>>> eebec3ea9c413a59ae8c558c2876624ae85f6763
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
