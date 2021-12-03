@@ -1,16 +1,16 @@
+import dayjs from 'dayjs';
 import BaseLayout from 'layouts/BaseLayout';
-import Movies from 'components/movies/Movies';
-import { getMovies } from 'endpoints/movies';
-import { getAllSeats } from "endpoints/seats";
+import Schedules from 'components/schedules/Schedules';
+import { getSchedulesBetweenDates } from 'endpoints/schedules';
 
-const Home = ({ movies, seats}) => {
+const Home = ({ schedules, uniqueMovieIds }) => {
   return (
     <BaseLayout
       title='Welcome to the Cinemama Theaters'
       description='The best place to watch movies'
       className='base-layout__main'
     >
-      <Movies movies={movies} seats={seats} />
+      <Schedules movieIds={uniqueMovieIds} schedules={schedules} />
     </BaseLayout>
   );
 };
@@ -19,12 +19,19 @@ const Home = ({ movies, seats}) => {
 // It may be called again, on a serverless function, if
 // revalidation is enabled and a new request comes in
 const getStaticProps = async () => {
-  const movies = await getMovies();
-  const seats = await getAllSeats();
+  const imaginaryDate = dayjs('2021-10-23').format('YYYY-MM-DD');
+  // const today = dayjs().format('YYYY-MM-DD');
+  const schedules = await getSchedulesBetweenDates(
+    imaginaryDate,
+    imaginaryDate
+  );
 
+  const movieIds = schedules.map((schedule) => schedule.movie.id);
+  const uniqueMovieIds = [...new Set(movieIds)];
   return {
     props: {
-      movies, seats
+      schedules,
+      uniqueMovieIds,
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
@@ -32,7 +39,6 @@ const getStaticProps = async () => {
     revalidate: 60,
   };
 };
-
 
 export { getStaticProps };
 export default Home;

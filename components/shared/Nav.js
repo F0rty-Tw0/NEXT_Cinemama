@@ -3,17 +3,18 @@ import { useState, useEffect } from 'react';
 import AuthenticationModal from 'features/authentication/AuthenticationModal';
 import unAuthorizeUser from 'features/authentication/unAuthorizeUser';
 import getAuthenticatedUserEmail from 'features/authentication/getAuthenticatedUserEmail';
-
 const Nav = ({ className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    (() => {
-      const savedEmail = getAuthenticatedUserEmail();
-      if (savedEmail) setEmail(savedEmail);
-    })();
+    const savedEmail = getAuthenticatedUserEmail();
+    if (savedEmail) setEmail(savedEmail);
   }, []);
+
+  const setAuthorizedUser = (userEmail) => {
+    setEmail(userEmail);
+  };
 
   const toggleAuthenticationModal = () => {
     setIsOpen(!isOpen);
@@ -46,6 +47,7 @@ const Nav = ({ className }) => {
       )}
       {isOpen && (
         <AuthenticationModal
+        setAuthorizedUser={setAuthorizedUser}
           closeModal={toggleAuthenticationModal}
         ></AuthenticationModal>
       )}

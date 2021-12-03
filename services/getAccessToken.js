@@ -1,6 +1,6 @@
 import checkIfTokenIsExpired from '../utils/checkIfTokenIsExpired';
 import getAuthorization from './getAuthorization';
-const url = process.env.API_AUTH;
+const url = process.env.NEXT_PUBLIC_API_AUTH;
 const apiCredentials = {
   email: process.env.API_USERNAME,
   password: process.env.API_PASSWORD,
