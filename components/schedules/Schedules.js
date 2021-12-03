@@ -1,9 +1,10 @@
 import Schedule from './Schedule';
 
-const Schedules = ({ schedules, movieIds }) => {
+const Schedules = ({ schedules, movieIds, todayDate }) => {
   return (
     <>
-      This is All Schedules <br></br>
+      This is All Schedules for {todayDate}
+      <br></br>
       {movieIds.map((id) => {
         const filteredSchedule = schedules.filter(
           (schedule) => schedule.movie.id === id
