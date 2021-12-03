@@ -1,32 +1,24 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useRouter } from 'next/router';
+import { useState, useCallback } from 'react';
 import authorizeUser from './authorizeUser';
 
-const AuthenticationModal = ({ closeModal }) => {
+const AuthenticationModal = ({ closeModal, setAuthorizedUser }) => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
-
-  const router = useRouter();
 
   const login = useCallback(
     async (event) => {
       event.preventDefault();
       try {
         await authorizeUser({ email, password });
-        router.push('/');
+        setAuthorizedUser(email);
         closeModal();
       } catch (err) {
         setError(err.message);
       }
     },
-    [closeModal, email, password, router]
+    [closeModal, email, password, setAuthorizedUser]
   );
-
-  useEffect(() => {
-    // Prefetch the dashboard page
-    router.prefetch('/');
-  }, [router]);
 
   return (
     <div>
