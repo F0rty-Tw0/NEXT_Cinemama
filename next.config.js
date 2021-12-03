@@ -1,6 +1,6 @@
 module.exports = {
   reactStrictMode: true,
-  env: {
+  publicRuntimeConfig: {
     NEXT_PUBLIC_API_AUTH: process.env.NEXT_PUBLIC_API_AUTH,
   },
 };
