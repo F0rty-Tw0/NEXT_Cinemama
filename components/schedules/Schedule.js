@@ -10,13 +10,15 @@ const Schedule = ({ filteredSchedule }) => {
       >
         {`title: ${filteredSchedule[0].movie.title}`}
       </Link>
-      {filteredSchedule.map((schedule) => {
-        return (
-          <div key={schedule.id}>
-            <p>{schedule.timeSlot}</p>
-          </div>
-        );
-      })}
+      {filteredSchedule[0].movie.genres.map((genre) => (
+        <p key={genre.id}>{genre.name}</p>
+      ))}
+      {filteredSchedule.map((schedule) => (
+        <div key={schedule.id}>
+          <p>{schedule.timeSlot}</p>
+          <p>{schedule.hall.name}</p>
+        </div>
+      ))}
     </>
   );
 };
