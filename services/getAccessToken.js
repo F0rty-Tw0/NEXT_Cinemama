@@ -35,4 +35,13 @@ const getUserAccessToken = async (credentials) => {
   return userAccessToken;
 };
 
-export { getApiAccessToken, getUserAccessToken };
+const getSavedUserToken = () => {
+  const user = localStorage.getItem('user');
+  if (user) {
+    const savedUser = JSON.parse(user);
+    return savedUser.token;
+  }
+  return null;
+};
+
+export { getApiAccessToken, getUserAccessToken, getSavedUserToken };

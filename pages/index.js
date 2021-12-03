@@ -3,14 +3,14 @@ import BaseLayout from 'layouts/BaseLayout';
 import Schedules from 'components/schedules/Schedules';
 import { getSchedulesBetweenDates } from 'endpoints/schedules';
 
-const Home = ({ schedules }) => {
+const Home = ({ schedules, uniqueMovieIds }) => {
   return (
     <BaseLayout
       title='Welcome to the Cinemama Theaters'
       description='The best place to watch movies'
       className='base-layout__main'
     >
-      <Schedules schedules={schedules} />
+      <Schedules movieIds={uniqueMovieIds} schedules={schedules} />
     </BaseLayout>
   );
 };
@@ -25,9 +25,13 @@ const getStaticProps = async () => {
     imaginaryDate,
     imaginaryDate
   );
+
+  const movieIds = schedules.map((schedule) => schedule.movie.id);
+  const uniqueMovieIds = [...new Set(movieIds)];
   return {
     props: {
       schedules,
+      uniqueMovieIds,
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
