@@ -1,4 +1,8 @@
-import { getApiAccessToken, getUserAccessToken } from 'services/getAccessToken';
+import {
+  getApiAccessToken,
+  getUserAccessToken,
+  getSavedUserToken,
+} from 'services/getAccessToken';
 
 const _fetchData = async (token, query, isExtended) => {
   const options = {
@@ -7,7 +11,9 @@ const _fetchData = async (token, query, isExtended) => {
     },
   };
   const res = await fetch(
-    `${process.env.API_URL}/${query}${isExtended ? '?type=extended' : ''}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/${query}${
+      isExtended ? '?type=extended' : ''
+    }`,
     options
   );
   return res.json();
@@ -23,4 +29,9 @@ const fetchWithUserToken = async (query, isExtended) => {
   return _fetchData(token, query, isExtended);
 };
 
-export { fetchWithApiToken, fetchWithUserToken };
+const fetchWithSavedUserToken = async (query, isExtended) => {
+  const token = await getSavedUserToken();
+  return _fetchData(token, query, isExtended);
+};
+
+export { fetchWithApiToken, fetchWithUserToken, fetchWithSavedUserToken };
