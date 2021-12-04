@@ -1,7 +1,9 @@
 import { useState, useCallback } from 'react';
-import authorizeUser from './authorizeUser';
 
-const AuthenticationModal = ({ closeModal, setAuthorizedUser }) => {
+import authenticateUser from './authenticateUser';
+import { connect } from 'react-redux';
+
+const AuthenticationModal = ({ closeModal, authenticateUser }) => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
@@ -10,14 +12,13 @@ const AuthenticationModal = ({ closeModal, setAuthorizedUser }) => {
     async (event) => {
       event.preventDefault();
       try {
-        await authorizeUser({ email, password });
-        setAuthorizedUser(email);
+        authenticateUser({ email, password });
         closeModal();
       } catch (err) {
         setError(err.message);
       }
     },
-    [closeModal, email, password, setAuthorizedUser]
+    [closeModal, email, password, authenticateUser]
   );
 
   return (
@@ -58,4 +59,6 @@ const AuthenticationModal = ({ closeModal, setAuthorizedUser }) => {
   );
 };
 
-export default AuthenticationModal;
+export default connect((state) => state, { authenticateUser })(
+  AuthenticationModal
+);

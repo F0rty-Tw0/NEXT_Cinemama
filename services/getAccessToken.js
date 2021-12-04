@@ -1,5 +1,6 @@
-import checkIfTokenIsExpired from '../utils/checkIfTokenIsExpired';
-import getAuthorization from './getAuthorization';
+import checkIfTokenIsExpired from 'utils/checkIfTokenIsExpired';
+import { getCookie } from 'utils/cookieHelper';
+import authenticate from './authenticate';
 const url = process.env.NEXT_PUBLIC_API_AUTH;
 const apiCredentials = {
   email: process.env.API_USERNAME,
@@ -9,37 +10,26 @@ let accessToken;
 let userAccessToken;
 
 const getApiAccessToken = async () => {
-  if (!accessToken || checkIfTokenIsExpired(accessToken)) {
-    const authorization = await getAuthorization(url, apiCredentials);
+  if (checkIfTokenIsExpired(accessToken)) {
+    const authorization = await authenticate(url, apiCredentials);
     accessToken = authorization.accessToken;
   }
   return accessToken;
 };
 
-const getUserAccessToken = async (credentials) => {
-  userAccessToken = localStorage.getItem('token');
-  if (!userAccessToken || checkIfTokenIsExpired(userAccessToken)) {
-    const authorization = await getAuthorization(url, credentials);
-    userAccessToken = authorization.accessToken;
-    if (authorization) {
-      localStorage.setItem('token', userAccessToken);
-      localStorage.setItem(
-        'user',
-        JSON.stringify({
-          id: authorization.id,
-          email: authorization.email,
-        })
-      );
-    }
+const getUserAccessToken = async (userCredentials) => {
+  userAccessToken = getSavedUserToken();
+  if (checkIfTokenIsExpired(userAccessToken)) {
+    userAccessToken = authenticate(url, userCredentials);
   }
   return userAccessToken;
 };
 
 const getSavedUserToken = () => {
-  const user = localStorage.getItem('user');
+  const user = getCookie('user');
   if (user) {
     const savedUser = JSON.parse(user);
-    return savedUser.token;
+    return savedUser.accessToken;
   }
   return null;
 };

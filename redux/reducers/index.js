@@ -1,6 +1,14 @@
 import { combineReducers } from 'redux';
-import setUserReducer from './setUserReducer';
+import userReducer from './userReducer';
+import seatsReducer from './seatsReducer';
+import schedulesReducer from './schedulesReducer';
+import selectedScheduleReducer from './selectedScheduleReducer';
 
-const allReducers = combineReducers({ setUserReducer });
+const allReducers = combineReducers({
+  userReducer,
+  seatsReducer,
+  schedulesReducer,
+  selectedScheduleReducer,
+});
 
 export default allReducers;
