@@ -11,7 +11,7 @@ const Schedules = ({ schedules, todayDate }) => {
       This is All Schedules for {todayDate}
       <br></br>
       {uniqueMovieIds.map((id) => {
-        const filteredSchedule = schedules.filter((schedule) => {
+        const filteredSchedule = schedules?.filter((schedule) => {
           return schedule.movie.id === id;
         });
         return <Schedule filteredSchedule={filteredSchedule} key={id} />;

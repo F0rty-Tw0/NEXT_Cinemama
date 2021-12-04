@@ -1,30 +1,38 @@
 import dayjs from 'dayjs';
 import wrapper from 'redux/store';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import BaseLayout from 'layouts/BaseLayout';
 import Schedules from 'components/schedules/Schedules';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { getSchedulesBetweenDates } from 'endpoints/schedules';
-import { setSchedules } from 'redux/actions';
+import { setSchedules, setFilteredSchedules } from 'redux/actions';
 
 const Home = () => {
+  const dispatch = useDispatch();
   const { schedules } = useSelector((state) => state.schedulesReducer);
-  const [day, setDay] = useState(dayjs().format('YYYY-MM-DD'));
-  const [filteredSchedule, setFilteredSchedule] = useState(
-    schedules.filter(
-      (schedule) => schedule.date === dayjs().format('YYYY-MM-DD')
-    )
+  const { filteredSchedules } = useSelector(
+    (state) => state.filteredSchedulesReducer
   );
+  const [day, setDay] = useState(dayjs().format('YYYY-MM-DD'));
 
-  const changeDates = (numberOfDays) => {
-    setFilteredSchedule(
-      schedules.filter(
+  const setMoviesOfDay = useCallback(
+    (numberOfDays) => {
+      const todaysSchedule = schedules?.filter(
         (schedule) =>
           schedule.date ===
           dayjs().add(numberOfDays, 'day').format('YYYY-MM-DD')
-      )
-    );
+      );
+      dispatch(setFilteredSchedules(todaysSchedule));
+    },
+    [dispatch, schedules]
+  );
 
+  useEffect(() => {
+    setMoviesOfDay(1);
+  }, [setMoviesOfDay]);
+
+  const changeDates = (numberOfDays) => {
+    setMoviesOfDay(numberOfDays);
     setDay(dayjs().add(numberOfDays, 'day').format('YYYY-MM-DD'));
   };
 
@@ -37,7 +45,7 @@ const Home = () => {
       <button onClick={() => changeDates(0)}>today</button>
       <button onClick={() => changeDates(1)}>tomorrow</button>
       <button onClick={() => changeDates(2)}>after tomorrow</button>
-      <Schedules schedules={filteredSchedule} todayDate={day} />
+      <Schedules schedules={filteredSchedules} todayDate={day} />
     </BaseLayout>
   );
 };
@@ -48,10 +56,10 @@ const getStaticProps = wrapper.getServerSideProps((store) => async () => {
   const today = dayjs().format('YYYY-MM-DD');
   const dayAfterTomorrow = dayjs().add(2, 'day').format('YYYY-MM-DD');
   const schedules = await getSchedulesBetweenDates(today, dayAfterTomorrow);
-  store.dispatch(setSchedules(schedules));
+  if (schedules.length > 0) {
+    store.dispatch(setSchedules(schedules));
+  }
 });
-
-
 
 export { getStaticProps };
 export default Home;
