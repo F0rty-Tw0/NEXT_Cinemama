@@ -1,25 +1,26 @@
 import Seat from '@/components/seats/Seat';
 
-import { useEffect, useState } from 'react';
-
+import { useEffect } from 'react';
+import { setSeats } from 'redux/actions';
+import { useSelector, useDispatch } from 'react-redux';
 import { getSeatsByHallIdDateAndTimeSlot } from 'endpoints/seats';
 
-const BookingModal = ({ selectedSchedule }) => {
-  const [seats, setSeats] = useState([]);
+const BookingModal = () => {
+  const dispatch = useDispatch();
+  const { schedule } = useSelector((state) => state.selectedScheduleReducer);
+  const { seats } = useSelector((state) => state.seatsReducer);
+
   useEffect(() => {
     (async () => {
       const selectedSeats = await getSeatsByHallIdDateAndTimeSlot(
-        selectedSchedule.hall.id,
-        selectedSchedule.date,
-        selectedSchedule.timeSlot
+        schedule.hall.id,
+        schedule.date,
+        schedule.timeSlot
       );
-      setSeats(selectedSeats);
+      dispatch(setSeats(selectedSeats));
     })();
-  }, [
-    selectedSchedule.hall.id,
-    selectedSchedule.date,
-    selectedSchedule.timeSlot,
-  ]);
+  }, [schedule, dispatch]);
+
   return seats.map((seat) => <Seat key={seat.id} name={seat.name} />);
 };
 

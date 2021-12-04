@@ -29,8 +29,8 @@ const fetchWithUserToken = async (query, isExtended) => {
   return _fetchData(token, query, isExtended);
 };
 
-const fetchWithSavedUserToken = async (query, isExtended) => {
-  const token = await getSavedUserToken();
+const fetchWithSavedUserToken = (query, isExtended) => {
+  const token = getSavedUserToken();
   return _fetchData(token, query, isExtended);
 };
 

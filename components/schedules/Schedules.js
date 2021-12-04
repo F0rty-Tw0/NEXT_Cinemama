@@ -1,13 +1,19 @@
 import Schedule from './Schedule';
+const Schedules = ({ schedules, todayDate }) => {
+  const getUniqueMovieIds = (selectedSchedules) => {
+    const movieIds = selectedSchedules.map((schedule) => schedule.movie.id);
+    return [...new Set(movieIds)];
+  };
 
-const Schedules = ({ schedules, movieIds }) => {
+  const uniqueMovieIds = getUniqueMovieIds(schedules);
   return (
     <>
-      This is All Schedules <br></br>
-      {movieIds.map((id) => {
-        const filteredSchedule = schedules.filter(
-          (schedule) => schedule.movie.id === id
-        );
+      This is All Schedules for {todayDate}
+      <br></br>
+      {uniqueMovieIds.map((id) => {
+        const filteredSchedule = schedules?.filter((schedule) => {
+          return schedule.movie.id === id;
+        });
         return <Schedule filteredSchedule={filteredSchedule} key={id} />;
       })}
     </>

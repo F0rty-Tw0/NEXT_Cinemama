@@ -1,27 +1,36 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import AuthenticationModal from 'features/authentication/AuthenticationModal';
-import unAuthorizeUser from 'features/authentication/unAuthorizeUser';
-import getAuthenticatedUserEmail from 'features/authentication/getAuthenticatedUserEmail';
+import deAuthenticateUser from 'features/authentication/deAuthenticateUser';
+import reAuthenticateUser from 'features/authentication/reAuthenticateUser';
+import getAuthenticatedUser from 'features/authentication/getAuthenticatedUser';
+
 const Nav = ({ className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState('');
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.userReducer);
 
   useEffect(() => {
-    const savedEmail = getAuthenticatedUserEmail();
-    if (savedEmail) setEmail(savedEmail);
-  }, []);
+    const loggedUser = getAuthenticatedUser();
+    if (loggedUser) {
+      dispatch(reAuthenticateUser(loggedUser));
+    } else {
+      dispatch(deAuthenticateUser());
+    }
+  }, [dispatch]);
 
-  const setAuthorizedUser = (userEmail) => {
-    setEmail(userEmail);
-  };
+  useEffect(() => {
+    setEmail(user?.email);
+  }, [user]);
 
   const toggleAuthenticationModal = () => {
     setIsOpen(!isOpen);
   };
 
   const logout = () => {
-    unAuthorizeUser();
+    dispatch(deAuthenticateUser());
     setEmail('');
   };
 
@@ -47,7 +56,6 @@ const Nav = ({ className }) => {
       )}
       {isOpen && (
         <AuthenticationModal
-        setAuthorizedUser={setAuthorizedUser}
           closeModal={toggleAuthenticationModal}
         ></AuthenticationModal>
       )}

@@ -1,16 +1,18 @@
 import Link from 'next/link';
 import { useState } from 'react';
-import getAuthenticatedUserEmail from 'features/authentication/getAuthenticatedUserEmail';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSelectedSchedule } from 'redux/actions';
 import BookingModal from 'features/booking/BookingModal';
 
 const Schedule = ({ filteredSchedule }) => {
   const [openModal, setOpenModal] = useState(false);
-  const [selectedSchedule, setSelectedSchedule] = useState(null);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.userReducer);
+  //NOTE: multiple executions
 
-  const toggleModal = (schedule) => {
-    const email = getAuthenticatedUserEmail();
-    if (email) {
-      setSelectedSchedule(schedule);
+  const toggleModal = (selectedSchedule) => {
+    if (user) {
+      dispatch(setSelectedSchedule(selectedSchedule));
       setOpenModal(!openModal);
     } else {
       console.log('You have to log in first');
@@ -25,16 +27,17 @@ const Schedule = ({ filteredSchedule }) => {
       >
         {`title: ${filteredSchedule[0].movie.title}`}
       </Link>
-      {openModal && (
-        <BookingModal selectedSchedule={selectedSchedule}></BookingModal>
-      )}
+      {openModal && <BookingModal></BookingModal>}
       {filteredSchedule[0].movie.genres.map((genre) => (
         <p key={genre.id}>{genre.name}</p>
       ))}
-      {filteredSchedule.map((schedule) => (
-        <div onClick={() => toggleModal(schedule)} key={schedule.id}>
-          <p>{schedule.timeSlot}</p>
-          <p>{schedule.hall.name}</p>
+      {filteredSchedule.map((schedulePlaying) => (
+        <div
+          onClick={() => toggleModal(schedulePlaying)}
+          key={schedulePlaying.id}
+        >
+          <p>{schedulePlaying.timeSlot}</p>
+          <p>{schedulePlaying.hall.name}</p>
         </div>
       ))}
     </>

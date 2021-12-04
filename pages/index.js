@@ -1,44 +1,65 @@
 import dayjs from 'dayjs';
+import wrapper from 'redux/store';
+import { useSelector, useDispatch } from 'react-redux';
 import BaseLayout from 'layouts/BaseLayout';
 import Schedules from 'components/schedules/Schedules';
+import { useState, useEffect, useCallback } from 'react';
 import { getSchedulesBetweenDates } from 'endpoints/schedules';
+import { setSchedules, setFilteredSchedules } from 'redux/actions';
 
-const Home = ({ schedules, uniqueMovieIds }) => {
+const Home = () => {
+  const dispatch = useDispatch();
+  const { schedules } = useSelector((state) => state.schedulesReducer);
+  const { filteredSchedules } = useSelector(
+    (state) => state.filteredSchedulesReducer
+  );
+  const [day, setDay] = useState(dayjs().format('YYYY-MM-DD'));
+
+  const setMoviesOfDay = useCallback(
+    (numberOfDays) => {
+      const todaysSchedule = schedules?.filter(
+        (schedule) =>
+          schedule.date ===
+          dayjs().add(numberOfDays, 'day').format('YYYY-MM-DD')
+      );
+      dispatch(setFilteredSchedules(todaysSchedule));
+    },
+    [dispatch, schedules]
+  );
+
+  useEffect(() => {
+    setMoviesOfDay(1);
+  }, [setMoviesOfDay]);
+
+  const changeDates = (numberOfDays) => {
+    setMoviesOfDay(numberOfDays);
+    setDay(dayjs().add(numberOfDays, 'day').format('YYYY-MM-DD'));
+  };
+
   return (
     <BaseLayout
       title='Welcome to the Cinemama Theaters'
       description='The best place to watch movies'
       className='base-layout__main'
     >
-      <Schedules movieIds={uniqueMovieIds} schedules={schedules} />
+      <button onClick={() => changeDates(0)}>today</button>
+      <button onClick={() => changeDates(1)}>tomorrow</button>
+      <button onClick={() => changeDates(2)}>after tomorrow</button>
+      <Schedules schedules={filteredSchedules} todayDate={day} />
     </BaseLayout>
   );
 };
-
 // This function gets called at build time on server-side.
 // It may be called again, on a serverless function, if
 // revalidation is enabled and a new request comes in
-const getStaticProps = async () => {
-  const imaginaryDate = dayjs('2021-10-23').format('YYYY-MM-DD');
-  // const today = dayjs().format('YYYY-MM-DD');
-  const schedules = await getSchedulesBetweenDates(
-    imaginaryDate,
-    imaginaryDate
-  );
-
-  const movieIds = schedules.map((schedule) => schedule.movie.id);
-  const uniqueMovieIds = [...new Set(movieIds)];
-  return {
-    props: {
-      schedules,
-      uniqueMovieIds,
-    },
-    // Next.js will attempt to re-generate the page:
-    // - When a request comes in
-    // - At most once every 60 seconds
-    revalidate: 60,
-  };
-};
+const getStaticProps = wrapper.getServerSideProps((store) => async () => {
+  const today = dayjs().format('YYYY-MM-DD');
+  const dayAfterTomorrow = dayjs().add(2, 'day').format('YYYY-MM-DD');
+  const schedules = await getSchedulesBetweenDates(today, dayAfterTomorrow);
+  if (schedules.length > 0) {
+    store.dispatch(setSchedules(schedules));
+  }
+});
 
 export { getStaticProps };
 export default Home;
