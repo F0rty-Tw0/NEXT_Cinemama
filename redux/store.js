@@ -2,6 +2,7 @@ import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import thunkMiddleware from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import allReducers from 'redux/reducers';
+
 const bindMiddleware = (middleware) => {
   if (process.env.NODE_ENV !== 'production') {
     const { composeWithDevTools } = require('redux-devtools-extension');
@@ -16,9 +17,9 @@ const reducer = (state, action) => {
       ...state,
       ...action.payload,
     };
-    if (state.userReducer.user?.id)
+    if (state.user.user?.id)
       // preserve the user state on client side navigation
-      nextState.userReducer.user = state.userReducer.user;
+      nextState.user.user = state.user.user;
     return nextState;
   } else {
     return allReducers(state, action);

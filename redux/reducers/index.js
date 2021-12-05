@@ -1,16 +1,20 @@
 import { combineReducers } from 'redux';
-import userReducer from './userReducer';
-import seatsReducer from './seatsReducer';
-import schedulesReducer from './schedulesReducer';
-import selectedScheduleReducer from './selectedScheduleReducer';
-import filteredSchedulesReducer from './filteredSchedulesReducer';
+import user from './userReducer';
+import seats from './seatsReducer';
+import date from './dateReducer';
+import error from './errorReducer';
+import schedules from './schedulesReducer';
+import selectedSchedule from './selectedScheduleReducer';
+import filteredSchedules from './filteredSchedulesReducer';
 
 const allReducers = combineReducers({
-  userReducer,
-  seatsReducer,
-  schedulesReducer,
-  selectedScheduleReducer,
-  filteredSchedulesReducer,
+  user,
+  seats,
+  error,
+  date,
+  schedules,
+  selectedSchedule,
+  filteredSchedules,
 });
 
 export default allReducers;
