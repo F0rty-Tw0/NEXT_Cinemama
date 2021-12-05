@@ -3,7 +3,7 @@
 <h4 align="center">This is semester 3 frontend project</h4>
 
 <p align="center">
-  <a href="https://github.com/F0rty-Tw0/NEXT_Cinemama"><img src="https://img.shields.io/github/package-json/v/F0rty-Tw0/NEXT_Cinemama.svg" alt="Version"></a>
+  <a href="https://github.com/F0rty-Tw0/NEXT_Cinemama"><img src="https://img.shields.io/github/package-json/v/F0rty-Tw0/NEXT_Cinemama/master.svg" alt="Version"></a>
 </p>
 
 We decided to use the [React](https://reactjs.org/) library for it's simplicity and performance.
