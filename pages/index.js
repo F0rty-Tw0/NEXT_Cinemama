@@ -10,7 +10,7 @@ import { setDate, setSchedules, setFilteredSchedules } from 'redux/actions';
 const Home = () => {
   const dispatch = useDispatch();
   const { schedules } = useSelector((state) => state.schedules);
- 
+
   const setMoviesOfDay = useCallback(
     (numberOfDays) => {
       const todaysSchedule = schedules?.filter(
