@@ -1,20 +1,28 @@
+import { useSelector } from 'react-redux';
 import Schedule from './Schedule';
-const Schedules = ({ schedules, todayDate }) => {
+const Schedules = () => {
+  const { date } = useSelector((state) => state.date);
+  const { error } = useSelector((state) => state.error); //NOTE: Move to a separate component
+  const { filteredSchedules } = useSelector(
+    (state) => state.filteredSchedules
+  );
+
   const getUniqueMovieIds = (selectedSchedules) => {
     const movieIds = selectedSchedules.map((schedule) => schedule.movie.id);
     return [...new Set(movieIds)];
   };
 
-  const uniqueMovieIds = getUniqueMovieIds(schedules);
+  const uniqueMovieIds = getUniqueMovieIds(filteredSchedules);
   return (
     <>
-      This is All Schedules for {todayDate}
-      <br></br>
+      This is All Schedules for {date}
+      <br />
+      <h2>{error}</h2>
       {uniqueMovieIds.map((id) => {
-        const filteredSchedule = schedules?.filter((schedule) => {
+        const uniqueSchedule = filteredSchedules?.filter((schedule) => {
           return schedule.movie.id === id;
         });
-        return <Schedule filteredSchedule={filteredSchedule} key={id} />;
+        return <Schedule filteredSchedule={uniqueSchedule} key={id} />;
       })}
     </>
   );

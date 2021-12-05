@@ -2,7 +2,7 @@ import { SET_USER, REMOVE_USER } from '../types';
 
 const userReducer = (
   state = {
-    user: {},
+    user: null,
   },
   action
 ) => {
@@ -10,7 +10,7 @@ const userReducer = (
     case SET_USER:
       return { ...state, user: action.payload };
     case REMOVE_USER:
-      return { user: {} };
+      return { user: null };
 
     default:
       return state;

@@ -3,17 +3,13 @@ import wrapper from 'redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import BaseLayout from 'layouts/BaseLayout';
 import Schedules from 'components/schedules/Schedules';
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { getSchedulesBetweenDates } from 'endpoints/schedules';
-import { setSchedules, setFilteredSchedules } from 'redux/actions';
+import { setDate, setSchedules, setFilteredSchedules } from 'redux/actions';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { schedules } = useSelector((state) => state.schedulesReducer);
-  const { filteredSchedules } = useSelector(
-    (state) => state.filteredSchedulesReducer
-  );
-  const [day, setDay] = useState(dayjs().format('YYYY-MM-DD'));
+  const { schedules } = useSelector((state) => state.schedules);
 
   const setMoviesOfDay = useCallback(
     (numberOfDays) => {
@@ -28,12 +24,12 @@ const Home = () => {
   );
 
   useEffect(() => {
-    setMoviesOfDay(1);
+    setMoviesOfDay(0);
   }, [setMoviesOfDay]);
 
   const changeDates = (numberOfDays) => {
+    dispatch(setDate(dayjs().add(numberOfDays, 'day').format('YYYY-MM-DD')));
     setMoviesOfDay(numberOfDays);
-    setDay(dayjs().add(numberOfDays, 'day').format('YYYY-MM-DD'));
   };
 
   return (
@@ -45,14 +41,14 @@ const Home = () => {
       <button onClick={() => changeDates(0)}>today</button>
       <button onClick={() => changeDates(1)}>tomorrow</button>
       <button onClick={() => changeDates(2)}>after tomorrow</button>
-      <Schedules schedules={filteredSchedules} todayDate={day} />
+      <Schedules />
     </BaseLayout>
   );
 };
 // This function gets called at build time on server-side.
 // It may be called again, on a serverless function, if
 // revalidation is enabled and a new request comes in
-const getStaticProps = wrapper.getServerSideProps((store) => async () => {
+const getStaticProps = wrapper.getStaticProps((store) => async () => {
   const today = dayjs().format('YYYY-MM-DD');
   const dayAfterTomorrow = dayjs().add(2, 'day').format('YYYY-MM-DD');
   const schedules = await getSchedulesBetweenDates(today, dayAfterTomorrow);

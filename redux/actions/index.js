@@ -1,15 +1,27 @@
 import {
   SET_USER,
+  SET_DATE,
+  SET_SEATS,
+  SET_ERROR,
   REMOVE_USER,
   SET_SCHEDULES,
   SET_FILTERED_SCHEDULES,
   SET_SELECTED_SCHEDULE,
-  SET_SEATS,
 } from '../types';
 
 const setUser = (user) => ({
   type: SET_USER,
   payload: user,
+});
+
+const setDate = (date) => ({
+  type: SET_DATE,
+  payload: date,
+});
+
+const setError = (error) => ({
+  type: SET_ERROR,
+  payload: error,
 });
 
 const removeUser = () => ({
@@ -38,9 +50,11 @@ const setSeats = (seats) => ({
 
 export {
   setUser,
-  setSchedules,
+  setDate,
+  setSeats,
+  setError,
   removeUser,
+  setSchedules,
   setSelectedSchedule,
   setFilteredSchedules,
-  setSeats,
 };

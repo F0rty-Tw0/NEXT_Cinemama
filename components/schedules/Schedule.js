@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSelectedSchedule } from 'redux/actions';
+import { setSelectedSchedule, setError } from 'redux/actions';
 import BookingModal from 'features/booking/BookingModal';
 
 const Schedule = ({ filteredSchedule }) => {
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.userReducer);
+  const { user } = useSelector((state) => state.user);
   //NOTE: multiple executions
 
   const toggleModal = (selectedSchedule) => {
@@ -15,7 +15,7 @@ const Schedule = ({ filteredSchedule }) => {
       dispatch(setSelectedSchedule(selectedSchedule));
       setOpenModal(!openModal);
     } else {
-      console.log('You have to log in first');
+      dispatch(setError('Please login to see available seats'));
     }
   };
   return (

@@ -11,7 +11,8 @@ let userAccessToken;
 
 const getApiAccessToken = async () => {
   if (checkIfTokenIsExpired(accessToken)) {
-    const authorization = await authenticate(url, apiCredentials);
+    const response = await authenticate(url, apiCredentials);
+    const authorization = await response.json();
     accessToken = authorization.accessToken;
   }
   return accessToken;
@@ -20,7 +21,8 @@ const getApiAccessToken = async () => {
 const getUserAccessToken = async (userCredentials) => {
   userAccessToken = getSavedUserToken();
   if (checkIfTokenIsExpired(userAccessToken)) {
-    userAccessToken = authenticate(url, userCredentials);
+    const response = authenticate(url, userCredentials);
+    userAccessToken = await response.json();
   }
   return userAccessToken;
 };

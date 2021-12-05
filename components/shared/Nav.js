@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { setError } from 'redux/actions';
 import AuthenticationModal from 'features/authentication/AuthenticationModal';
 import deAuthenticateUser from 'features/authentication/deAuthenticateUser';
 import reAuthenticateUser from 'features/authentication/reAuthenticateUser';
@@ -8,30 +9,23 @@ import getAuthenticatedUser from 'features/authentication/getAuthenticatedUser';
 
 const Nav = ({ className }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [email, setEmail] = useState('');
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.userReducer);
-
+  const { user } = useSelector((state) => state.user);
+  const email = user?.email;
   useEffect(() => {
     const loggedUser = getAuthenticatedUser();
     if (loggedUser) {
       dispatch(reAuthenticateUser(loggedUser));
-    } else {
-      dispatch(deAuthenticateUser());
     }
   }, [dispatch]);
 
-  useEffect(() => {
-    setEmail(user?.email);
-  }, [user]);
-
   const toggleAuthenticationModal = () => {
     setIsOpen(!isOpen);
+    dispatch(setError('')); // NOTE: remove when an error component is created
   };
 
   const logout = () => {
     dispatch(deAuthenticateUser());
-    setEmail('');
   };
 
   return (
@@ -45,8 +39,13 @@ const Nav = ({ className }) => {
           <Link href={`/about`}>About</Link>
         </li>
         <li>
-          <Link href={`/contact`}>contact</Link>
+          <Link href={`/contact`}>Contacts</Link>
         </li>
+        {user?.role === 'ROLE_ADMIN' && (
+          <li>
+            <Link href={`/admin`}>Admin panel</Link>
+          </li>
+        )}
         {email && <p>{email}</p>}
       </ul>
       {email ? (

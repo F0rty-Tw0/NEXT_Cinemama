@@ -7,8 +7,8 @@ import { getSeatsByHallIdDateAndTimeSlot } from 'endpoints/seats';
 
 const BookingModal = () => {
   const dispatch = useDispatch();
-  const { schedule } = useSelector((state) => state.selectedScheduleReducer);
-  const { seats } = useSelector((state) => state.seatsReducer);
+  const { schedule } = useSelector((state) => state.selectedSchedule);
+  const { seats } = useSelector((state) => state.seats);
 
   useEffect(() => {
     (async () => {
