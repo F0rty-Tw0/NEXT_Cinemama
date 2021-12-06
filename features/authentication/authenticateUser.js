@@ -9,8 +9,9 @@ const authenticateUser = (credentials) => async (dispatch) => {
   if (response.status === 200) {
     setCookie('user', JSON.stringify(userAuthorization));
     dispatch(setUser(userAuthorization));
+  } else {
+    dispatch(setError(userAuthorization.message));
   }
-  dispatch(setError(userAuthorization.message));
 };
 
 export default authenticateUser;

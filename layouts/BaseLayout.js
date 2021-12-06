@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Nav from 'components/shared/Nav';
 import Header from 'components/shared/Header';
 import Footer from 'components/shared/Footer';
+import Error from 'components/shared/Error';
 import Carousel from 'components/shared/Carousel';
 
 const BaseLayout = ({ className, title, description, children }) => {
@@ -14,6 +15,7 @@ const BaseLayout = ({ className, title, description, children }) => {
       </Head>
       <main className={`${className}`}>
         <Header className='base-layout__header' />
+        <Error className='base-layout__error' />
         <Carousel className='base-layout__carousel' />
         <Nav className='base-layout__nav' />
         <section className='base-layout__content'>{children}</section>

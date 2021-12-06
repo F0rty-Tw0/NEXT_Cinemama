@@ -1,10 +1,7 @@
-import { useSelector } from 'react-redux';
+import withAuth from 'components/hoc/withAuth';
 import BaseLayout from 'layouts/BaseLayout';
-import Redirect from 'utils/redirect';
 const Admin = () => {
-  const { user } = useSelector((state) => state.user);
-
-  return user?.role === 'ROLE_ADMIN' ? (
+  return (
     <BaseLayout
       title={'Cinemama: Admin Panel'}
       description='The best place to watch movies'
@@ -12,8 +9,7 @@ const Admin = () => {
     >
       <h1>This is admin panel</h1>
     </BaseLayout>
-  ) : (
-    <Redirect ssr to='/' />
   );
 };
-export default Admin;
+
+export default withAuth(Admin)('ROLE_ADMIN');

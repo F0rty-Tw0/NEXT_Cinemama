@@ -19,19 +19,19 @@ const _fetchData = async (token, query, isExtended) => {
   return res.json();
 };
 
-const fetchWithApiToken = async (query, isExtended) => {
+const fetchWithApiToken = async (query) => {
   const token = await getApiAccessToken();
-  return _fetchData(token, query, isExtended);
+  return _fetchData(token, query, true);
 };
 
-const fetchWithUserToken = async (query, isExtended) => {
+const fetchWithUserToken = async (query) => {
   const token = await getUserAccessToken();
-  return _fetchData(token, query, isExtended);
+  return _fetchData(token, query, false);
 };
 
-const fetchWithSavedUserToken = (query, isExtended) => {
+const fetchWithSavedUserToken = (query) => {
   const token = getSavedUserToken();
-  return _fetchData(token, query, isExtended);
+  return _fetchData(token, query, false);
 };
 
 export { fetchWithApiToken, fetchWithUserToken, fetchWithSavedUserToken };
