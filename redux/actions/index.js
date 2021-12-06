@@ -3,7 +3,10 @@ import {
   SET_DATE,
   SET_SEATS,
   SET_ERROR,
+  RESET_ERROR,
   REMOVE_USER,
+  SET_LOADING,
+  RESET_LOADING,
   SET_SCHEDULES,
   SET_FILTERED_SCHEDULES,
   SET_SELECTED_SCHEDULE,
@@ -22,6 +25,18 @@ const setDate = (date) => ({
 const setError = (error) => ({
   type: SET_ERROR,
   payload: error,
+});
+
+const resetError = () => ({
+  type: RESET_ERROR,
+});
+
+const setLoading = () => ({
+  type: SET_LOADING,
+});
+
+const resetLoading = () => ({
+  type: RESET_LOADING,
 });
 
 const removeUser = () => ({
@@ -53,7 +68,10 @@ export {
   setDate,
   setSeats,
   setError,
+  resetError,
   removeUser,
+  setLoading,
+  resetLoading,
   setSchedules,
   setSelectedSchedule,
   setFilteredSchedules,

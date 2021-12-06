@@ -1,17 +1,25 @@
-import { SET_ERROR } from '../types';
+import { SET_ERROR, RESET_ERROR } from '../types';
 
 const errorReducer = (
   state = {
-    error: '',
+    error: null,
   },
   action
 ) => {
-  if (action.type === SET_ERROR)
-    return {
-      ...state,
-      error: action.payload,
-    };
-  return state;
+  switch (action.type) {
+    case SET_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case RESET_ERROR:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
 };
 
 export default errorReducer;

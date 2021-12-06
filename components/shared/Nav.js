@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setError } from 'redux/actions';
 import AuthenticationModal from 'features/authentication/AuthenticationModal';
 import deAuthenticateUser from 'features/authentication/deAuthenticateUser';
 import reAuthenticateUser from 'features/authentication/reAuthenticateUser';
@@ -21,7 +20,6 @@ const Nav = ({ className }) => {
 
   const toggleAuthenticationModal = () => {
     setIsOpen(!isOpen);
-    dispatch(setError('')); // NOTE: remove when an error component is created
   };
 
   const logout = () => {
