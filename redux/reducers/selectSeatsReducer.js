@@ -1,4 +1,4 @@
-import { SELECT_SEATS } from '../types';
+import { SELECT_SEATS, RESET_SEATS } from '../types';
 
 const selectSeatsReducer = (
   state = {
@@ -6,20 +6,29 @@ const selectSeatsReducer = (
   },
   action
 ) => {
-  if (action.type === SELECT_SEATS) {
-    if (state.selectedSeats.includes(action.payload)) {
+  switch (action.type) {
+    case SELECT_SEATS:
+      if (state.selectedSeats.includes(action.payload)) {
+        return {
+          ...state,
+          selectedSeats: [
+            ...state.selectedSeats.filter((seat) => seat !== action.payload),
+          ],
+        };
+      } else {
+        return {
+          ...state,
+          selectedSeats: [...state.selectedSeats, action.payload],
+        };
+      }
+    case RESET_SEATS:
       return {
         ...state,
-        selectedSeats: [...state.selectedSeats.filter((seat) => seat !== action.payload)],
+        selectedSeats: [],
       };
-    } else {
-      return {
-        ...state,
-        selectedSeats: [...state.selectedSeats, action.payload],
-      };
-    }
+    default:
+      return state;
   }
-  return state;
 };
 
 export default selectSeatsReducer;

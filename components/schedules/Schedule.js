@@ -8,7 +8,6 @@ const Schedule = ({ filteredSchedule }) => {
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  //NOTE: multiple executions
 
   const toggleModal = (selectedSchedule) => {
     if (user) {

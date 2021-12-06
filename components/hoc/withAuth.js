@@ -5,9 +5,8 @@ import Redirect from 'utils/redirect';
 
 const WithAuth = ({ children, role }) => {
   const { user } = useSelector((state) => state.user);
+  const { data: loggedUser, loading: loadingUser } = useGetLoggedUser();
   if (user) {
-    const { data: loggedUser, loading: loadingUser } = useGetLoggedUser();
-
     if (loadingUser)
       return (
         <BaseLayout>
