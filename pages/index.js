@@ -39,9 +39,15 @@ const Home = () => {
       description='The best place to watch movies'
       className='base-layout__main'
     >
-      <Button variant="contained" onClick={() => changeDates(0)}>today</Button>
-      <Button variant="contained" onClick={() => changeDates(1)}>tomorrow</Button>
-      <Button variant="contained" onClick={() => changeDates(2)}>after tomorrow</Button>
+      <Button variant='contained' onClick={() => changeDates(0)}>
+        today
+      </Button>
+      <Button variant='contained' onClick={() => changeDates(1)}>
+        tomorrow
+      </Button>
+      <Button variant='contained' onClick={() => changeDates(2)}>
+        after tomorrow
+      </Button>
       <Schedules />
     </BaseLayout>
   );
@@ -56,6 +62,7 @@ const getStaticProps = wrapper.getStaticProps((store) => async () => {
   if (schedules.length > 0) {
     store.dispatch(setSchedules(schedules));
   }
+  console.log(schedules);
 });
 
 export { getStaticProps };
