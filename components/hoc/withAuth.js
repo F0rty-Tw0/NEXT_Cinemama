@@ -1,19 +1,24 @@
+import { useSelector } from 'react-redux';
+import { useGetLoggedUser } from 'endpoints/users';
 import BaseLayout from 'layouts/BaseLayout';
 import Redirect from 'utils/redirect';
-import { useGetLoggedUser } from 'endpoints/users';
 
 const WithAuth = ({ children, role }) => {
-  const { data: user, loading: loadingUser } = useGetLoggedUser();
+  const { user } = useSelector((state) => state.user);
+  if (user) {
+    const { data: loggedUser, loading: loadingUser } = useGetLoggedUser();
 
-  if (loadingUser)
-    return (
-      <BaseLayout>
-        <div>Loading...</div>
-      </BaseLayout>
-    );
+    if (loadingUser)
+      return (
+        <BaseLayout>
+          <div>Loading...</div>
+        </BaseLayout>
+      );
 
-  if (!user) return <Redirect to='/' />;
-  if (role && user.role.name !== role) return <Redirect to='/' />;
-  return { ...children };
+    if (!loggedUser) return <Redirect to='/' />;
+    if (role && loggedUser.role.name !== role) return <Redirect to='/' />;
+    return { ...children };
+  }
+  return <Redirect to='/' />;
 };
 export default WithAuth;

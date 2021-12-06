@@ -2,7 +2,6 @@ import {
   fetchWithApiToken,
   fetchWithSavedUserToken,
 } from '../services/fetchApi';
-
 const getAllSeats = async () => {
   return fetchWithApiToken(`seats`);
 };

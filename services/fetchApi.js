@@ -3,35 +3,46 @@ import {
   getUserAccessToken,
   getSavedUserToken,
 } from 'services/getAccessToken';
+import { requestOptions } from 'context';
 
-const _fetchData = async (token, query, isExtended) => {
-  const options = {
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
-  };
+const _makeRequest = async (method, body, token, query, isExtended) => {
+  const options = requestOptions(method);
+  options.headers.authorization = `Bearer ${token}`;
+
+  if (body) options.body = JSON.stringify(body);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/${query}${
       isExtended ? '?type=extended' : ''
     }`,
     options
   );
+  if (res.status === 201) return res;
   return res.json();
 };
 
 const fetchWithApiToken = async (query) => {
   const token = await getApiAccessToken();
-  return _fetchData(token, query, true);
+  return _makeRequest('GET', null, token, query, true);
 };
 
 const fetchWithUserToken = async (query) => {
   const token = await getUserAccessToken();
-  return _fetchData(token, query, false);
+  return _makeRequest('GET', null, token, query, false);
 };
 
 const fetchWithSavedUserToken = (query) => {
   const token = getSavedUserToken();
-  return _fetchData(token, query, false);
+  return _makeRequest('GET', null, token, query, false);
 };
 
-export { fetchWithApiToken, fetchWithUserToken, fetchWithSavedUserToken };
+const postWithSavedUserToken = (body, query) => {
+  const token = getSavedUserToken();
+  return _makeRequest('POST', body, token, query, false);
+};
+
+export {
+  fetchWithApiToken,
+  fetchWithUserToken,
+  fetchWithSavedUserToken,
+  postWithSavedUserToken,
+};

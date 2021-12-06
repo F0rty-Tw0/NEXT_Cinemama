@@ -44,7 +44,7 @@ const Nav = ({ className }) => {
             <Link href={`/admin`}>Admin panel</Link>
           </li>
         )}
-        {email && <p>{email}</p>}
+        {email && <Link href={`/user`}>{email}</Link>}
       </ul>
       {email ? (
         <button onClick={logout}>logout</button>
