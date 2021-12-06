@@ -6,6 +6,7 @@ import Schedules from 'components/schedules/Schedules';
 import { useEffect, useCallback } from 'react';
 import { getSchedulesBetweenDates } from 'endpoints/schedules';
 import { setDate, setSchedules, setFilteredSchedules } from 'redux/actions';
+import Button from '@mui/material/Button';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -38,9 +39,9 @@ const Home = () => {
       description='The best place to watch movies'
       className='base-layout__main'
     >
-      <button onClick={() => changeDates(0)}>today</button>
-      <button onClick={() => changeDates(1)}>tomorrow</button>
-      <button onClick={() => changeDates(2)}>after tomorrow</button>
+      <Button variant="contained" onClick={() => changeDates(0)}>today</Button>
+      <Button variant="contained" onClick={() => changeDates(1)}>tomorrow</Button>
+      <Button variant="contained" onClick={() => changeDates(2)}>after tomorrow</Button>
       <Schedules />
     </BaseLayout>
   );
