@@ -5,6 +5,7 @@ import date from './dateReducer';
 import error from './errorReducer';
 import loading from './loadingReducer';
 import schedules from './schedulesReducer';
+import selectSeats from './selectSeatsReducer';
 import selectedSchedule from './selectedScheduleReducer';
 import filteredSchedules from './filteredSchedulesReducer';
 
@@ -15,6 +16,7 @@ const allReducers = combineReducers({
   date,
   loading,
   schedules,
+  selectSeats,
   selectedSchedule,
   filteredSchedules,
 });

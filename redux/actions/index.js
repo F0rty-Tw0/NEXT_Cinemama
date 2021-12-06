@@ -6,6 +6,7 @@ import {
   RESET_ERROR,
   REMOVE_USER,
   SET_LOADING,
+  SELECT_SEATS,
   RESET_LOADING,
   SET_SCHEDULES,
   SET_FILTERED_SCHEDULES,
@@ -43,6 +44,11 @@ const removeUser = () => ({
   type: REMOVE_USER,
 });
 
+const selectSeats = (seat) => ({
+  type: SELECT_SEATS,
+  payload: seat,
+});
+
 const setSchedules = (schedules) => ({
   type: SET_SCHEDULES,
   payload: schedules,
@@ -71,6 +77,7 @@ export {
   resetError,
   removeUser,
   setLoading,
+  selectSeats,
   resetLoading,
   setSchedules,
   setSelectedSchedule,
