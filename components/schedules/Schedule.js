@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { useState } from 'react';
+import Typography from '@mui/material/IconButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedSchedule, setError } from 'redux/actions';
 import BookingModal from 'features/booking/BookingModal';
-import { Image } from 'styled-components/Image';
-import { Genres } from 'styled-components/Genres';
+import Image from 'next/image';
 import { Time } from 'styled-components/Time';
 import { Hours } from 'styled-components/Hours';
 import { MovieCard } from 'styled-components/MovieCard';
@@ -26,19 +26,19 @@ const Schedule = ({ filteredSchedule }) => {
     <>
       <MovieCard>
         <div>
-          <Image
+          {/* <Image
             src={`https://www.themoviedb.org/t/p/original/${filteredSchedule[0].movie.poster}`}
             alt='movie image'
-          />
+          /> */}
           <Link
             href={`/movies/${filteredSchedule[0].movie.id}`}
             as={`/movies/${filteredSchedule[0].movie.id}`}
           >
-            <h3>{filteredSchedule[0].movie.title}</h3>
+            {filteredSchedule[0].movie.title}
           </Link>
           {openModal && <BookingModal></BookingModal>}
           {filteredSchedule[0].movie.genres.map((genre) => (
-            <Genres key={genre.id}>{genre.name} </Genres>
+            <Typography key={genre.id}>{genre.name} </Typography>
           ))}
           <Hours>
             {filteredSchedule.map((schedulePlaying) => (
@@ -46,8 +46,8 @@ const Schedule = ({ filteredSchedule }) => {
                 onClick={() => toggleModal(schedulePlaying)}
                 key={schedulePlaying.id}
               >
-                <p>{schedulePlaying.timeSlot}</p>
-                <p> {schedulePlaying.hall.name}</p>
+                {/* <p>{schedulePlaying.timeSlot}</p>
+                <p> {schedulePlaying.hall.name}</p> */}
               </Time>
             ))}
           </Hours>

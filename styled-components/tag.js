@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
 
-const Tag = styled.h1`
-text-align: center;
-margin-top: 3vh;
+const Tag = styled(Typography)`
+  text-align: center;
+  margin-top: 3vh;
 `;
 export { Tag };
