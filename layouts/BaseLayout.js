@@ -15,8 +15,8 @@ const BaseLayout = ({ className, title, description, children }) => {
         <meta name='description' content={description} />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-        <main className={`${className}`}>
-      <StyledContainer>
+      <main className={`${className}`}>
+        <StyledContainer>
           <Header className='base-layout__header' />
           <Error className='base-layout__error' />
           <Loading className='base-layout__loading' />
@@ -24,8 +24,8 @@ const BaseLayout = ({ className, title, description, children }) => {
           <Nav className='base-layout__nav' />
           <section className='base-layout__content'>{children}</section>
           <Footer className='base-layout__footer' />
-      </StyledContainer>
-        </main>
+        </StyledContainer>
+      </main>
     </>
   );
 };
