@@ -31,32 +31,36 @@ const Nav = ({ className }) => {
   const logout = () => {
     dispatch(deAuthenticateUser());
   };
-  
+
   return (
-    <CustomNav sx={{ mt: -2 }}>
+    <CustomNav sx={{ mt: 0 }}>
       <Toolbar>
         <CustomButtonGroup sx={{ mx: "auto" }}>
+          <CustomIconButton>
+            <Link href={`/`}>Home</Link>
+          </CustomIconButton>
+          {user?.role === "ROLE_ADMIN" && (
             <CustomIconButton>
-              <Link href={`/`}>Home</Link>
+              <Link href={`/admin`}>Admin panel </Link>
             </CustomIconButton>
+          )}
+          {email && (
             <CustomIconButton>
-              {user?.role === "ROLE_ADMIN" && (
-                <Link href={`/admin`}>Admin panel </Link>
-              )}
+              <Link href={`/user`}>{email}</Link>
             </CustomIconButton>
-            <CustomIconButton>
-              {email && <Link href={`/user`}>{email}</Link>}
+          )}
+          {email ? (
+            <CustomIconButton onClick={logout}>logout</CustomIconButton>
+          ) : (
+            <CustomIconButton onClick={toggleAuthenticationModal}>
+              login
             </CustomIconButton>
-            {email ? (
-              <CustomIconButton onClick={logout}>logout</CustomIconButton>
-            ) : (
-              <CustomIconButton onClick={toggleAuthenticationModal}>login</CustomIconButton>
-            )}
-            {isOpen && (
-              <AuthenticationModal
-                closeModal={toggleAuthenticationModal}
-              ></AuthenticationModal>
-            )}
+          )}
+          {isOpen && (
+            <AuthenticationModal
+              closeModal={toggleAuthenticationModal}
+            ></AuthenticationModal>
+          )}
         </CustomButtonGroup>
       </Toolbar>
     </CustomNav>
