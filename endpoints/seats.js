@@ -2,15 +2,15 @@ import {
   fetchWithApiToken,
   fetchWithSavedUserToken,
 } from '../services/fetchApi';
-const getAllSeats = async () => {
+const getAllSeats = () => {
   return fetchWithApiToken(`seats`);
 };
 
-const getSeatsByHallId = async (id) => {
+const getSeatsByHallId = (id) => {
   return fetchWithApiToken(`seats/hall/${id}`);
 };
 
-const getSeatsByHallIdDateAndTimeSlot = async (hallId, date, timeSlot) => {
+const getSeatsByHallIdDateAndTimeSlot = (hallId, date, timeSlot) => {
   return fetchWithSavedUserToken(
     `seats/available/${hallId}/date/${date}/time-slot/${timeSlot}`
   );

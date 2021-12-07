@@ -6,8 +6,7 @@ import Schedules from 'components/schedules/Schedules';
 import { useEffect, useCallback } from 'react';
 import { getSchedulesBetweenDates } from 'endpoints/schedules';
 import { setDate, setSchedules, setFilteredSchedules } from 'redux/actions';
-import CustomButton from 'styled-components/CustomButton';
-
+import Nav from 'react-bootstrap/Nav';
 const Home = () => {
   const dispatch = useDispatch();
   const { schedules } = useSelector((state) => state.schedules);
@@ -39,19 +38,27 @@ const Home = () => {
       description='The best place to watch movies'
       className='base-layout__main'
     >
-      <CustomButton variant='contained' onClick={() => changeDates(0)}>
-        today
-      </CustomButton>
-      <CustomButton
-        active='true'
-        variant='contained'
-        onClick={() => changeDates(1)}
-      >
-        tomorrow
-      </CustomButton>
-      <CustomButton variant='contained' onClick={() => changeDates(2)}>
-        after tomorrow
-      </CustomButton>
+      <Nav justify variant='tabs' className={'schedule__navigation'}>
+        <Nav.Item>
+          <Nav.Link onClick={() => changeDates(0)}>
+            Today ({dayjs().format(`dddd D/M`)})
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            active='true'
+            variant='contained'
+            onClick={() => changeDates(1)}
+          >
+            Tomorrow ({dayjs().add(1, 'day').format(`dddd D/M`)})
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={() => changeDates(2)}>
+            {dayjs().add(2, 'day').format(`dddd D/M`)}
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
       <Schedules />
     </BaseLayout>
   );
