@@ -3,6 +3,11 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedSchedule, setError } from 'redux/actions';
 import BookingModal from 'features/booking/BookingModal';
+import { Image } from 'styled-components/Image';
+import { Genres } from 'styled-components/Genres';
+import { Time } from 'styled-components/Time';
+import { Hours } from 'styled-components/Hours';
+import { MovieCard } from 'styled-components/MovieCard';
 
 const Schedule = ({ filteredSchedule }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -19,26 +24,32 @@ const Schedule = ({ filteredSchedule }) => {
   };
   return (
     <>
-      This is schedule:
-      <Link
-        href={`/movies/${filteredSchedule[0].movie.id}`}
-        as={`/movies/${filteredSchedule[0].movie.id}`}
-      >
-        {`title: ${filteredSchedule[0].movie.title}`}
-      </Link>
-      {openModal && <BookingModal></BookingModal>}
-      {filteredSchedule[0].movie.genres.map((genre) => (
-        <p key={genre.id}>{genre.name}</p>
-      ))}
-      {filteredSchedule.map((schedulePlaying) => (
-        <div
-          onClick={() => toggleModal(schedulePlaying)}
-          key={schedulePlaying.id}
-        >
-          <p>{schedulePlaying.timeSlot}</p>
-          <p>{schedulePlaying.hall.name}</p>
+      <MovieCard>
+        <div>
+          <Image src={filteredSchedule[0].movie.image} alt='movie image' />
+          <Link
+            href={`/movies/${filteredSchedule[0].movie.id}`}
+            as={`/movies/${filteredSchedule[0].movie.id}`}
+          >
+            <h3>{filteredSchedule[0].movie.title}</h3>
+          </Link>
+          {openModal && <BookingModal></BookingModal>}
+          {filteredSchedule[0].movie.genres.map((genre) => (
+            <Genres key={genre.id}>{genre.name} </Genres>
+          ))}
+          <Hours>
+            {filteredSchedule.map((schedulePlaying) => (
+              <Time
+                onClick={() => toggleModal(schedulePlaying)}
+                key={schedulePlaying.id}
+              >
+                <p>{schedulePlaying.timeSlot}</p>
+                <p> {schedulePlaying.hall.name}</p>
+              </Time>
+            ))}
+          </Hours>
         </div>
-      ))}
+      </MovieCard>
     </>
   );
 };
