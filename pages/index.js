@@ -65,7 +65,6 @@ const getStaticProps = wrapper.getStaticProps((store) => async () => {
   if (schedules.length > 0) {
     store.dispatch(setSchedules(schedules));
   }
-  console.log(schedules);
 });
 
 export { getStaticProps };
