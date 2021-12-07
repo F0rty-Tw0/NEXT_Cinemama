@@ -1,16 +1,22 @@
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import AuthenticationModal from 'features/authentication/AuthenticationModal';
-import deAuthenticateUser from 'features/authentication/deAuthenticateUser';
-import reAuthenticateUser from 'features/authentication/reAuthenticateUser';
-import getAuthenticatedUser from 'features/authentication/getAuthenticatedUser';
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import AuthenticationModal from "features/authentication/AuthenticationModal";
+import deAuthenticateUser from "features/authentication/deAuthenticateUser";
+import reAuthenticateUser from "features/authentication/reAuthenticateUser";
+import getAuthenticatedUser from "features/authentication/getAuthenticatedUser";
+
+import CustomNav from "styled-components/CustomNav";
+import CustomIconButton from "styled-components/CustomIconButton";
+import CustomButtonGroup from "styled-components/CustomButtonGroup";
+import Toolbar from "@mui/material/Toolbar";
 
 const Nav = ({ className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const email = user?.email;
+
   useEffect(() => {
     const loggedUser = getAuthenticatedUser();
     if (loggedUser) {
@@ -25,38 +31,35 @@ const Nav = ({ className }) => {
   const logout = () => {
     dispatch(deAuthenticateUser());
   };
-
+  
   return (
-    <nav className={className}>
-      This is Nav
-      <ul>
-        <li>
-          <Link href={`/`}>Home</Link>
-        </li>
-        <li>
-          <Link href={`/about`}>About</Link>
-        </li>
-        <li>
-          <Link href={`/contact`}>Contacts</Link>
-        </li>
-        {user?.role === 'ROLE_ADMIN' && (
-          <li>
-            <Link href={`/admin`}>Admin panel</Link>
-          </li>
-        )}
-        {email && <Link href={`/user`}>{email}</Link>}
-      </ul>
-      {email ? (
-        <button onClick={logout}>logout</button>
-      ) : (
-        <button onClick={toggleAuthenticationModal}>login</button>
-      )}
-      {isOpen && (
-        <AuthenticationModal
-          closeModal={toggleAuthenticationModal}
-        ></AuthenticationModal>
-      )}
-    </nav>
+    <CustomNav sx={{ mt: -2 }}>
+      <Toolbar>
+        <CustomButtonGroup sx={{ mx: "auto" }}>
+            <CustomIconButton>
+              <Link href={`/`}>Home</Link>
+            </CustomIconButton>
+            <CustomIconButton>
+              {user?.role === "ROLE_ADMIN" && (
+                <Link href={`/admin`}>Admin panel </Link>
+              )}
+            </CustomIconButton>
+            <CustomIconButton>
+              {email && <Link href={`/user`}>{email}</Link>}
+            </CustomIconButton>
+            {email ? (
+              <CustomIconButton onClick={logout}>logout</CustomIconButton>
+            ) : (
+              <CustomIconButton onClick={toggleAuthenticationModal}>login</CustomIconButton>
+            )}
+            {isOpen && (
+              <AuthenticationModal
+                closeModal={toggleAuthenticationModal}
+              ></AuthenticationModal>
+            )}
+        </CustomButtonGroup>
+      </Toolbar>
+    </CustomNav>
   );
 };
 
