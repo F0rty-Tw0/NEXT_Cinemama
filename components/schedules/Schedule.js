@@ -26,7 +26,10 @@ const Schedule = ({ filteredSchedule }) => {
     <>
       <MovieCard>
         <div>
-          <Image src={filteredSchedule[0].movie.image} alt='movie image' />
+          <Image
+            src={`https://www.themoviedb.org/t/p/original/${filteredSchedule[0].movie.poster}`}
+            alt='movie image'
+          />
           <Link
             href={`/movies/${filteredSchedule[0].movie.id}`}
             as={`/movies/${filteredSchedule[0].movie.id}`}
