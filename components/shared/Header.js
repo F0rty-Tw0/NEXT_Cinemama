@@ -1,7 +1,8 @@
 import NavBar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from 'react-bootstrap/Container';
-import Image from 'next/Image';
+import Image from 'next/image';
+
 const cinemas = [
   'Arne Jacobsens Allé 12',
   'Gammel Jernbanevej 31',
