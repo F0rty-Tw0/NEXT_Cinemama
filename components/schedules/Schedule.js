@@ -26,11 +26,8 @@ const Schedule = ({ filteredSchedule }) => {
         href={`/movies/${filteredSchedule[0].movie.id}`}
         as={`/movies/${filteredSchedule[0].movie.id}`}
       >
-        <a className='schedule-movie__title'>
+        <a>
           <div className='schedule-movie__image'>
-            <div className='schedule-movie__rating'>
-              {filteredSchedule[0].movie.rating}
-            </div>
             <Image
               width={'300'}
               height={'450'}
@@ -38,12 +35,16 @@ const Schedule = ({ filteredSchedule }) => {
               className='schedule-movie__image'
               src={`https://www.themoviedb.org/t/p/w300/${filteredSchedule[0].movie.image}`}
             />
+            <div className='schedule-movie__rating'>
+              {filteredSchedule[0].movie.rating}
+            </div>
             <div className='schedule-movie__age'>
               {filteredSchedule[0].movie.minAge}+
             </div>
           </div>
-
-          {filteredSchedule[0].movie.title}
+          <p className='schedule-movie__title'>
+            {filteredSchedule[0].movie.title}
+          </p>
         </a>
       </Link>
       {openModal && <BookingModal></BookingModal>}
