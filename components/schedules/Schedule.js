@@ -18,6 +18,7 @@ const Schedule = ({ filteredSchedule }) => {
     }
   };
   return (
+<<<<<<< HEAD
     <Card style={{ width: '23.2459677419%' }}>
       <Card.Img
         variant='top'
@@ -48,6 +49,38 @@ const Schedule = ({ filteredSchedule }) => {
         ))}
       </Card.Body>
     </Card>
+=======
+      <Card className='schedule__card'>
+        <Card.Img
+          variant='top'
+          src={`https://www.themoviedb.org/t/p/w200/${filteredSchedule[0].movie.image}`}
+        />
+        <Card.Body>
+          <Card.Title>
+            <Link
+              passHref
+              href={`/movies/${filteredSchedule[0].movie.id}`}
+              as={`/movies/${filteredSchedule[0].movie.id}`}
+            >
+              <a>{filteredSchedule[0].movie.title}</a>
+            </Link>
+          </Card.Title>
+          {openModal && <BookingModal></BookingModal>}
+          {filteredSchedule[0].movie.genres.map((genre) => (
+            <p key={genre.id}>{genre.name}</p>
+          ))}
+          {filteredSchedule.map((schedulePlaying) => (
+            <Card.Text
+              onClick={() => toggleModal(schedulePlaying)}
+              key={schedulePlaying.id}
+            >
+              {schedulePlaying.timeSlot}
+              {schedulePlaying.hall.name}
+            </Card.Text>
+          ))}
+        </Card.Body>
+      </Card>
+>>>>>>> 0ec16506f3246604ff19f654954c7df92bf3dd4b
   );
 };
 
