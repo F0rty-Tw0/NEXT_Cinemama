@@ -1,14 +1,7 @@
-import { ThemeProvider } from '@mui/material/styles';
-import React from 'react';
+import 'styles/globals.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import wrapper from 'redux/store';
-import theme from 'styled-components/theme';
 
-const MyApp = ({ Component, pageProps }) => {
-  return (
-    <ThemeProvider theme={theme}>
-      <Component {...pageProps} />
-    </ThemeProvider>
-  );
-};
+const MyApp = ({ Component, pageProps }) => <Component {...pageProps} />;
 
 export default wrapper.withRedux(MyApp);

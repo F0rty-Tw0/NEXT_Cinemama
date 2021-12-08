@@ -1,19 +1,14 @@
 import Link from 'next/link';
 import { useState } from 'react';
-import Typography from '@mui/material/IconButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedSchedule, setError } from 'redux/actions';
+import Card from 'react-bootstrap/Card';
 import BookingModal from 'features/booking/BookingModal';
-import Image from 'next/image';
-import { Time } from 'styled-components/Time';
-import { Hours } from 'styled-components/Hours';
-import { MovieCard } from 'styled-components/MovieCard';
 
 const Schedule = ({ filteredSchedule }) => {
   const [openModal, setOpenModal] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-
   const toggleModal = (selectedSchedule) => {
     if (user) {
       dispatch(setSelectedSchedule(selectedSchedule));
@@ -23,37 +18,36 @@ const Schedule = ({ filteredSchedule }) => {
     }
   };
   return (
-    <>
-      <MovieCard>
-        <div>
-          {/* <Image
-            src={`https://www.themoviedb.org/t/p/original/${filteredSchedule[0].movie.poster}`}
-            alt='movie image'
-          /> */}
-          <Link
-            href={`/movies/${filteredSchedule[0].movie.id}`}
-            as={`/movies/${filteredSchedule[0].movie.id}`}
-          >
-            {filteredSchedule[0].movie.title}
-          </Link>
+      <Card style={{ width: '23.2459677419%' }}>
+        <Card.Img
+          variant='top'
+          src={`https://www.themoviedb.org/t/p/w200/${filteredSchedule[0].movie.image}`}
+        />
+        <Card.Body>
+          <Card.Title>
+            <Link
+              passHref
+              href={`/movies/${filteredSchedule[0].movie.id}`}
+              as={`/movies/${filteredSchedule[0].movie.id}`}
+            >
+              <a>{filteredSchedule[0].movie.title}</a>
+            </Link>
+          </Card.Title>
           {openModal && <BookingModal></BookingModal>}
           {filteredSchedule[0].movie.genres.map((genre) => (
-            <Typography key={genre.id}>{genre.name} </Typography>
+            <p key={genre.id}>{genre.name}</p>
           ))}
-          <Hours>
-            {filteredSchedule.map((schedulePlaying) => (
-              <Time
-                onClick={() => toggleModal(schedulePlaying)}
-                key={schedulePlaying.id}
-              >
-                {/* <p>{schedulePlaying.timeSlot}</p>
-                <p> {schedulePlaying.hall.name}</p> */}
-              </Time>
-            ))}
-          </Hours>
-        </div>
-      </MovieCard>
-    </>
+          {filteredSchedule.map((schedulePlaying) => (
+            <Card.Text
+              onClick={() => toggleModal(schedulePlaying)}
+              key={schedulePlaying.id}
+            >
+              {schedulePlaying.timeSlot}
+              {schedulePlaying.hall.name}
+            </Card.Text>
+          ))}
+        </Card.Body>
+      </Card>
   );
 };
 

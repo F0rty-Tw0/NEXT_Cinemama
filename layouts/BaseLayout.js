@@ -1,11 +1,11 @@
 import Head from 'next/head';
-import Nav from 'components/shared/Nav';
+import NavBar from 'components/shared/NavBar';
 import Header from 'components/shared/Header';
 import Footer from 'components/shared/Footer';
 import Error from 'components/shared/Error';
 import Loading from 'components/shared/Loading';
 import Carousel from 'components/shared/Carousel';
-import StyledContainer from 'styled-components/StyledContainer';
+import Container from 'react-bootstrap/Container';
 
 const BaseLayout = ({ className, title, description, children }) => {
   return (
@@ -15,16 +15,16 @@ const BaseLayout = ({ className, title, description, children }) => {
         <meta name='description' content={description} />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main className={`${className}`}>
-        <StyledContainer>
+      <main className={`base-layout ${className}`}>
+        <Container className={'base-layout__container'}>
           <Header className='base-layout__header' />
           <Error className='base-layout__error' />
           <Loading className='base-layout__loading' />
           <Carousel className='base-layout__carousel' />
-          <Nav className='base-layout__nav' />
+          <NavBar className='base-layout__nav' />
           <section className='base-layout__content'>{children}</section>
           <Footer className='base-layout__footer' />
-        </StyledContainer>
+        </Container>
       </main>
     </>
   );
