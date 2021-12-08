@@ -16,8 +16,8 @@ const Header = ({ className }) => {
             <Image
               className='logo__image'
               src='/favicon.ico'
-              width='50'
-              height='50'
+              width='48'
+              height='48'
               alt='Cinemama logo'
             />
             <h1 className='logo__name d-inline'>Cinemama</h1>

@@ -3,7 +3,7 @@ import Image from 'next/Image';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedSchedule, setError } from 'redux/actions';
-import Container from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import BookingModal from 'features/booking/BookingModal';
 
@@ -20,35 +20,48 @@ const Schedule = ({ filteredSchedule }) => {
     }
   };
   return (
-    <Container className='schedule__card'>
-      <p>Rating: {filteredSchedule[0].movie.rating}</p>
-      <Image
-        width={300}
-        height={200}
-        alt={'FIXME'}
-        src={`https://www.themoviedb.org/t/p/w200/${filteredSchedule[0].movie.image}`}
-      />
+    <Container className='schedule-movie'>
       <Link
         passHref
         href={`/movies/${filteredSchedule[0].movie.id}`}
         as={`/movies/${filteredSchedule[0].movie.id}`}
       >
-        <a>{filteredSchedule[0].movie.title}</a>
+        <a className='schedule-movie__title'>
+          <div className='schedule-movie__image'>
+            <div className='schedule-movie__rating'>
+              {filteredSchedule[0].movie.rating}
+            </div>
+            <Image
+              width={'300'}
+              height={'450'}
+              alt={'FIXME'}
+              className='schedule-movie__image'
+              src={`https://www.themoviedb.org/t/p/w300/${filteredSchedule[0].movie.image}`}
+            />
+            <div className='schedule-movie__age'>
+              {filteredSchedule[0].movie.minAge}+
+            </div>
+          </div>
+
+          {filteredSchedule[0].movie.title}
+        </a>
       </Link>
       {openModal && <BookingModal></BookingModal>}
       {filteredSchedule[0].movie.genres.map((genre) => (
-        <p key={genre.id}>{genre.name}</p>
+        <p className='schedule-movie__genres' key={genre.id}>
+          {genre.name}
+        </p>
       ))}
-      <div className='schedule__cardContainer'>
+      <div className='schedule-movie__time-slot'>
         {filteredSchedule.map((schedulePlaying) => (
-          <p
-            className='schedule__cardText'
+          <div
+            className='time-slot__box'
             onClick={() => toggleModal(schedulePlaying)}
             key={schedulePlaying.id}
           >
-            {schedulePlaying.timeSlot}
-            {schedulePlaying.hall.name}
-          </p>
+            <p className='time-slot__time'>{schedulePlaying.timeSlot}</p>
+            <p className='time-slot__hall'>{schedulePlaying.hall.name}</p>
+          </div>
         ))}
       </div>
     </Container>

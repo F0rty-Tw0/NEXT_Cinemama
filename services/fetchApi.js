@@ -16,6 +16,7 @@ const _makeRequest = async (method, body, token, query, isExtended) => {
     }`,
     options
   );
+  if (res.status === 201) return res;
   const response = await res.json();
   if (res.status !== 200) throw new Error(response.message);
   return response;
