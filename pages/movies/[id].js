@@ -29,41 +29,7 @@ const Movie = ({ movie, filteredSchedule }) => {
       {router.isFallback ? (
         <h1>Loading...</h1>
       ) : (
-        <Container className='movie__container'>
-          <Row>
-            <Col md={3}>
-              <img
-                className='movie__photo'
-                src={`https://www.themoviedb.org/t/p/w200/${movie.poster}`}
-                alt={`${movie.title} image`}
-              />
-            </Col>
-            <Col>
-              <h1>{movie.title}</h1>
-              <p>{movie.info}</p>
-              <Row style={{ marginTop: '3vh' }}>
-                <Col>
-                  <iframe
-                    src={`https://www.youtube.com/embed/${movie.trailer}`}
-                    title='YouTube video player'
-                    frameBorder='0'
-                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                    allowFullScreen
-                    style={{ height: '12rem' }}
-                  ></iframe>
-                </Col>
-                <Col>
-                  <h5>Screen time</h5>
-                  <p>{movie.screenTime} </p>
-                  <h5>Minimum Age</h5>
-                  <p>{movie.minAge} </p>
-                  <h5>Rating</h5>
-                  <p>{movie.rating} </p>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Container>
+        <Container className='movie__container'></Container>
       )}
     </BaseLayout>
   );
