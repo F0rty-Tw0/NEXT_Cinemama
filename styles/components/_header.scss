@@ -1,0 +1,19 @@
+.base-layout__header {
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+
+.logo {
+  &__name {
+    position: relative;
+    font-size: 1.5rem;
+    font-weight: bold;
+    bottom: 1rem;
+    left: 0.5rem;
+    text-decoration: none;
+    color: #fff;
+    &:hover {
+      color: #fff;
+    }
+  }
+}

@@ -1,49 +1,44 @@
-import Nav from "react-bootstrap/Nav";
-import Dropdown from "react-bootstrap/Dropdown";
-import Image from "react-bootstrap/Image";
-
+import NavBar from 'react-bootstrap/NavBar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Container from 'react-bootstrap/Container';
+import Image from 'next/Image';
+const cinemas = [
+  'Arne Jacobsens Allé 12',
+  'Gammel Jernbanevej 31',
+  'Christiansmindevej 17',
+];
 const Header = ({ className }) => {
-
   return (
     <header className={className}>
-      <Nav
-        fill
-        variant="tabs"
-        // activeKey='/'
-        onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-      >
-        <Nav.Link href="/">
-          <Image src="https://i.imgur.com/w6ftcfo.jpeg" rounded />
-        </Nav.Link>
-        <Nav.Item>
-          <Dropdown className="header__dropdown">
-            <Dropdown.Toggle className="header__dropdown__toggle" id="dropdown-header">
-              Click to change Cinemama
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">
-                Arne Jacobsens Allé 12, 2300 København
-              </Dropdown.Item>
-              <Dropdown.Item href="#/action-2">
-                Gammel Jernbanevej 31, 2500 København
-              </Dropdown.Item>
-              <Dropdown.Item href="#/action-3">
-                Christiansmindevej 17, 4300 Holbæk
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Nav.Item>
-        <Nav.Item className="header__nav__item">
-          <h5>Current Cinemama is</h5>
-          <strong>Amagerbrogade 32</strong>
-          <p>2300 København S</p>
-        </Nav.Item>
-        <Nav.Item className="header__nav__item">
-          <h5>For reservations or inquiries</h5>
-          <h5>please contact</h5>
-          <strong>+4520503320</strong>
-        </Nav.Item>
-      </Nav>
+      <NavBar>
+        <Container>
+          <div className='logo'>
+            <Image
+              className='logo__image'
+              src='/favicon.ico'
+              width='50'
+              height='50'
+              alt='Cinemama logo'
+            />
+            <h1 className='logo__name d-inline'>Cinemama</h1>
+            <NavDropdown
+              id='nav-dropdown-dark-example'
+              title='Gammel Konge Vej 99'
+              className='header__dropdown'
+              menuVariant='dark'
+            >
+              {cinemas.map((cinema, index) => (
+                <NavDropdown.Item key={index}>{cinema}</NavDropdown.Item>
+              ))}
+            </NavDropdown>
+          </div>
+          <Container>facebook, instagram, youtube, linkedin, logos</Container>
+          <NavBar.Text>
+            <p>For reservations or inquiries</p>
+            <p>+4520503320</p>
+          </NavBar.Text>
+        </Container>
+      </NavBar>
     </header>
   );
 };

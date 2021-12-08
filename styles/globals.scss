@@ -1,40 +1,21 @@
 @import './components/_schedules';
+@import './components/_header';
+@import './components/_navbar';
+@import './components/_footer';
 
 * {
   padding: 0;
   margin: 0;
 }
-
-$color: red;
-$second_color: green;
-.inherit {
-  display: inherit;
-}
-
-.header__dropdown {
-  margin-top: 2.5em;
-  
-}
-
-.header__nav__item {
-  margin-top: 10px;
-  color: azure;
-}
-
-#dropdown-header{
-  background-color:aliceblue;
-  color: black
-}
-
-.nav__bar__item{
-  display: block;
-  padding: 0.5rem 1rem;
-  color: aliceblue;
+a {
   text-decoration: none;
 }
 
-.nav__bar__logout{
-  color:aliceblue;
+$color: red;
+$second_color: green;
+
+.inherit {
+  display: inherit;
 }
 
 .base-layout {
@@ -50,7 +31,6 @@ $second_color: green;
   }
   &__header {
     background-color: #378087;
-
   }
   &__carousel {
     height: 30vh;
@@ -67,7 +47,6 @@ $second_color: green;
   }
   &__footer {
     margin-top: auto;
-    text-align: center;
     background-color: rosybrown;
   }
 }
