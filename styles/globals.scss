@@ -1,0 +1,46 @@
+@import './components/schedules.scss';
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+$color: red;
+$second_color: green;
+.inherit {
+  display: inherit;
+}
+
+.base-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: url('/poster.jpg') center no-repeat;
+  &__container {
+    margin-top: 20vh;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+  }
+  &__header {
+    background-color: $color;
+  }
+  &__carousel {
+    height: 30vh;
+    background-color: $second_color;
+  }
+  &__nav {
+    background-color: aqua;
+  }
+  &__admin {
+    background-color: plum;
+  }
+  &__content {
+    background-color: olivedrab;
+  }
+  &__footer {
+    margin-top: auto;
+    text-align: center;
+    background-color: rosybrown;
+  }
+}

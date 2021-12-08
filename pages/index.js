@@ -6,9 +6,7 @@ import Schedules from 'components/schedules/Schedules';
 import { useEffect, useCallback } from 'react';
 import { getSchedulesBetweenDates } from 'endpoints/schedules';
 import { setDate, setSchedules, setFilteredSchedules } from 'redux/actions';
-import Button from '@mui/material/Button';
-import { ButtonDiv } from 'styled-components/ButtonDiv';
-
+import Nav from 'react-bootstrap/Nav';
 const Home = () => {
   const dispatch = useDispatch();
   const { schedules } = useSelector((state) => state.schedules);
@@ -35,24 +33,34 @@ const Home = () => {
   };
 
   return (
-      <BaseLayout
-        title='Welcome to the Cinemama Theaters'
-        description='The best place to watch movies'
-        className='base-layout__main'
-      >
-        <ButtonDiv>
-          <Button variant='contained' onClick={() => changeDates(0)}>
-            today
-          </Button>
-          <Button variant='contained' onClick={() => changeDates(1)}>
-            tomorrow
-          </Button>
-          <Button variant='contained' onClick={() => changeDates(2)}>
-            after tomorrow
-          </Button>
-        </ButtonDiv>
-        <Schedules />
-      </BaseLayout>
+    <BaseLayout
+      title='Welcome to the Cinemama Theaters'
+      description='The best place to watch movies'
+      className='base-layout__main'
+    >
+      <Nav justify variant='tabs' className={'schedule__navigation'}>
+        <Nav.Item>
+          <Nav.Link onClick={() => changeDates(0)}>
+            Today ({dayjs().format(`dddd D/M`)})
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            active='true'
+            variant='contained'
+            onClick={() => changeDates(1)}
+          >
+            Tomorrow ({dayjs().add(1, 'day').format(`dddd D/M`)})
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={() => changeDates(2)}>
+            {dayjs().add(2, 'day').format(`dddd D/M`)}
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <Schedules />
+    </BaseLayout>
   );
 };
 // This function gets called at build time on server-side.

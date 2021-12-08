@@ -16,8 +16,9 @@ const _makeRequest = async (method, body, token, query, isExtended) => {
     }`,
     options
   );
-  if (res.status === 201) return res;
-  return res.json();
+  const response = await res.json();
+  if (res.status !== 200) throw new Error(response.message);
+  return response;
 };
 
 const fetchWithApiToken = async (query) => {
