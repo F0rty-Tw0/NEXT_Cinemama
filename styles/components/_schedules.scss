@@ -4,8 +4,38 @@
 .schedule {
   &__navigation {
     background-color: #f5f5f5;
+    margin-bottom: 3vh;
   }
   &__card {
-    width: 23.2459677419%;
+    padding-top: 3vh;
+    margin-left: 3vw;
+    margin-bottom: 3vh;
+  }
+  &__card:hover .schedule__cardImage {
+    transform: scale(1.1);
+  }
+  &__cardText {
+    border: #ffc107;
+    border-style: solid;
+    border-radius: 10px;
+    height: 60px;
+    width: 5rem;
+    text-align: center;
+  }
+  &__cardContainer {
+    display: flex;
+    justify-content: space-around;
+  }
+  &__cardRating {
+    background-color: goldenrod;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__cardImage {
+    width: 100%;
+    transition: 0.5s ease;
   }
 }

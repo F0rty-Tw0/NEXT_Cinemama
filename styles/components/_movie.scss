@@ -1,0 +1,12 @@
+@import 'styles/variables';
+@import 'styles/mixins';
+
+.movie {
+  &__photo {
+    width: 18rem;
+  }
+  &__container {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+  }
+}

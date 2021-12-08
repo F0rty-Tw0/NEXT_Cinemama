@@ -1,4 +1,5 @@
 @import './components/_schedules';
+@import './components/_movie';
 
 * {
   padding: 0;
@@ -14,12 +15,14 @@ $second_color: green;
 .base-layout {
   display: flex;
   flex-direction: column;
+  overflow-y: hidden;
   height: 100vh;
   background: url('/poster.jpg') center no-repeat;
   &__container {
     margin-top: 20vh;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
     height: 80vh;
   }
   &__header {
@@ -36,7 +39,7 @@ $second_color: green;
     background-color: plum;
   }
   &__content {
-    background-color: olivedrab;
+    background-color: rgba(224, 224, 224, 0.877);
   }
   &__footer {
     margin-top: auto;
