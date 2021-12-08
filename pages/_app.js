@@ -1,23 +1,7 @@
-import 'styles/globals.css';
+import 'styles/globals.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import wrapper from 'redux/store';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const theme = createTheme({
-  palette: {
-    type: 'light',
-    primary: {
-      main: '#75c17e',
-    },
-    secondary: {
-      main: '#f50057',
-    },
-  },
-});
-
-const MyApp = ({ Component, pageProps }) => (
-  <ThemeProvider theme={theme}>
-    <Component {...pageProps} />
-  </ThemeProvider>
-);
+const MyApp = ({ Component, pageProps }) => <Component {...pageProps} />;
 
 export default wrapper.withRedux(MyApp);

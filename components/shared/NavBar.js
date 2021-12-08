@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Nav from 'react-bootstrap/Nav';
 import AuthenticationModal from 'features/authentication/AuthenticationModal';
 import deAuthenticateUser from 'features/authentication/deAuthenticateUser';
 import reAuthenticateUser from 'features/authentication/reAuthenticateUser';
 import getAuthenticatedUser from 'features/authentication/getAuthenticatedUser';
 
-const Nav = ({ className }) => {
+const NavBar = ({ className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -27,37 +28,44 @@ const Nav = ({ className }) => {
   };
 
   return (
-    <nav className={className}>
-      This is Nav
-      <ul>
-        <li>
-          <Link href={`/`}>Home</Link>
-        </li>
-        <li>
-          <Link href={`/about`}>About</Link>
-        </li>
-        <li>
-          <Link href={`/contact`}>Contacts</Link>
-        </li>
-        {user?.role === 'ROLE_ADMIN' && (
-          <li>
-            <Link href={`/admin`}>Admin panel</Link>
-          </li>
-        )}
-        {email && <Link href={`/user`}>{email}</Link>}
-      </ul>
+    <Nav className={`${className}`}>
+      <Nav.Item>
+        <Link passHref href={`/`}>
+          <a className='nav-link'>Home</a>
+        </Link>
+      </Nav.Item>
+
+      {user?.role === 'ROLE_ADMIN' && (
+        <Nav.Item>
+          <Link passHref href={`/admin`}>
+            <a className='nav-link'>Admin panel</a>
+          </Link>
+        </Nav.Item>
+      )}
       {email ? (
-        <button onClick={logout}>logout</button>
+        <div className='ms-auto inherit'>
+          <Nav.Item className='d-inline'>
+            <Link passHref href={`/user`}>
+              <a className='nav-link'>{email}</a>
+            </Link>
+          </Nav.Item>
+
+          <Nav.Item className='d-inline'>
+            <Nav.Link onClick={logout}>logout</Nav.Link>
+          </Nav.Item>
+        </div>
       ) : (
-        <button onClick={toggleAuthenticationModal}>login</button>
+        <Nav.Item className='ms-auto'>
+          <Nav.Link onClick={toggleAuthenticationModal}>login</Nav.Link>
+        </Nav.Item>
       )}
       {isOpen && (
         <AuthenticationModal
           closeModal={toggleAuthenticationModal}
         ></AuthenticationModal>
       )}
-    </nav>
+    </Nav>
   );
 };
 
-export default Nav;
+export default NavBar;

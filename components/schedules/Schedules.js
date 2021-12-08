@@ -1,10 +1,9 @@
 import { useSelector } from 'react-redux';
 import Schedule from './Schedule';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
 const Schedules = () => {
-  const { date } = useSelector((state) => state.date);
-  const { filteredSchedules } = useSelector(
-    (state) => state.filteredSchedules
-  );
+  const { filteredSchedules } = useSelector((state) => state.filteredSchedules);
 
   const getUniqueMovieIds = (selectedSchedules) => {
     const movieIds = selectedSchedules.map((schedule) => schedule.movie.id);
@@ -13,16 +12,16 @@ const Schedules = () => {
 
   const uniqueMovieIds = getUniqueMovieIds(filteredSchedules);
   return (
-    <>
-      This is All Schedules for {date}
-      <br />
-      {uniqueMovieIds.map((id) => {
-        const uniqueSchedule = filteredSchedules?.filter((schedule) => {
-          return schedule.movie.id === id;
-        });
-        return <Schedule filteredSchedule={uniqueSchedule} key={id} />;
-      })}
-    </>
+    <Container>
+      <Row xs={1} md={2} className='g-4'>
+        {uniqueMovieIds.map((id) => {
+          const uniqueSchedule = filteredSchedules?.filter((schedule) => {
+            return schedule.movie.id === id;
+          });
+          return <Schedule filteredSchedule={uniqueSchedule} key={id} />;
+        })}
+      </Row>
+    </Container>
   );
 };
 

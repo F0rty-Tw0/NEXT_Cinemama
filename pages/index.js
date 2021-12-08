@@ -5,9 +5,13 @@ import BaseLayout from 'layouts/BaseLayout';
 import Schedules from 'components/schedules/Schedules';
 import { useEffect, useCallback } from 'react';
 import { getSchedulesBetweenDates } from 'endpoints/schedules';
-import { setDate, setSchedules, setFilteredSchedules } from 'redux/actions';
-import CustomButton from 'styled-components/CustomButton';
-
+import {
+  setDate,
+  setError,
+  setSchedules,
+  setFilteredSchedules,
+} from 'redux/actions';
+import Nav from 'react-bootstrap/Nav';
 const Home = () => {
   const dispatch = useDispatch();
   const { schedules } = useSelector((state) => state.schedules);
@@ -39,19 +43,27 @@ const Home = () => {
       description='The best place to watch movies'
       className='base-layout__main'
     >
-      <CustomButton variant='contained' onClick={() => changeDates(0)}>
-        today
-      </CustomButton>
-      <CustomButton
-        active='true'
-        variant='contained'
-        onClick={() => changeDates(1)}
-      >
-        tomorrow
-      </CustomButton>
-      <CustomButton variant='contained' onClick={() => changeDates(2)}>
-        after tomorrow
-      </CustomButton>
+      <Nav justify variant='tabs' className={'schedule__navigation'}>
+        <Nav.Item>
+          <Nav.Link onClick={() => changeDates(0)}>
+            Today ({dayjs().format(`dddd D/M`)})
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            active='true'
+            variant='contained'
+            onClick={() => changeDates(1)}
+          >
+            Tomorrow ({dayjs().add(1, 'day').format(`dddd D/M`)})
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={() => changeDates(2)}>
+            {dayjs().add(2, 'day').format(`dddd D/M`)}
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
       <Schedules />
     </BaseLayout>
   );
@@ -62,9 +74,13 @@ const Home = () => {
 const getStaticProps = wrapper.getStaticProps((store) => async () => {
   const today = dayjs().format('YYYY-MM-DD');
   const dayAfterTomorrow = dayjs().add(2, 'day').format('YYYY-MM-DD');
-  const schedules = await getSchedulesBetweenDates(today, dayAfterTomorrow);
-  if (schedules.length > 0) {
-    store.dispatch(setSchedules(schedules));
+  try {
+    const schedules = await getSchedulesBetweenDates(today, dayAfterTomorrow);
+    if (schedules.length > 0) {
+      store.dispatch(setSchedules(schedules));
+    }
+  } catch (err) {
+    store.dispatch(setError(err.message));
   }
 });
 
