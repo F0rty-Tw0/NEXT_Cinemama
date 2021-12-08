@@ -2,8 +2,9 @@ import { useRouter } from 'next/router';
 import BaseLayout from 'layouts/BaseLayout';
 import ErrorPage from '../404';
 import { getMovies, getMovieById } from 'endpoints/movies';
+import Container from 'react-bootstrap/Container';
 
-const Movie = ({ movie }) => {
+const Movie = ({ movie, filteredSchedule }) => {
   const router = useRouter();
   if (!router.isFallback && !movie.id) {
     return (
@@ -22,7 +23,11 @@ const Movie = ({ movie }) => {
       description='The best place to watch movies'
       className='base-layout__movie'
     >
-      {router.isFallback ? <h1>Loading...</h1> : <h1>Movie {movie.title}</h1>}
+      {router.isFallback ? (
+        <h1>Loading...</h1>
+      ) : (
+        <Container className='movie__container'></Container>
+      )}
     </BaseLayout>
   );
 };

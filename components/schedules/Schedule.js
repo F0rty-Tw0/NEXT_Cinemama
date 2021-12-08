@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedSchedule, setError } from 'redux/actions';
-import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
 import BookingModal from 'features/booking/BookingModal';
 
 const Schedule = ({ filteredSchedule }) => {
@@ -18,36 +19,52 @@ const Schedule = ({ filteredSchedule }) => {
     }
   };
   return (
-      <Card className='schedule__card'>
-        <Card.Img
-          variant='top'
-          src={`https://www.themoviedb.org/t/p/w200/${filteredSchedule[0].movie.image}`}
-        />
-        <Card.Body>
-          <Card.Title>
-            <Link
-              passHref
-              href={`/movies/${filteredSchedule[0].movie.id}`}
-              as={`/movies/${filteredSchedule[0].movie.id}`}
-            >
-              <a>{filteredSchedule[0].movie.title}</a>
-            </Link>
-          </Card.Title>
-          {openModal && <BookingModal></BookingModal>}
-          {filteredSchedule[0].movie.genres.map((genre) => (
-            <p key={genre.id}>{genre.name}</p>
-          ))}
-          {filteredSchedule.map((schedulePlaying) => (
-            <Card.Text
-              onClick={() => toggleModal(schedulePlaying)}
-              key={schedulePlaying.id}
-            >
-              {schedulePlaying.timeSlot}
-              {schedulePlaying.hall.name}
-            </Card.Text>
-          ))}
-        </Card.Body>
-      </Card>
+    <Container className='schedule-movie'>
+      <Link
+        passHref
+        href={`/movies/${filteredSchedule[0].movie.id}`}
+        as={`/movies/${filteredSchedule[0].movie.id}`}
+      >
+        <a>
+          <div className='schedule-movie__image'>
+            <Image
+              width={'300'}
+              height={'450'}
+              alt={'FIXME'}
+              className='schedule-movie__image'
+              src={`https://www.themoviedb.org/t/p/w300/${filteredSchedule[0].movie.image}`}
+            />
+            <div className='schedule-movie__rating'>
+              {filteredSchedule[0].movie.rating}
+            </div>
+            <div className='schedule-movie__age'>
+              {filteredSchedule[0].movie.minAge}+
+            </div>
+          </div>
+          <p className='schedule-movie__title'>
+            {filteredSchedule[0].movie.title}
+          </p>
+        </a>
+      </Link>
+      {openModal && <BookingModal></BookingModal>}
+      {filteredSchedule[0].movie.genres.map((genre) => (
+        <p className='schedule-movie__genres' key={genre.id}>
+          {genre.name}
+        </p>
+      ))}
+      <div className='schedule-movie__time-slot'>
+        {filteredSchedule.map((schedulePlaying) => (
+          <div
+            className='time-slot__box'
+            onClick={() => toggleModal(schedulePlaying)}
+            key={schedulePlaying.id}
+          >
+            <p className='time-slot__time'>{schedulePlaying.timeSlot}</p>
+            <p className='time-slot__hall'>{schedulePlaying.hall.name}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
   );
 };
 

@@ -1,26 +1,45 @@
-import Nav from 'react-bootstrap/Nav';
+import NavBar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Container from 'react-bootstrap/Container';
+import Image from 'next/image';
+
+const cinemas = [
+  'Arne Jacobsens Allé 12',
+  'Gammel Jernbanevej 31',
+  'Christiansmindevej 17',
+];
 const Header = ({ className }) => {
   return (
     <header className={className}>
-      <Nav
-        activeKey='/home'
-        onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-      >
-        <Nav.Item>
-          <Nav.Link href='/home'>Active</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey='link-1'>Link</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey='link-2'>Link</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey='disabled' disabled>
-            Disabled
-          </Nav.Link>
-        </Nav.Item>
-      </Nav>
+      <NavBar>
+        <Container>
+          <div className='logo'>
+            <Image
+              className='logo__image'
+              src='/favicon.ico'
+              width='48'
+              height='48'
+              alt='Cinemama logo'
+            />
+            <h1 className='logo__name d-inline'>Cinemama</h1>
+            <NavDropdown
+              id='nav-dropdown-dark-example'
+              title='Gammel Konge Vej 99'
+              className='header__dropdown'
+              menuVariant='dark'
+            >
+              {cinemas.map((cinema, index) => (
+                <NavDropdown.Item key={index}>{cinema}</NavDropdown.Item>
+              ))}
+            </NavDropdown>
+          </div>
+          <Container>facebook, instagram, youtube, linkedin, logos</Container>
+          <NavBar.Text>
+            <p>For reservations or inquiries</p>
+            <p>+4520503320</p>
+          </NavBar.Text>
+        </Container>
+      </NavBar>
     </header>
   );
 };

@@ -1,0 +1,15 @@
+@import '../variables';
+
+.nav {
+  &-link {
+    font-size: $font-size-small;
+    color: #fff;
+    &:hover {
+      color: red;
+    }
+  }
+}
+
+.active {
+  color: purple;
+}

@@ -16,15 +16,17 @@ const BaseLayout = ({ className, title, description, children }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className={`base-layout ${className}`}>
-        <Container className={'base-layout__container'}>
-          <Header className='base-layout__header' />
-          <Error className='base-layout__error' />
-          <Loading className='base-layout__loading' />
-          <Carousel className='base-layout__carousel' />
-          <NavBar className='base-layout__nav' />
-          <section className='base-layout__content'>{children}</section>
-          <Footer className='base-layout__footer' />
-        </Container>
+        <div className='base-layout__wrapper'>
+          <Container className='base-layout__container'>
+            <Header className='base-layout__header' />
+            <Error className='base-layout__error' />
+            <Loading className='base-layout__loading' />
+            <Carousel className='base-layout__carousel' />
+            <NavBar className='base-layout__nav' />
+            <section className='base-layout__content'>{children}</section>
+            <Footer className='base-layout__footer' />
+          </Container>
+        </div>
       </main>
     </>
   );

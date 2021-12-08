@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import Schedule from './Schedule';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+
 const Schedules = () => {
   const { filteredSchedules } = useSelector((state) => state.filteredSchedules);
 
