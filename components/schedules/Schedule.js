@@ -21,7 +21,7 @@ const Schedule = ({ filteredSchedule }) => {
     <Card style={{ width: '23.2459677419%' }}>
       <Card.Img
         variant='top'
-        src={`https://www.themoviedb.org/t/p/w200/${filteredSchedule[0].movie.image}`}
+        src={`https://www.themoviedb.org/t/p/w200/${filteredSchedule[0].movie.poster}`}
       />
       <Card.Body>
         <Card.Title>
