@@ -33,7 +33,7 @@ $second_color: green;
     background-color: #378087;
   }
   &__carousel {
-    height: 30vh;
+    min-height: 20vh;
     background-color: $second_color;
   }
   &__nav {
@@ -43,7 +43,8 @@ $second_color: green;
     background-color: plum;
   }
   &__content {
-    background-color: olivedrab;
+    min-height: 40vh;
+    background-color: rgba(224, 224, 224, 0.877);
   }
   &__footer {
     margin-top: auto;

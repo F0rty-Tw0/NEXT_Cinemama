@@ -18,7 +18,7 @@ const BookingModal = () => {
   const { user } = useSelector((state) => state.user);
   const { selectedSeats } = useSelector((state) => state.selectSeats);
   const { seats } = useSelector((state) => state.seats);
-  
+
   const getSeats = useCallback(async () => {
     try {
       const scheduleSeats = await getSeatsByHallIdDateAndTimeSlot(
@@ -44,7 +44,6 @@ const BookingModal = () => {
   const onBooking = async () => {
     dispatch(setLoading());
     const booking = await makeBooking(selectedSeats, schedule?.id, user?.id);
-    console.log(booking);
     dispatch(resetSeats());
     getSeats();
   };
