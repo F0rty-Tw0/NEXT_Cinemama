@@ -11,6 +11,32 @@ $second_color: green;
   display: inherit;
 }
 
+.header__dropdown {
+  margin-top: 2.5em;
+  
+}
+
+.header__nav__item {
+  margin-top: 10px;
+  color: azure;
+}
+
+#dropdown-header{
+  background-color:aliceblue;
+  color: black
+}
+
+.nav__bar__item{
+  display: block;
+  padding: 0.5rem 1rem;
+  color: aliceblue;
+  text-decoration: none;
+}
+
+.nav__bar__logout{
+  color:aliceblue;
+}
+
 .base-layout {
   display: flex;
   flex-direction: column;
@@ -23,14 +49,15 @@ $second_color: green;
     height: 80vh;
   }
   &__header {
-    background-color: $color;
+    background-color: #378087;
+
   }
   &__carousel {
     height: 30vh;
     background-color: $second_color;
   }
   &__nav {
-    background-color: aqua;
+    background-color: #378087;
   }
   &__admin {
     background-color: plum;
