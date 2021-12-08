@@ -34,16 +34,7 @@ const NavBar = ({ className }) => {
           <a className='nav-link'>Home</a>
         </Link>
       </Nav.Item>
-      <Nav.Item>
-        <Link passHref href={`/about`}>
-          <a className='nav-link'>About</a>
-        </Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Link passHref href={`/contact`}>
-          <a className='nav-link'>Contacts</a>
-        </Link>
-      </Nav.Item>
+
       {user?.role === 'ROLE_ADMIN' && (
         <Nav.Item>
           <Link passHref href={`/admin`}>

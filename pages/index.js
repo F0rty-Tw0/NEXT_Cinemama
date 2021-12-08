@@ -5,7 +5,12 @@ import BaseLayout from 'layouts/BaseLayout';
 import Schedules from 'components/schedules/Schedules';
 import { useEffect, useCallback } from 'react';
 import { getSchedulesBetweenDates } from 'endpoints/schedules';
-import { setDate, setSchedules, setFilteredSchedules } from 'redux/actions';
+import {
+  setDate,
+  setError,
+  setSchedules,
+  setFilteredSchedules,
+} from 'redux/actions';
 import Nav from 'react-bootstrap/Nav';
 const Home = () => {
   const dispatch = useDispatch();
@@ -69,9 +74,13 @@ const Home = () => {
 const getStaticProps = wrapper.getStaticProps((store) => async () => {
   const today = dayjs().format('YYYY-MM-DD');
   const dayAfterTomorrow = dayjs().add(2, 'day').format('YYYY-MM-DD');
-  const schedules = await getSchedulesBetweenDates(today, dayAfterTomorrow);
-  if (schedules.length > 0) {
-    store.dispatch(setSchedules(schedules));
+  try {
+    const schedules = await getSchedulesBetweenDates(today, dayAfterTomorrow);
+    if (schedules.length > 0) {
+      store.dispatch(setSchedules(schedules));
+    }
+  } catch (err) {
+    store.dispatch(setError(err.message));
   }
 });
 
