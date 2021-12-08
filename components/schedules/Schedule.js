@@ -1,10 +1,9 @@
 import Link from 'next/link';
-import Image from 'next/Image';
+import Image from 'next/image';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedSchedule, setError } from 'redux/actions';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import BookingModal from 'features/booking/BookingModal';
 
 const Schedule = ({ filteredSchedule }) => {

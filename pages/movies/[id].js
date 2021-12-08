@@ -1,11 +1,8 @@
 import { useRouter } from 'next/router';
-import Image from 'next/Image';
 import BaseLayout from 'layouts/BaseLayout';
 import ErrorPage from '../404';
 import { getMovies, getMovieById } from 'endpoints/movies';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 const Movie = ({ movie, filteredSchedule }) => {
   const router = useRouter();
