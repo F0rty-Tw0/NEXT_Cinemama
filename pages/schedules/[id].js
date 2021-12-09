@@ -1,5 +1,6 @@
 import BaseLayout from 'layouts/BaseLayout';
 import dayjs from 'dayjs';
+import { useSelector } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -9,6 +10,7 @@ import { getScheduleByMovieId } from 'endpoints/schedules';
 import { getMovies, getMovieById } from 'endpoints/movies';
 
 const Schedule = ({ schedule, movie }) => {
+  const { filteredSchedules } = useSelector((state) => state.filteredSchedules);
   const today = dayjs().format('YYYY-MM-DD');
   const tomorrow = dayjs().add(1, 'day').format('YYYY-MM-DD');
   const afterTomorrow = dayjs().add(1, 'day').format('YYYY-MM-DD');
@@ -71,9 +73,12 @@ const Schedule = ({ schedule, movie }) => {
                 <p>{movie.rating} </p>
               </Col>
             </Row>
+            {filteredSchedules.map((test, index) => (
+              <div key={index}>{test.timeSlot}</div>
+            ))}
             <Row>
               <h3 className='movie__schedule'> Schedule for the next 3 days</h3>
-              <SchedulePicker />
+              <SchedulePicker className={'testing__name'} />
             </Row>
           </Col>
         </Row>
