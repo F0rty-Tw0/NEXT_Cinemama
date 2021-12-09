@@ -30,13 +30,13 @@ const Schedule = ({ filteredSchedule }) => {
       >
         <a>
           <div className='schedule-movie__image'>
-            {/*   <Image
+              <Image
               width={'300'}
               height={'450'}
-              alt={'FIXME'}
+              alt={'Schedule Image'}
               className='schedule-movie__image'
               src={`https://www.themoviedb.org/t/p/w300/${filteredSchedule[0].movie.image}`}
-            /> */}
+            />
             <div className='schedule-movie__rating'>
               {filteredSchedule[0].movie.rating}
             </div>

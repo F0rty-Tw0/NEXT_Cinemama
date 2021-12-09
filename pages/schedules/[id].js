@@ -38,15 +38,15 @@ const Schedule = ({ schedule, movie }) => {
       <Container className='movie__container'>
         <Row>
           <Col md={3}>
-            {/* <div className='movie__image'>
-              <image
-                width={'300'}
-                height={'450'}
-                alt={'FIXME'}
-                src={`https://www.themoviedb.org/t/p/w300/${movie.image}`}
+            <div className='movie__image'>
+              <Image
+                width={'500'}
+                height={'750'}
+                alt={'Poster Image'}
+                src={`https://www.themoviedb.org/t/p/w500/${movie.image}`}
               />
               <div className='schedule-movie__age'>{movie.minAge}+</div>
-            </div> */}
+            </div>
           </Col>
           <Col>
             <h1 className='movie__title'>{movie.title}</h1>
