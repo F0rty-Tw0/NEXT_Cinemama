@@ -54,7 +54,7 @@ const AuthenticationModal = ({ isOpen, handleClose, authenticate }) => {
               onChange={(event) => setPassword(event.target.value)}
             />
           </Form.Group>
-          <Button variant='primary' type='submit' className='float-sm-end'>
+          <Button variant='primary' type='submit' className='float-sm-end custom__button'>
             Login
           </Button>
         </Form>

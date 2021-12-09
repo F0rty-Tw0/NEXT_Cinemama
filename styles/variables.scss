@@ -1,17 +1,19 @@
-$color-main: #1675f6;
+$color-main: #3788d0;
+$color-main-light: #5fa9e6;
 $color-text: #333333;
 $color-secondary: #ffd600;
-$color-green: #33691E;
+$color-selected: #185ee0;
+$color-dark-green: #33691E ;
+$color-green: #a4ce36;
 $color-text-hover: #555555;
+$color-danger: #ef5858;
+$color-white: #ffffff;
+
 $white-overlay-02dp: rgba(255, 255, 255, 0.07);
 $white-overlay-03dp: rgba(255, 255, 255, 0.08);
 $white-overlay-08dp: rgba(255, 255, 255, 0.12);
 $white-overlay-16dp: rgba(255, 255, 255, 0.15);
 $white-overlay-64dp: rgba(255, 255, 255, 0.19);
-
-$margin1: 1rem;
-$margin3: 3rem;
-$margin5: 5rem;
 
 $dark-overlay-02dp: rgba(0, 0, 0, 0.07);
 $dark-overlay-03dp: rgba(0, 0, 0, 0.08);
@@ -25,7 +27,7 @@ $font-size-x-small: 1rem;
 $font-size-small: 1.3rem;
 $font-size-medium: 1.5rem;
 $font-size-large: 2rem;
-
+$font-size-x-large: 2.5rem;
 
 $spacing-xxs: 0.2rem;
 $spacing-xs: 0.4rem;
@@ -38,4 +40,5 @@ $border-radius-xxs: 0.2rem;
 $border-radius-xs: 0.4rem;
 $border-radius-s: 0.6rem;
 $border-radius-m: 1rem;
-$border-radius-l: 1.5rem;
+$border-radius-l: 1.6rem;
+$border-radius-xl: 2.5rem;

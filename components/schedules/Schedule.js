@@ -26,10 +26,10 @@ const Schedule = ({ filteredSchedule }) => {
       dispatch(setError('Please login to see available seats'));
     }
   };
-
   return (
     <Container className='schedule-movie'>
       <Link
+        scroll={false}
         passHref
         href={`/schedules/${filteredSchedule[0].movie.id}`}
         as={`/schedules/${filteredSchedule[0].movie.id}`}

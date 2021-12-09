@@ -1,0 +1,66 @@
+@import 'styles/variables';
+
+.schedule-movie {
+  &__row {
+    justify-content: center;
+  }
+  &__image {
+    margin-top: $spacing-l;
+  }
+  &__title {
+    margin-top: $spacing-l;
+    font-size: $font-size-large;
+  }
+  &__info {
+    margin-bottom: $spacing-l;
+  }
+  &__trailer {
+    width: 30rem;
+    height: 15rem;
+  }
+  &__screen {
+    &-time,
+    &-rating {
+      font-size: $font-size-medium;
+      &--hour,
+      &--amount {
+        font-size: $font-size-x-large;
+      }
+    }
+  }
+  &__schedule {
+    margin-top: $spacing-l;
+    margin-bottom: $spacing-xl;
+    &-picker {
+      & .nav-item .nav-link {
+        font-size: $font-size-x-small;
+      }
+    }
+  }
+}
+.time-slot {
+  &__box {
+    display: inline-block;
+    text-align: center;
+    margin-bottom: $spacing-s;
+    margin-right: $spacing-s;
+    border-radius: $border-radius-s;
+    border: 2px solid $color-secondary;
+  }
+  &__time {
+    font-size: $font-size-x-small;
+    font-weight: bold;
+    color: $color-text;
+    margin-bottom: $spacing-xxs;
+    padding: $spacing-xxs;
+    transition: ease-in-out 0.3s;
+    background-color: $color-secondary;
+    &:hover {
+      color: $color-text-hover;
+    }
+  }
+  &__hall {
+    font-size: $font-size-xx-small;
+    margin-bottom: $spacing-s;
+  }
+}

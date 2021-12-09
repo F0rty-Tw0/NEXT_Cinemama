@@ -18,6 +18,8 @@
     flex-direction: column;
   }
   &__header {
+    padding: 0.5rem 1rem;
+    text-align: center;
     border-radius: $border-radius-xxs;
     min-height: 120px;
     background-color: #378087;
@@ -40,5 +42,9 @@
   &__footer {
     margin-top: auto;
     background-color: rosybrown;
+  }
+
+  &__error {
+    border-radius: $border-radius-s;
   }
 }

@@ -1,10 +1,12 @@
 @import './components/_base-layout';
 @import './components/_schedules';
-@import './components/_movie';
+@import './components/_schedule-movie';
 @import './components/_header';
 @import './components/_navbar';
 @import './components/_footer';
 @import './components/_seats';
+@import './components/_error';
+@import './overrides.scss';
 
 html,
 body {
@@ -25,3 +27,12 @@ a {
   display: inherit;
 }
 
+.custom__button {
+  width: 150px;
+  background-color: $color-main;
+  border-color: $color-main;
+  &:hover {
+    background-color: $color-main-light;
+    border-color: $color-main-light;
+  }
+}

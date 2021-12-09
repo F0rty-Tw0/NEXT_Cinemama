@@ -1,0 +1,6 @@
+@import '../variables';
+
+.error__message {
+  background-color: $color-danger;
+  border-bottom: none;
+}

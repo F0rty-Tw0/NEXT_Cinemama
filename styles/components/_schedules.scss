@@ -1,108 +1,137 @@
 @import '../variables';
 
-.schedule-movie {
-  width: 350px;
-  margin-top: $spacing-xl;
-  &__image {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    span {
-      overflow: visible !important;
-      img {
-        border-radius: $border-radius-s;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-          rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-        transition: all ease 0.3s;
-        &:hover {
-          transform: scale(1.01);
+.schedule {
+  &__navigation {
+    background-color: $color-white;
+    border-radius: $border-radius-xl;
+    box-shadow: 0 0 1px 0 rgba($color-text, 0.15),
+      0 6px 12px 0 rgba($color-text, 0.15);
+    padding: 0.75rem;
+    border-bottom: none;
+  }
+
+  &__day.nav-link {
+    font-size: $font-size-small;
+    color: $color-text;
+    border-top-left-radius: $border-radius-l !important;
+    border-top-right-radius: $border-radius-l !important;
+    border-radius: $border-radius-l;
+    &:hover {
+      color: $color-text-hover;
+      background-color: $dark-overlay-08dp;
+      border-radius: $border-radius-l;
+    }
+    &.active {
+      color: $color-dark-green;
+      background-color: $dark-overlay-02dp !important;
+      border-radius: $border-radius-l;
+    }
+  }
+
+  &-movie {
+    width: 350px;
+    margin-top: $spacing-xl;
+    &__image {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      span {
+        overflow: visible !important;
+        img {
+          border-radius: $border-radius-s;
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+            rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+          transition: all ease 0.3s;
+          &:hover {
+            transform: scale(1.01);
+          }
         }
       }
     }
-  }
 
-  &__rating {
-    position: absolute;
-    top: $spacing-s;
-    right: $spacing-s;
-    display: inline-block;
-    font-size: $font-size-x-small;
-    font-weight: bold;
-    border-radius: $border-radius-xxs;
-    padding: $spacing-xxs;
-    color: $color-text;
-    background-color: $color-secondary;
-  }
-  &__title {
-    display: block;
-    font-size: $font-size-medium;
-    font-weight: bold;
-    color: $color-text;
-    margin-bottom: $spacing-s;
-    transition: ease-in-out 0.3s;
-    &:hover {
-      color: $color-text-hover;
+    &__rating {
+      position: absolute;
+      top: $spacing-s;
+      right: $spacing-s;
+      display: inline-block;
+      font-size: $font-size-x-small;
+      font-weight: bold;
+      border-radius: $border-radius-xxs;
+      padding: $spacing-xxs;
+      color: $color-text;
+      background-color: $color-secondary;
     }
-  }
-  &__age {
-    position: absolute;
-    bottom: $spacing-s;
-    left: $spacing-s;
-    display: inline-block;
-    font-size: $font-size-x-small;
-    font-weight: bold;
-    border-radius: $border-radius-xxs;
-    padding: $spacing-xxs $spacing-s;
-    color: #fff;
-    background-color: $color-green;
-  }
-  &__genre {
-    display: inline-block;
-    font-size: $font-size-xx-small;
-    font-weight: normal;
-    margin-right: $spacing-s;
-    margin-bottom: $spacing-s;
-    border-radius: $border-radius-xxs;
-    padding: $spacing-xxs $spacing-s;
-    background-color: $dark-overlay-08dp;
-  }
+    &__title {
+      display: block;
+      font-size: $font-size-medium;
+      font-weight: bold;
+      color: $color-text;
+      margin-bottom: $spacing-s;
+      transition: ease-in-out 0.3s;
+      &:hover {
+        color: $color-text-hover;
+      }
+    }
+    &__age {
+      position: absolute;
+      bottom: $spacing-s;
+      left: $spacing-s;
+      display: inline-block;
+      font-size: $font-size-x-small;
+      font-weight: bold;
+      border-radius: $border-radius-xxs;
+      padding: $spacing-xxs $spacing-s;
+      color: #fff;
+      background-color: $color-dark-green;
+    }
+    &__genre {
+      display: inline-block;
+      font-size: $font-size-xx-small;
+      font-weight: normal;
+      margin-right: $spacing-s;
+      margin-bottom: $spacing-s;
+      border-radius: $border-radius-xxs;
+      padding: $spacing-xxs $spacing-s;
+      background-color: $dark-overlay-08dp;
+    }
 
-  &__title {
-    display: block;
-    font-size: $font-size-medium;
-    font-weight: bold;
-    color: $color-text;
-    margin-bottom: $spacing-s;
-    transition: ease-in-out 0.3s;
-    &:hover {
-      color: $color-text-hover;
+    &__title {
+      display: block;
+      font-size: $font-size-medium;
+      font-weight: bold;
+      color: $color-text;
+      margin-bottom: $spacing-s;
+      transition: ease-in-out 0.3s;
+      &:hover {
+        color: $color-text-hover;
+      }
     }
-  }
-}
-.time-slot {
-  &__box {
-    display: inline-block;
-    text-align: center;
-    width: 30%;
-    margin-bottom: $spacing-s;
-    margin-right: $spacing-s;
-    border-radius: $border-radius-s;
-    border: 2px solid $color-secondary;
-  }
-  &__time {
-    font-size: $font-size-x-small;
-    font-weight: bold;
-    color: $color-text;
-    margin-bottom: $spacing-xxs;
-    padding: $spacing-xxs;
-    transition: ease-in-out 0.3s;
-    background-color: $color-secondary;
-    &:hover {
-      color: $color-text-hover;
+    .time-slot {
+      &__box {
+        display: inline-block;
+        text-align: center;
+        width: 30%;
+        margin-bottom: $spacing-s;
+        margin-right: $spacing-s;
+        border-radius: $border-radius-s;
+        border: 2px solid $color-secondary;
+      }
+      &__time {
+        font-size: $font-size-x-small;
+        font-weight: bold;
+        color: $color-text;
+        margin-bottom: $spacing-xxs;
+        padding: $spacing-xxs;
+        transition: ease-in-out 0.3s;
+        background-color: $color-secondary;
+        &:hover {
+          color: $color-text-hover;
+        }
+      }
+      &__hall {
+        font-size: $font-size-xx-small;
+        margin-bottom: $spacing-s;
+      }
     }
-  }
-  &__hall {
-    font-size: $font-size-xx-small;
-    margin-bottom: $spacing-s;
   }
 }

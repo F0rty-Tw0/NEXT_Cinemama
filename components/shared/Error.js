@@ -20,8 +20,8 @@ const Error = ({ className }) => {
 
   return (
     <Modal className={className} show={!!error} onHide={handleClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>{error}</Modal.Title>
+      <Modal.Header className='error__message' closeButton>
+        <Modal.Title className='text-uppercase'>{error}</Modal.Title>
       </Modal.Header>
     </Modal>
   );

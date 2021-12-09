@@ -1,5 +1,4 @@
-import Seat from '@/components/seats/Seat';
-
+import Image from 'next/image';
 import { useEffect, useCallback } from 'react';
 import {
   setSeats,
@@ -18,6 +17,7 @@ import {
   getAvailableSeatsByHallIdDateAndTimeSlot,
   getBookedSeatsByHallIdDateAndTimeSlot,
 } from 'endpoints/seats';
+import Seat from '@/components/seats/Seat';
 
 const BookingModal = ({ isOpen, handleClose }) => {
   const dispatch = useDispatch();
@@ -77,6 +77,12 @@ const BookingModal = ({ isOpen, handleClose }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        <Image
+          width={'500'}
+          height={'150'}
+          alt={'Schedule Image'}
+          src={'/screen.svg'}
+        />
         <Container className='seats__container'>
           {seats.map((seat) => (
             <Seat key={seat.id} seat={seat} />
@@ -85,7 +91,7 @@ const BookingModal = ({ isOpen, handleClose }) => {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button onClick={() => onBooking()}>Book</Button>
+        <Button className="custom__button" onClick={() => onBooking()}>Book</Button>
       </Modal.Footer>
     </Modal>
   );

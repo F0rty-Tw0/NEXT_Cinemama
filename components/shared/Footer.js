@@ -1,9 +1,12 @@
 const Footer = ({ className }) => {
   return (
     <footer className={className}>
-      <p className='footer__text'>
-        Designed and developed by: Artiom Tofan, Nikolai Lenander, Pawel Stepien
-      </p>
+      <div className='footer__text'>
+        &copy; Designed and developed by:{' '}
+        <span className='footer__names'>
+          Artiom Tofan, Nikolai Lenander, Pawel Stepien
+        </span>
+      </div>
     </footer>
   );
 };
