@@ -6,5 +6,7 @@ const getSchedulesBetweenDates = async (fromDate, toDate) => {
     `schedules/${theaterId}/end-date/${toDate}/start-date/${fromDate}`
   );
 };
-
-export { getSchedulesBetweenDates };
+const getScheduleByMovieId = async (movieId) => {
+  return fetchWithApiToken(`schedules/movie/${movieId}`);
+};
+export { getSchedulesBetweenDates, getScheduleByMovieId };

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/Image';
+import Image from 'next/image';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSelectedSchedule, setError } from 'redux/actions';
@@ -9,6 +9,7 @@ import BookingModal from 'features/booking/BookingModal';
 
 const Schedule = ({ filteredSchedule }) => {
   const [openModal, setOpenModal] = useState(false);
+  console.log(filteredSchedule);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const toggleModal = (selectedSchedule) => {
@@ -19,22 +20,23 @@ const Schedule = ({ filteredSchedule }) => {
       dispatch(setError('Please login to see available seats'));
     }
   };
+
   return (
     <Container className='schedule-movie'>
       <Link
         passHref
-        href={`/movies/${filteredSchedule[0].movie.id}`}
-        as={`/movies/${filteredSchedule[0].movie.id}`}
+        href={`/schedules/${filteredSchedule[0].movie.id}`}
+        as={`/schedules/${filteredSchedule[0].movie.id}`}
       >
         <a>
           <div className='schedule-movie__image'>
-            <Image
+            {/*   <Image
               width={'300'}
               height={'450'}
               alt={'FIXME'}
               className='schedule-movie__image'
               src={`https://www.themoviedb.org/t/p/w300/${filteredSchedule[0].movie.image}`}
-            />
+            /> */}
             <div className='schedule-movie__rating'>
               {filteredSchedule[0].movie.rating}
             </div>
