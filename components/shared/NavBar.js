@@ -67,11 +67,11 @@ const NavBar = ({ className }) => {
             <Nav.Link onClick={toggleAuthenticationModal}>Login</Nav.Link>
           </Nav.Item>
         )}
-        {isOpen && (
-          <AuthenticationModal
-            closeModal={toggleAuthenticationModal}
-          ></AuthenticationModal>
-        )}
+
+        <AuthenticationModal
+          isOpen={isOpen}
+          handleClose={toggleAuthenticationModal}
+        ></AuthenticationModal>
       </Nav>
     </nav>
   );

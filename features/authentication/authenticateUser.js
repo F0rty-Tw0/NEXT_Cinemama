@@ -9,11 +9,13 @@ const authenticateUser = (credentials) => async (dispatch) => {
   const userAuthorization = await response.json();
   if (response.status === 200) {
     setCookie('user', JSON.stringify(userAuthorization));
+    dispatch(resetLoading());
     dispatch(setUser(userAuthorization));
+    return true;
   } else {
     dispatch(setError(userAuthorization.message));
+    dispatch(resetLoading());
   }
-  dispatch(resetLoading());
 };
 
 export default authenticateUser;

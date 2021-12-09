@@ -7,17 +7,19 @@ import Container from 'react-bootstrap/Container';
 import BookingModal from 'features/booking/BookingModal';
 
 const Schedule = ({ filteredSchedule }) => {
-  const [openModal, setOpenModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
+
   const toggleModal = (selectedSchedule) => {
     if (user) {
       dispatch(setSelectedSchedule(selectedSchedule));
-      setOpenModal(!openModal);
+      setIsOpen(!isOpen);
     } else {
       dispatch(setError('Please login to see available seats'));
     }
   };
+
   return (
     <Container className='schedule-movie'>
       <Link
@@ -46,12 +48,16 @@ const Schedule = ({ filteredSchedule }) => {
           </p>
         </a>
       </Link>
-      {openModal && <BookingModal></BookingModal>}
-      {filteredSchedule[0].movie.genres.map((genre) => (
-        <p className='schedule-movie__genres' key={genre.id}>
-          {genre.name}
-        </p>
-      ))}
+      {isOpen && (
+        <BookingModal isOpen={isOpen} handleClose={toggleModal}></BookingModal>
+      )}
+      <div className='schedule-movie__genres'>
+        {filteredSchedule[0].movie.genres.map((genre) => (
+          <p className='schedule-movie__genre' key={genre.id}>
+            {genre.name}
+          </p>
+        ))}
+      </div>
       <div className='schedule-movie__time-slot'>
         {filteredSchedule.map((schedulePlaying) => (
           <div

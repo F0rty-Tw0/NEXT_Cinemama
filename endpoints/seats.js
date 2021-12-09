@@ -10,9 +10,21 @@ const getSeatsByHallId = (id) => {
   return fetchWithApiToken(`seats/hall/${id}`);
 };
 
-const getSeatsByHallIdDateAndTimeSlot = (hallId, date, timeSlot) => {
+const getAvailableSeatsByHallIdDateAndTimeSlot = (hallId, date, timeSlot) => {
   return fetchWithSavedUserToken(
     `seats/available/${hallId}/date/${date}/time-slot/${timeSlot}`
   );
 };
-export { getSeatsByHallId, getAllSeats, getSeatsByHallIdDateAndTimeSlot };
+
+const getBookedSeatsByHallIdDateAndTimeSlot = (hallId, date, timeSlot) => {
+  return fetchWithSavedUserToken(
+    `seats/booked/${hallId}/date/${date}/time-slot/${timeSlot}`
+  );
+};
+
+export {
+  getSeatsByHallId,
+  getAllSeats,
+  getAvailableSeatsByHallIdDateAndTimeSlot,
+  getBookedSeatsByHallIdDateAndTimeSlot
+};

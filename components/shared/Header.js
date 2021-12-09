@@ -12,7 +12,7 @@ const Header = ({ className }) => {
   return (
     <header className={className}>
       <NavBar>
-        <Container>
+        <Container className='logo'>
           <div className='logo'>
             <Image
               className='logo__image'
@@ -33,7 +33,9 @@ const Header = ({ className }) => {
               ))}
             </NavDropdown>
           </div>
-          <Container>facebook, instagram, youtube, linkedin, logos</Container>
+          <Container >
+            facebook, instagram, youtube, linkedin, logos
+          </Container>
           <NavBar.Text>
             <p>For reservations or inquiries</p>
             <p>+4520503320</p>

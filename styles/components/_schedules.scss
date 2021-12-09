@@ -1,33 +1,35 @@
 @import '../variables';
 
 .schedule-movie {
-  width: 23%;
-  margin-top: 2.5rem;
+  width: 350px;
+  margin-top: $spacing-xl;
   &__image {
     position: relative;
     display: flex;
+    justify-content: center;
     span {
       overflow: visible !important;
       img {
-        border-radius: 6px;
+        border-radius: $border-radius-s;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
           rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-        transition: ease-in-out 0.3s;
+        transition: all ease 0.3s;
         &:hover {
-          transform: scale(1.05);
+          transform: scale(1.01);
         }
       }
     }
   }
+
   &__rating {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: $spacing-s;
+    right: $spacing-s;
     display: inline-block;
     font-size: $font-size-x-small;
     font-weight: bold;
-    border-radius: 2px;
-    padding: 0.25rem;
+    border-radius: $border-radius-xxs;
+    padding: $spacing-xxs;
     color: $color-text;
     background-color: $color-secondary;
   }
@@ -36,7 +38,7 @@
     font-size: $font-size-medium;
     font-weight: bold;
     color: $color-text;
-    margin-bottom: 0.5rem;
+    margin-bottom: $spacing-s;
     transition: ease-in-out 0.3s;
     &:hover {
       color: $color-text-hover;
@@ -44,24 +46,24 @@
   }
   &__age {
     position: absolute;
-    bottom: 8px;
-    left: 8px;
+    bottom: $spacing-s;
+    left: $spacing-s;
     display: inline-block;
     font-size: $font-size-x-small;
     font-weight: bold;
-    border-radius: 2px;
-    padding: 0.25rem 0.5rem;
+    border-radius: $border-radius-xxs;
+    padding: $spacing-xxs $spacing-s;
     color: #fff;
     background-color: $color-green;
   }
-  &__genres {
+  &__genre {
     display: inline-block;
     font-size: $font-size-xx-small;
     font-weight: normal;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-    border-radius: 2px;
-    padding: 0.25rem 0.5rem;
+    margin-right: $spacing-s;
+    margin-bottom: $spacing-s;
+    border-radius: $border-radius-xxs;
+    padding: $spacing-xxs $spacing-s;
     background-color: $dark-overlay-08dp;
   }
 
@@ -70,21 +72,11 @@
     font-size: $font-size-medium;
     font-weight: bold;
     color: $color-text;
-    margin-bottom: 0.5rem;
+    margin-bottom: $spacing-s;
     transition: ease-in-out 0.3s;
     &:hover {
       color: $color-text-hover;
     }
-  }
-  &__genres {
-    display: inline-block;
-    font-size: $font-size-xx-small;
-    font-weight: normal;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-    border-radius: 2px;
-    padding: 0.25rem 0.5rem;
-    background-color: $dark-overlay-08dp;
   }
 }
 .time-slot {
@@ -92,17 +84,17 @@
     display: inline-block;
     text-align: center;
     width: 30%;
-    margin-bottom: 0.5rem;
-    margin-right: 0.5rem;
-    border-radius: 6px;
+    margin-bottom: $spacing-s;
+    margin-right: $spacing-s;
+    border-radius: $border-radius-s;
     border: 2px solid $color-secondary;
   }
   &__time {
     font-size: $font-size-x-small;
     font-weight: bold;
     color: $color-text;
-    margin-bottom: 0.3rem;
-    padding: 0.3rem;
+    margin-bottom: $spacing-xxs;
+    padding: $spacing-xxs;
     transition: ease-in-out 0.3s;
     background-color: $color-secondary;
     &:hover {
@@ -111,6 +103,6 @@
   }
   &__hall {
     font-size: $font-size-xx-small;
-    margin-bottom: 0.5rem;
+    margin-bottom: $spacing-s;
   }
 }

@@ -1,0 +1,24 @@
+@import '../variables';
+
+.selected {
+  background-color: green;
+  color: white;
+}
+
+.booked {
+  background-color: red;
+}
+
+.seats {
+  &__container {
+    display: flex;
+    width: 280px;
+    flex-wrap: wrap;
+    & > * {
+      text-align: center;
+      width: 50px;
+      height: 50px;
+      overflow: hidden;
+    }
+  }
+}
