@@ -2,7 +2,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSelectedSchedule, setError } from 'redux/actions';
+import {
+  setSelectedSchedule,
+  setError,
+  resetSeats,
+  resetSelectedSeats,
+} from 'redux/actions';
 import Container from 'react-bootstrap/Container';
 import BookingModal from 'features/booking/BookingModal';
 
@@ -15,6 +20,8 @@ const Schedule = ({ filteredSchedule }) => {
     if (user) {
       dispatch(setSelectedSchedule(selectedSchedule));
       setIsOpen(!isOpen);
+      dispatch(resetSeats());
+      dispatch(resetSelectedSeats());
     } else {
       dispatch(setError('Please login to see available seats'));
     }

@@ -6,7 +6,7 @@ import {
   setLoading,
   resetLoading,
   setBookedSeats,
-  resetSeats,
+  resetSelectedSeats,
   setError,
 } from 'redux/actions';
 import Modal from 'react-bootstrap/Modal';
@@ -22,6 +22,7 @@ import {
 const BookingModal = ({ isOpen, handleClose }) => {
   const dispatch = useDispatch();
   const { schedule } = useSelector((state) => state.selectedSchedule);
+  const { selectedSeats } = useSelector((state) => state.selectSeats);
   const { user } = useSelector((state) => state.user);
   const { seats } = useSelector((state) => state.seats);
 
@@ -59,7 +60,7 @@ const BookingModal = ({ isOpen, handleClose }) => {
   const onBooking = async () => {
     dispatch(setLoading());
     await makeBooking(selectedSeats, schedule?.id, user?.id);
-    dispatch(resetSeats());
+    dispatch(resetSelectedSeats());
     getSeats();
   };
   return (
@@ -76,7 +77,7 @@ const BookingModal = ({ isOpen, handleClose }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Container className="seats__container">
+        <Container className='seats__container'>
           {seats.map((seat) => (
             <Seat key={seat.id} seat={seat} />
           ))}

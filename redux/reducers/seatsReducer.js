@@ -1,4 +1,4 @@
-import { SET_SEATS } from '../types';
+import { SET_SEATS, RESET_SEATS } from '../types';
 
 const seatsReducer = (
   state = {
@@ -6,12 +6,20 @@ const seatsReducer = (
   },
   action
 ) => {
-  if (action.type === SET_SEATS)
-    return {
-      ...state,
-      seats: action.payload,
-    };
-  return state;
+  switch (action.type) {
+    case SET_SEATS:
+      return {
+        ...state,
+        seats: action.payload,
+      };
+    case RESET_SEATS:
+      return {
+        ...state,
+        seats: [],
+      };
+    default:
+      return state;
+  }
 };
 
 export default seatsReducer;
