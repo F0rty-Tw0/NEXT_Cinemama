@@ -31,15 +31,15 @@ const Schedule = ({ filteredSchedule }) => {
     <Container className='schedule-movie'>
       <Link
         passHref
-        href={`/movies/${filteredSchedule[0].movie.id}`}
-        as={`/movies/${filteredSchedule[0].movie.id}`}
+        href={`/schedules/${filteredSchedule[0].movie.id}`}
+        as={`/schedules/${filteredSchedule[0].movie.id}`}
       >
         <a>
           <div className='schedule-movie__image'>
             <Image
               width={'300'}
               height={'450'}
-              alt={'FIXME'}
+              alt={'Schedule Image'}
               className='schedule-movie__image'
               src={`https://www.themoviedb.org/t/p/w300/${filteredSchedule[0].movie.image}`}
             />

@@ -33,9 +33,7 @@ const Header = ({ className }) => {
               ))}
             </NavDropdown>
           </div>
-          <Container >
-            facebook, instagram, youtube, linkedin, logos
-          </Container>
+          <Container>facebook, instagram, youtube, linkedin, logos</Container>
           <NavBar.Text>
             <p>For reservations or inquiries</p>
             <p>+4520503320</p>

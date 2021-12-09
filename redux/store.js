@@ -20,6 +20,8 @@ const reducer = (state, action) => {
     if (state.user.user?.id)
       // preserve the user state on client side navigation
       nextState.user.user = state.user.user;
+    if (state.schedules.schedules.length > 0)
+      nextState.schedules.schedules = state.schedules.schedules;
     return nextState;
   } else {
     return allReducers(state, action);

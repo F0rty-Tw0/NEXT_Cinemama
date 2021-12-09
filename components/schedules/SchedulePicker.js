@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setDate, setFilteredSchedules } from 'redux/actions';
 
 import Nav from 'react-bootstrap/Nav';
-const SchedulePicker = () => {
+
+const SchedulePicker = ({ className = '' }) => {
   const dispatch = useDispatch();
   const { schedules } = useSelector((state) => state.schedules);
   const setMoviesOfDay = useCallback(
@@ -33,7 +34,7 @@ const SchedulePicker = () => {
       justify
       variant='tabs'
       defaultActiveKey='/'
-      className='schedule__navigation'
+      className={`schedule__navigation ${className}`}
     >
       <Nav.Item>
         <Nav.Link eventKey='/' onClick={() => changeDates(0)}>
@@ -46,7 +47,7 @@ const SchedulePicker = () => {
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey='after-tomrrow' onClick={() => changeDates(2)}>
+        <Nav.Link eventKey='after-tomorrow' onClick={() => changeDates(2)}>
           {dayjs().add(2, 'day').format(`dddd D/M`)}
         </Nav.Link>
       </Nav.Item>

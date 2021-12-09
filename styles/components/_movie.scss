@@ -1,12 +1,28 @@
-// @import 'styles/variables';
-// @import 'styles/mixins';
+@import 'styles/variables';
+@import 'styles/mixins';
 
-// .movie {
-//   &__photo {
-//     width: 18rem;
-//   }
-//   &__container {
-//     margin-top: 3vh;
-//     margin-bottom: 3vh;
-//   }
-// }
+.movie {
+  &__image {
+    position: relative;
+    display: flex;
+    margin-top: $margin3;
+  }
+  &__title {
+    margin-bottom: $margin3;
+    font-weight: bold;
+    text-align: center;
+  }
+  &__info {
+    margin-bottom: $margin3;
+  }
+  &__schedule {
+    margin-top: $margin3;
+    margin-bottom: $margin3;
+  }
+  &__buttons {
+    margin-bottom: $margin1;
+  }
+  &__schedulebox {
+    width: 6rem !important;
+  }
+}
