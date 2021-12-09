@@ -1,37 +1,39 @@
-import BaseLayout from 'layouts/BaseLayout';
 import dayjs from 'dayjs';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSelectedSchedule, setError } from 'redux/actions';
+import { getScheduleByMovieId } from 'endpoints/schedules';
+import { getMovies, getMovieById } from 'endpoints/movies';
+import BookingModal from 'features/booking/BookingModal';
+import BaseLayout from 'layouts/BaseLayout';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'next/image';
 import SchedulePicker from 'components/schedules/SchedulePicker';
-import { getScheduleByMovieId } from 'endpoints/schedules';
-import { getMovies, getMovieById } from 'endpoints/movies';
 
-const Schedule = ({ schedule, movie }) => {
+const Schedule = ({ movie }) => {
   const { filteredSchedules } = useSelector((state) => state.filteredSchedules);
-  const today = dayjs().format('YYYY-MM-DD');
-  const tomorrow = dayjs().add(1, 'day').format('YYYY-MM-DD');
-  const afterTomorrow = dayjs().add(1, 'day').format('YYYY-MM-DD');
-
-  const todaySchedule = schedule.filter((sch) => sch.date == today);
-  const tomorrowSchedule = schedule.filter((sch) => sch.date == tomorrow);
-  const afterTomorrowSchedule = schedule.filter(
-    (sch) => sch.date == afterTomorrow
+  const [openModal, setOpenModal] = useState(false);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+  const toggleModal = (selectedSchedule) => {
+    if (user) {
+      dispatch(setSelectedSchedule(selectedSchedule));
+      setOpenModal(!openModal);
+    } else {
+      dispatch(setError('Please login to see available seats'));
+    }
+  };
+  const movieSchedule = filteredSchedules.filter(
+    (schedule) => schedule.movie.id == movie.id
   );
-
-  /*  function displaySchedule(arraySchedule) {
-    arraySchedule.map((schedulePlayed) => {
-      console.log(schedulePlayed);
-    });
-  } */
 
   return (
     <BaseLayout
       title={
-        schedule
-          ? `Best description of movie ${schedule.id}`
+        movie
+          ? `Best description of movie ${movie.title}`
           : 'Cinemama: Loading movie...'
       }
       description='The best place to watch movies'
@@ -73,13 +75,20 @@ const Schedule = ({ schedule, movie }) => {
                 <p>{movie.rating} </p>
               </Col>
             </Row>
-            {filteredSchedules.map((test, index) => (
-              <div key={index}>{test.timeSlot}</div>
+
+            <h3 className='movie__schedule'> Schedule for the next 3 days</h3>
+            <SchedulePicker className={'movie__buttons'} />
+            {openModal && <BookingModal></BookingModal>}
+            {movieSchedule.map((schedulePlaying) => (
+              <div
+                className='time-slot__box movie__schedulebox'
+                onClick={() => toggleModal(schedulePlaying)}
+                key={schedulePlaying.id}
+              >
+                <p className='time-slot__time'>{schedulePlaying.timeSlot}</p>
+                <p className='time-slot__hall'>{schedulePlaying.hall.name}</p>
+              </div>
             ))}
-            <Row>
-              <h3 className='movie__schedule'> Schedule for the next 3 days</h3>
-              <SchedulePicker className={'testing__name'} />
-            </Row>
           </Col>
         </Row>
       </Container>
@@ -102,11 +111,9 @@ const getStaticPaths = async () => {
 };
 
 const getStaticProps = async ({ params }) => {
-  const schedule = await getScheduleByMovieId(params.id);
   const movie = await getMovieById(params.id);
   return {
     props: {
-      schedule,
       movie,
     },
     revalidate: 60,

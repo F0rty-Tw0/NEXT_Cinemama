@@ -19,8 +19,10 @@
     margin-top: $margin3;
     margin-bottom: $margin3;
   }
-}
-
-.testing__name {
-  background-color: red;
+  &__buttons {
+    margin-bottom: $margin1;
+  }
+  &__schedulebox {
+    width: 6rem !important;
+  }
 }

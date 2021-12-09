@@ -9,4 +9,6 @@ const getSchedulesBetweenDates = async (fromDate, toDate) => {
 const getScheduleByMovieId = async (movieId) => {
   return fetchWithApiToken(`schedules/movie/${movieId}`);
 };
+
+
 export { getSchedulesBetweenDates, getScheduleByMovieId };

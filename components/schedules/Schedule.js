@@ -9,7 +9,6 @@ import BookingModal from 'features/booking/BookingModal';
 
 const Schedule = ({ filteredSchedule }) => {
   const [openModal, setOpenModal] = useState(false);
-  console.log(filteredSchedule);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const toggleModal = (selectedSchedule) => {
