@@ -11,6 +11,7 @@ import BookingModal from 'features/booking/BookingModal';
 import SchedulePicker from 'components/schedules/SchedulePicker';
 import ErrorPage from '../404';
 import TimeSlot from 'components/schedules/TimeSlot';
+import LoadingSchedule from 'components/schedules/LoadingSchedule';
 
 const Schedule = ({ id }) => {
   const { filteredSchedules } = useSelector((state) => state.filteredSchedules);
@@ -117,10 +118,10 @@ const Schedule = ({ id }) => {
         </Container>
       </BaseLayout>
     ) : (
-      <ErrorPage /> //FIXME: SHOULD BE LOADING STATE
+      <ErrorPage />
     );
   }
-  return <ErrorPage />;
+  return <LoadingSchedule />;
 };
 export async function getServerSideProps(context) {
   return { props: context.query };

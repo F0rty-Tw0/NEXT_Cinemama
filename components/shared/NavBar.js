@@ -30,7 +30,6 @@ const NavBar = ({ className }) => {
   };
 
   const getActiveLink = (path) => {
-    console.log(path);
     return router.pathname == path ? 'active' : '';
   };
   return (

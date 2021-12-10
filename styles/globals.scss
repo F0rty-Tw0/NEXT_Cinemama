@@ -27,7 +27,17 @@ a {
 .inherit {
   display: inherit;
 }
-
+.link {
+  a {
+    color: $color-white;
+  }
+}
+.content--center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
 .custom__button {
   width: 150px;
   background-color: $color-main;
