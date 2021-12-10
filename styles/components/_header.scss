@@ -1,28 +1,37 @@
+@import '../variables';
+
+.header {
+  &__dropdown {
+    & .nav-link {
+      margin-left: $spacing-l;
+      color: $color-white;
+      &:hover {
+        color: $color-green;
+      }
+    }
+  }
+}
+
 .logo {
   &__name {
     position: relative;
-    font-size: 1.5rem;
+    font-size: $font-size-medium;
     font-weight: bold;
-    bottom: 1rem;
-    left: 0.5rem;
+    bottom: $spacing-m;
+    left: $spacing-xs;
     text-decoration: none;
-    color: #fff;
+    color: $color-white;
     &:hover {
-      color: #fff;
+      color: $color-white;
     }
   }
 }
 .some__logo {
   opacity: 0.9;
 }
-
-.header {
-  &__dropdown {
-    & .nav-link {
-      color: red;
-      &:hover {
-        color: green;
-      }
-    }
+.contact__text {
+  font-size: $font-size-x-small;
+  &.navbar-text {
+    color: $color-white;
   }
 }

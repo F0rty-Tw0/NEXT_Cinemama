@@ -19,18 +19,14 @@
     height: 15rem;
   }
   &__screen {
-    &-time,
-    &-rating {
-      font-size: $font-size-medium;
-      &--hour,
-      &--amount {
-        font-size: $font-size-x-large;
-      }
+    font-size: $font-size-medium;
+    &--time,
+    &--rating {
+      font-size: $font-size-x-large;
     }
   }
   &__schedule {
     margin-top: $spacing-l;
-    margin-bottom: $spacing-xl;
     &-picker {
       & .nav-item .nav-link {
         font-size: $font-size-x-small;

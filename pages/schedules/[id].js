@@ -52,6 +52,12 @@ const Schedule = ({ id }) => {
                 />
                 <div className='schedule-movie__age'>{movie.minAge}+</div>
               </div>
+              <p className='schedule-movie__screen mt-3'>Director</p>
+              {movie.directors.map((director, index) => (
+                <p className='' key={index}>
+                  {director.name}
+                </p>
+              ))}
             </Col>
             <Col>
               <SchedulePicker
@@ -72,12 +78,12 @@ const Schedule = ({ id }) => {
                   ></iframe>
                 </Col>
                 <Col>
-                  <p className='schedule-movie__screen-time'>Screen time</p>
-                  <p className='schedule-movie__screen-time--hour'>
+                  <p className='schedule-movie__screen'>Screen time</p>
+                  <p className='schedule-movie__screen--time'>
                     {movie.screenTime}
                   </p>
-                  <p className='schedule-movie__screen-rating'>Rating</p>
-                  <p className='schedule-movie__screen-rating--amount'>
+                  <p className='schedule-movie__screen'>Rating</p>
+                  <p className='schedule-movie__screen--rating'>
                     {movie.rating}
                     <Image
                       width={'80'}
@@ -86,6 +92,12 @@ const Schedule = ({ id }) => {
                       src={`/imdb.svg`}
                     />
                   </p>
+                </Col>
+                <Col>
+                  <p className='schedule-movie__screen'>Cast:</p>
+                  {movie.actors.map((actor, index) => (
+                    <p key={index}>{actor.name}</p>
+                  ))}
                 </Col>
               </Row>
               <h2 className='schedule-movie__schedule'>
