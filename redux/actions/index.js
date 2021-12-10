@@ -10,6 +10,8 @@ import {
   SELECT_SEATS,
   RESET_LOADING,
   SET_SCHEDULES,
+  SET_BOOKED_SEATS,
+  RESET_SELECTED_SEATS,
   SET_FILTERED_SCHEDULES,
   SET_SELECTED_SCHEDULE,
 } from '../types';
@@ -45,6 +47,11 @@ const removeUser = () => ({
   type: REMOVE_USER,
 });
 
+const setBookedSeats = (seats) => ({
+  type: SET_BOOKED_SEATS,
+  payload: seats,
+});
+
 const selectSeats = (seat) => ({
   type: SELECT_SEATS,
   payload: seat,
@@ -52,6 +59,10 @@ const selectSeats = (seat) => ({
 
 const resetSeats = () => ({
   type: RESET_SEATS,
+});
+
+const resetSelectedSeats = () => ({
+  type: RESET_SELECTED_SEATS,
 });
 
 const setSchedules = (schedules) => ({
@@ -86,6 +97,8 @@ export {
   selectSeats,
   resetLoading,
   setSchedules,
+  setBookedSeats,
+  resetSelectedSeats,
   setSelectedSchedule,
   setFilteredSchedules,
 };

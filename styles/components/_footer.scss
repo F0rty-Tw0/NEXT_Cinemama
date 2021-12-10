@@ -1,7 +1,14 @@
 @import '../variables';
 
-.footer__text {
-  font-size: $font-size-x-small;
-  text-align: center;
-  margin-top: 1rem;
+.footer {
+  &__text {
+    font-size: $font-size-x-small;
+    text-align: center;
+    margin: $spacing-s;
+   
+  }
+  &__names {
+    font-weight: bold;
+    font-size: $font-size-xx-small;
+  }
 }

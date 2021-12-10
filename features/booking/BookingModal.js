@@ -1,32 +1,48 @@
-import Seat from '@/components/seats/Seat';
-
+import Image from 'next/image';
 import { useEffect, useCallback } from 'react';
 import {
   setSeats,
   setLoading,
   resetLoading,
-  resetSeats,
+  setBookedSeats,
+  resetSelectedSeats,
   setError,
 } from 'redux/actions';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 import makeBooking from './makeBooking';
 import { useSelector, useDispatch } from 'react-redux';
-import { getSeatsByHallIdDateAndTimeSlot } from 'endpoints/seats';
+import {
+  getAvailableSeatsByHallIdDateAndTimeSlot,
+  getBookedSeatsByHallIdDateAndTimeSlot,
+} from 'endpoints/seats';
+import Seat from '@/components/seats/Seat';
 
-const BookingModal = () => {
+const BookingModal = ({ isOpen, handleClose }) => {
   const dispatch = useDispatch();
   const { schedule } = useSelector((state) => state.selectedSchedule);
-  const { user } = useSelector((state) => state.user);
   const { selectedSeats } = useSelector((state) => state.selectSeats);
+  const { user } = useSelector((state) => state.user);
   const { seats } = useSelector((state) => state.seats);
 
   const getSeats = useCallback(async () => {
     try {
-      const scheduleSeats = await getSeatsByHallIdDateAndTimeSlot(
+      const available = await getAvailableSeatsByHallIdDateAndTimeSlot(
         schedule.hall.id,
         schedule.date,
         schedule.timeSlot
       );
-      dispatch(setSeats(scheduleSeats));
+      const booked = await getBookedSeatsByHallIdDateAndTimeSlot(
+        schedule.hall.id,
+        schedule.date,
+        schedule.timeSlot
+      );
+      dispatch(setBookedSeats(booked));
+
+      const allSeats = available.concat(booked);
+      const sortedSeats = allSeats.sort((a, b) => a.id - b.id);
+      dispatch(setSeats(sortedSeats));
       dispatch(resetLoading());
     } catch (err) {
       dispatch(setError('Could not get available seats'));
@@ -43,17 +59,43 @@ const BookingModal = () => {
 
   const onBooking = async () => {
     dispatch(setLoading());
-    const booking = await makeBooking(selectedSeats, schedule?.id, user?.id);
-    dispatch(resetSeats());
+    await makeBooking(selectedSeats, schedule?.id, user?.id);
+    dispatch(resetSelectedSeats());
     getSeats();
   };
   return (
-    <>
-      {seats.map((seat) => (
-        <Seat key={seat.id} seat={seat} />
-      ))}
-      <button onClick={() => onBooking()}>Book</button>
-    </>
+    <Modal
+      show={isOpen}
+      onHide={handleClose}
+      size='m'
+      aria-labelledby='contained-modal-title-vcenter'
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id='contained-modal-title-vcenter'>
+          Book your seats
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Image
+          width={'500'}
+          height={'150'}
+          alt={'Schedule Image'}
+          src={'/screen.svg'}
+        />
+        <Container className='seats__container'>
+          {seats.map((seat) => (
+            <Seat key={seat.id} seat={seat} />
+          ))}
+        </Container>
+      </Modal.Body>
+
+      <Modal.Footer>
+        <Button className='custom__button' onClick={() => onBooking()}>
+          Book
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 
