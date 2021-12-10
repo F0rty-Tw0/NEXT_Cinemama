@@ -13,7 +13,7 @@ const Schedules = () => {
   };
 
   const uniqueMovieIds = getUniqueMovieIds(filteredSchedules);
-  
+
   return (
     <Container>
       <Row
@@ -21,16 +21,22 @@ const Schedules = () => {
         md={uniqueMovieIds.length < 2 ? uniqueMovieIds.length : 2}
         xl={uniqueMovieIds.length < 3 ? uniqueMovieIds.length : 3}
       >
-        {uniqueMovieIds.map((id) => {
-          const uniqueSchedule = filteredSchedules?.filter((schedule) => {
-            return schedule.movie.id === id;
-          });
-          return (
-            <Col key={id}>
-              <Schedule filteredSchedule={uniqueSchedule} />
-            </Col>
-          );
-        })}
+        {uniqueMovieIds.length > 0 ? (
+          uniqueMovieIds.map((id) => {
+            const uniqueSchedule = filteredSchedules?.filter((schedule) => {
+              return schedule.movie.id === id;
+            });
+            return (
+              <Col key={id}>
+                <Schedule filteredSchedule={uniqueSchedule} />
+              </Col>
+            );
+          })
+        ) : (
+          <div className='content--center mt-5'>
+            <h1>There are no schedules for this day</h1>
+          </div>
+        )}
       </Row>
     </Container>
   );
