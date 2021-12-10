@@ -15,6 +15,7 @@ import LoadingSchedule from 'components/schedules/LoadingSchedule';
 
 const Schedule = ({ id }) => {
   const { filteredSchedules } = useSelector((state) => state.filteredSchedules);
+  const { date } = useSelector((state) => state.date);
   const [isOpen, setIsOpen] = useState(false);
   const [savedSchedules, setSavedSchedules] = useState([]);
 
@@ -101,9 +102,7 @@ const Schedule = ({ id }) => {
                   ))}
                 </Col>
               </Row>
-              <h2 className='schedule-movie__schedule'>
-                Schedule for the next 3 days
-              </h2>
+              <h2 className='schedule-movie__schedule'>Schedule for {date}:</h2>
               {isOpen && (
                 <BookingModal
                   isOpen={isOpen}

@@ -2,6 +2,7 @@
 
 .time-slot {
   &__box {
+    cursor: pointer;
     display: inline-block;
     text-align: center;
     margin: $spacing-s $spacing-s $spacing-s 0;
