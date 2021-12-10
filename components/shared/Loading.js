@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import Image from 'next/image';
 import Modal from 'react-bootstrap/Modal';
 
 const Error = ({ className }) => {
@@ -11,7 +12,13 @@ const Error = ({ className }) => {
       aria-labelledby='contained-modal-title-vcenter'
       centered
     >
-      <Modal.Body>LOADING</Modal.Body>
+      <Image
+        className='logo__image'
+        src='/loader.svg'
+        width='200'
+        height='200'
+        alt='Cinemama logo'
+      />
     </Modal>
   );
 };

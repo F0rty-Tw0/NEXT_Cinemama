@@ -32,6 +32,7 @@ const getStaticProps = wrapper.getStaticProps((store) => async () => {
   } catch (err) {
     store.dispatch(setError(err.message));
   }
+  return { revalidate: 50 };
 });
 
 export { getStaticProps };

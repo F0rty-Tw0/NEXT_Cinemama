@@ -91,7 +91,11 @@ const BookingModal = ({ isOpen, handleClose }) => {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button className='custom__button' onClick={() => onBooking()}>
+        <Button
+          disabled={!selectedSeats.length > 0}
+          className='custom__button '
+          onClick={() => onBooking()}
+        >
           Book
         </Button>
       </Modal.Footer>
