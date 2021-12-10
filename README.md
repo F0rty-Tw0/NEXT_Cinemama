@@ -9,6 +9,30 @@
 We decided to use the [React](https://reactjs.org/) library for it's simplicity and performance.
 And [NextJs](https://nextjs.org/) framework because the server side rendering.
 
+<h2 align="center">Sprint Number 2:</h2>
+
+## Artiom Tofan
+
+In the second sprint, I had to implement the cinema seat selection and the actual booking of the seats and display it beautifully.
+I Helped the team with minor fixes and improvements, mentored them until they were ready to add and design their features.
+
+Was guiding out how to solve state management issues and use the [Redux](https://redux.js.org/) library.
+At the beginning of the sprint, we decided to use Material UI for the UI. But it ended up a bad idea because it was not easy to use.
+In general, the project was an excellent experience, and we accumulated many good points. But overall, after finalizing, some of the features that we thought would be necessary were out of scope.
+
+## Nikolai Lenander
+
+On the second sprint, I was tasked with styling and configuring the header and the navigation bar. I had the goal of making sure that the header contained necessary social contact information such as SoMe links, the phone number to the current cinema, the address, and finally, the Cinemama logo.
+
+On the navigation bar, four links were created to navigate around the site, starting with home and log in. Once logged in from the pop-up modal, 1-2 more links were added, depending on the user type, respectively. The styling was done in synergy with the header.
+
+## Pawel Stepien
+
+During the second sprint, I focused on styling the components I created during the first sprint.
+My task was to style the schedules to get all the necessary information during the first interaction with the website. Information includes movie titles, genres, ratings, movie posters, schedules, and age limitations. After selecting the movie, the user is redirected to the specific movie page. That was my second task. I created a page that displays the schedule, the movie description, and the movie trailer. During styling, I learned how to utilize SCSS, which is a powerful tool. Using styles variables and nested class names made it easier to create clear and readable code.
+
+<h2 align="center">Sprint Number 1:</h2>
+
 ## Artiom Tofan
 
 In the first sprint, my goal was to design the website's main page. Create the basic logic and connect the components.
