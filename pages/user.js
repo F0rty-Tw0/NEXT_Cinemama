@@ -11,7 +11,7 @@ const User = () => {
     >
       <div className='content--center mt-5'>
         <h1>This will be a beautiful user page:</h1>
-        <h2>for the user under email: {user.email}</h2>
+        <h2>for the user under email: {user?.email}</h2>
       </div>
     </BaseLayout>
   );
