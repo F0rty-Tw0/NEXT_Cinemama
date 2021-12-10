@@ -11,6 +11,7 @@ import BookingModal from 'features/booking/BookingModal';
 import SchedulePicker from 'components/schedules/SchedulePicker';
 import ErrorPage from '../404';
 import TimeSlot from 'components/schedules/TimeSlot';
+import LoadingSchedule from 'components/schedules/LoadingSchedule';
 
 const Schedule = ({ id }) => {
   const { filteredSchedules } = useSelector((state) => state.filteredSchedules);
@@ -52,6 +53,12 @@ const Schedule = ({ id }) => {
                 />
                 <div className='schedule-movie__age'>{movie.minAge}+</div>
               </div>
+              <p className='schedule-movie__screen mt-3'>Director</p>
+              {movie.directors.map((director, index) => (
+                <p className='' key={index}>
+                  {director.name}
+                </p>
+              ))}
             </Col>
             <Col>
               <SchedulePicker
@@ -72,12 +79,12 @@ const Schedule = ({ id }) => {
                   ></iframe>
                 </Col>
                 <Col>
-                  <p className='schedule-movie__screen-time'>Screen time</p>
-                  <p className='schedule-movie__screen-time--hour'>
+                  <p className='schedule-movie__screen'>Screen time</p>
+                  <p className='schedule-movie__screen--time'>
                     {movie.screenTime}
                   </p>
-                  <p className='schedule-movie__screen-rating'>Rating</p>
-                  <p className='schedule-movie__screen-rating--amount'>
+                  <p className='schedule-movie__screen'>Rating</p>
+                  <p className='schedule-movie__screen--rating'>
                     {movie.rating}
                     <Image
                       width={'80'}
@@ -86,6 +93,12 @@ const Schedule = ({ id }) => {
                       src={`/imdb.svg`}
                     />
                   </p>
+                </Col>
+                <Col>
+                  <p className='schedule-movie__screen'>Cast:</p>
+                  {movie.actors.map((actor, index) => (
+                    <p key={index}>{actor.name}</p>
+                  ))}
                 </Col>
               </Row>
               <h2 className='schedule-movie__schedule'>
@@ -105,10 +118,10 @@ const Schedule = ({ id }) => {
         </Container>
       </BaseLayout>
     ) : (
-      <ErrorPage /> //FIXME: SHOULD BE LOADING STATE
+      <ErrorPage />
     );
   }
-  return <ErrorPage />;
+  return <LoadingSchedule />;
 };
 export async function getServerSideProps(context) {
   return { props: context.query };

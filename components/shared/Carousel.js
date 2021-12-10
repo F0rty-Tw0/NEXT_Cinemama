@@ -3,7 +3,7 @@ const Carousel = ({ className }) => {
   return (
     <Image
       className={className}
-      src='/carousel.jpg'
+      src='/carousel.webp'
       width='1300'
       height='400'
       alt='Cinemama logo'

@@ -63,7 +63,7 @@ const Header = ({ className }) => {
               alt='Twitter Logo'
             />
           </Container>
-          <NavBar.Text className='w-25 fw-bold'>
+          <NavBar.Text className='w-25 fw-bold contact__text'>
             <p>📞 Contact us</p>
             <p>+45 20503320</p>
           </NavBar.Text>
