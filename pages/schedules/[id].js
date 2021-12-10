@@ -115,7 +115,12 @@ const Schedule = ({ id }) => {
                   handleClose={setIsOpen}
                 ></BookingModal>
               )}
-              <TimeSlot schedules={movieSchedules} toggleModal={toggleModal} />
+              <div className='schedule-movie__time-slot'>
+                <TimeSlot
+                  schedules={movieSchedules}
+                  toggleModal={toggleModal}
+                />
+              </div>
             </Col>
           </Row>
         </Container>

@@ -106,32 +106,5 @@
         color: $color-text-hover;
       }
     }
-    .time-slot {
-      &__box {
-        display: inline-block;
-        text-align: center;
-        width: 30%;
-        margin-bottom: $spacing-s;
-        margin-right: $spacing-s;
-        border-radius: $border-radius-s;
-        border: 2px solid $color-secondary;
-      }
-      &__time {
-        font-size: $font-size-x-small;
-        font-weight: bold;
-        color: $color-text;
-        margin-bottom: $spacing-xxs;
-        padding: $spacing-xxs;
-        transition: ease-in-out 0.3s;
-        background-color: $color-secondary;
-        &:hover {
-          color: $color-text-hover;
-        }
-      }
-      &__hall {
-        font-size: $font-size-xx-small;
-        margin-bottom: $spacing-s;
-      }
-    }
   }
 }
