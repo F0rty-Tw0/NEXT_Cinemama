@@ -10,6 +10,7 @@ import {
 } from 'redux/actions';
 import Container from 'react-bootstrap/Container';
 import BookingModal from 'features/booking/BookingModal';
+import TimeSlot from 'components/schedules/TimeSlot';
 
 const Schedule = ({ filteredSchedule }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,16 +67,7 @@ const Schedule = ({ filteredSchedule }) => {
         ))}
       </div>
       <div className='schedule-movie__time-slot'>
-        {filteredSchedule.map((schedulePlaying) => (
-          <div
-            className='time-slot__box'
-            onClick={() => toggleModal(schedulePlaying)}
-            key={schedulePlaying.id}
-          >
-            <p className='time-slot__time'>{schedulePlaying.timeSlot}</p>
-            <p className='time-slot__hall'>{schedulePlaying.hall.name}</p>
-          </div>
-        ))}
+        <TimeSlot schedules={filteredSchedule} toggleModal={toggleModal} />
       </div>
     </Container>
   );
