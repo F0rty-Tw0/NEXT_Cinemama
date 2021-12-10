@@ -1,12 +1,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  setSelectedSchedule,
-  setError,
-  resetSeats,
-  resetSelectedSeats,
-} from 'redux/actions';
+import { useSelector } from 'react-redux';
+
 import { getSchedulesFromStorage } from 'services/schedulesService';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -18,22 +13,9 @@ import ErrorPage from '../404';
 import TimeSlot from 'components/schedules/TimeSlot';
 
 const Schedule = ({ id }) => {
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
   const { filteredSchedules } = useSelector((state) => state.filteredSchedules);
   const [isOpen, setIsOpen] = useState(false);
   const [savedSchedules, setSavedSchedules] = useState([]);
-
-  const toggleModal = (selectedSchedule) => {
-    if (user) {
-      dispatch(setSelectedSchedule(selectedSchedule));
-      setIsOpen(!isOpen);
-      dispatch(resetSeats());
-      dispatch(resetSelectedSeats());
-    } else {
-      dispatch(setError('Please login to see available seats'));
-    }
-  };
 
   useEffect(() => {
     setSavedSchedules(getSchedulesFromStorage());
@@ -116,10 +98,7 @@ const Schedule = ({ id }) => {
                 ></BookingModal>
               )}
               <div className='schedule-movie__time-slot'>
-                <TimeSlot
-                  schedules={movieSchedules}
-                  toggleModal={toggleModal}
-                />
+                <TimeSlot schedules={movieSchedules} />
               </div>
             </Col>
           </Row>

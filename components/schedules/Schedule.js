@@ -1,32 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  setSelectedSchedule,
-  setError,
-  resetSeats,
-  resetSelectedSeats,
-} from 'redux/actions';
 import Container from 'react-bootstrap/Container';
-import BookingModal from 'features/booking/BookingModal';
 import TimeSlot from 'components/schedules/TimeSlot';
 
 const Schedule = ({ filteredSchedule }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
-
-  const toggleModal = (selectedSchedule) => {
-    if (user) {
-      dispatch(setSelectedSchedule(selectedSchedule));
-      setIsOpen(!isOpen);
-      dispatch(resetSeats());
-      dispatch(resetSelectedSeats());
-    } else {
-      dispatch(setError('Please login to see available seats'));
-    }
-  };
   return (
     <Container className='schedule-movie'>
       <Link
@@ -56,9 +33,7 @@ const Schedule = ({ filteredSchedule }) => {
           </p>
         </a>
       </Link>
-      {isOpen && (
-        <BookingModal isOpen={isOpen} handleClose={toggleModal}></BookingModal>
-      )}
+
       <div className='schedule-movie__genres'>
         {filteredSchedule[0].movie.genres.map((genre) => (
           <p className='schedule-movie__genre' key={genre.id}>
@@ -67,7 +42,7 @@ const Schedule = ({ filteredSchedule }) => {
         ))}
       </div>
       <div className='schedule-movie__time-slot'>
-        <TimeSlot schedules={filteredSchedule} toggleModal={toggleModal} />
+        <TimeSlot schedules={filteredSchedule} />
       </div>
     </Container>
   );

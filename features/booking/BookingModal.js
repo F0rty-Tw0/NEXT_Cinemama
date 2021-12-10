@@ -91,7 +91,9 @@ const BookingModal = ({ isOpen, handleClose }) => {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button className="custom__button" onClick={() => onBooking()}>Book</Button>
+        <Button className='custom__button' onClick={() => onBooking()}>
+          Book
+        </Button>
       </Modal.Footer>
     </Modal>
   );
