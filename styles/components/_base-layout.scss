@@ -44,7 +44,18 @@
     margin-top: auto;
     background-color: $color-primary;
   }
-
+  &__loading {
+    background-color: $dark-overlay-64dp;
+    z-index: 99999;
+    .modal-dialog {
+      justify-content: center;
+    }
+    .modal-content {
+      width: 200px;
+      background-color: transparent;
+      border: transparent;
+    }
+  }
   &__error {
     border-radius: $border-radius-s;
   }

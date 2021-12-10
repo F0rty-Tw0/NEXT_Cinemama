@@ -7,7 +7,6 @@
 @import './components/_footer';
 @import './components/_seats';
 @import './components/_error';
-@import './overrides.scss';
 
 html,
 body {
@@ -43,6 +42,10 @@ a {
   background-color: $color-main;
   border-color: $color-main;
   &:hover {
+    background-color: $color-main-light;
+    border-color: $color-main-light;
+  }
+  &:disabled {
     background-color: $color-main-light;
     border-color: $color-main-light;
   }
