@@ -1,19 +1,22 @@
-import Head from 'next/head';
 import Link from 'next/link';
+import BaseLayout from 'layouts/BaseLayout';
+import Button from 'react-bootstrap/Button';
 const ErrorPage = () => {
   return (
-    <div>
-      <Head>
-        <title>Error has occurred</title>
-        <meta name='description' content='Page not found' />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-
-      <main>
+    <BaseLayout
+      title='Error has occurred'
+      description='TPage not found'
+      className='base-layout__error'
+    >
+      <div className='content--center mt-5'>
         <h1>404: Page not found.</h1>
-        <Link href='/'>Back</Link>
-      </main>
-    </div>
+        <Button className='custom__button link text-uppercase'>
+          <Link scroll={false} href='/'>
+            Back
+          </Link>
+        </Button>
+      </div>
+    </BaseLayout>
   );
 };
 export default ErrorPage;

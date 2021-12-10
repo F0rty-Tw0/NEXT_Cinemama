@@ -1,15 +1,15 @@
 @import '../variables';
 
-.active {
-  color: purple;
-}
-
 .nav {
   &-item {
     margin-right: $spacing-s;
   }
   &__link {
     font-size: $font-size-small;
-    color: red;
+    color: $color-white;
+    &:hover,
+    &.active {
+      color: $color-secondary;
+    }
   }
 }

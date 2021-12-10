@@ -37,7 +37,9 @@ const NavBar = ({ className }) => {
       <Nav>
         <Nav.Item>
           <Link scroll={false} passHref href={`/`}>
-            <Nav.Link className={`${getActiveLink('/')} nav__link`}>
+            <Nav.Link
+              className={`${getActiveLink('/')} nav__link text-uppercase`}
+            >
               Home
             </Nav.Link>
           </Link>
@@ -46,7 +48,11 @@ const NavBar = ({ className }) => {
         {user?.role === 'ROLE_ADMIN' && (
           <Nav.Item>
             <Link scroll={false} passHref href={`/admin`}>
-              <Nav.Link className={`${getActiveLink('/')} nav__link`}>
+              <Nav.Link
+                className={`${getActiveLink(
+                  '/admin'
+                )} nav__link text-uppercase`}
+              >
                 Admin Panel
               </Nav.Link>
             </Link>
@@ -56,14 +62,14 @@ const NavBar = ({ className }) => {
           <div className='ms-auto inherit'>
             <Nav.Item className='d-inline'>
               <Link scroll={false} passHref href={`/user`}>
-                <Nav.Link className={`${getActiveLink('/')} nav__link`}>
+                <Nav.Link className={`${getActiveLink('/user')} nav__link `}>
                   {email}
                 </Nav.Link>
               </Link>
             </Nav.Item>
 
             <Nav.Item className='d-inline'>
-              <Nav.Link className={'nav__link'} onClick={logout}>
+              <Nav.Link className={'nav__link text-uppercase'} onClick={logout}>
                 Logout
               </Nav.Link>
             </Nav.Item>
@@ -71,7 +77,7 @@ const NavBar = ({ className }) => {
         ) : (
           <Nav.Item className='ms-auto'>
             <Nav.Link
-              className={'nav__link'}
+              className={'nav__link text-uppercase'}
               onClick={toggleAuthenticationModal}
             >
               Login

@@ -4,13 +4,12 @@
   &__box {
     display: inline-block;
     text-align: center;
-    margin-bottom: $spacing-s;
-    margin-right: $spacing-s;
+    margin: $spacing-s $spacing-s $spacing-s 0;
     border-radius: $border-radius-s;
     border: 2px solid $color-secondary;
   }
   &__time {
-    font-size: $font-size-x-small;
+    font-size: $font-size-small;
     font-weight: bold;
     color: $color-text;
     margin-bottom: $spacing-xxs;

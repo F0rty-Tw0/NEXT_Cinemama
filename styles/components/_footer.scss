@@ -2,10 +2,10 @@
 
 .footer {
   &__text {
+    color: $color-white;
     font-size: $font-size-x-small;
     text-align: center;
     margin: $spacing-s;
-   
   }
   &__names {
     font-weight: bold;
