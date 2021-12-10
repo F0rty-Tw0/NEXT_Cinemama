@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetError } from 'redux/actions';
+import Modal from 'react-bootstrap/Modal';
+
 const Error = ({ className }) => {
   const dispatch = useDispatch();
   const { error } = useSelector((state) => state.error);
@@ -14,6 +16,14 @@ const Error = ({ className }) => {
     }
   });
 
-  return <div className={className}>{error}</div>;
+  const handleClose = () => dispatch(resetError());
+
+  return (
+    <Modal className={className} show={!!error} onHide={handleClose}>
+      <Modal.Header className='error__message' closeButton>
+        <Modal.Title className='text-uppercase'>{error}</Modal.Title>
+      </Modal.Header>
+    </Modal>
+  );
 };
 export default Error;

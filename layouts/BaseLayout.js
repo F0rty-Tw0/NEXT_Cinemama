@@ -19,12 +19,12 @@ const BaseLayout = ({ className, title, description, children }) => {
         <div className='base-layout__wrapper'>
           <Container className='base-layout__container'>
             <Header className='base-layout__header' />
-            <Error className='base-layout__error' />
-            <Loading className='base-layout__loading' />
             <Carousel className='base-layout__carousel' />
             <NavBar className='base-layout__nav' />
             <section className='base-layout__content'>{children}</section>
             <Footer className='base-layout__footer' />
+            <Error className='base-layout__error' />
+            <Loading className='base-layout__loading' />
           </Container>
         </div>
       </main>

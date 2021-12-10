@@ -1,4 +1,4 @@
-import { SELECT_SEATS, RESET_SEATS } from '../types';
+import { SELECT_SEATS, RESET_SELECTED_SEATS } from '../types';
 
 const selectSeatsReducer = (
   state = {
@@ -21,7 +21,7 @@ const selectSeatsReducer = (
           selectedSeats: [...state.selectedSeats, action.payload],
         };
       }
-    case RESET_SEATS:
+    case RESET_SELECTED_SEATS:
       return {
         ...state,
         selectedSeats: [],

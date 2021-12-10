@@ -1,18 +1,21 @@
 import dayjs from 'dayjs';
 import wrapper from 'redux/store';
+import { useSelector } from 'react-redux';
 import BaseLayout from 'layouts/BaseLayout';
 import Schedules from 'components/schedules/Schedules';
 import SchedulePicker from 'components/schedules/SchedulePicker';
 import { getSchedulesBetweenDates } from 'endpoints/schedules';
 import { setError, setSchedules } from 'redux/actions';
 const Home = () => {
+  const { schedules } = useSelector((state) => state.schedules);
+
   return (
     <BaseLayout
       title='Welcome to the Cinemama Theaters'
       description='The best place to watch movies'
       className='base-layout__main'
     >
-      <SchedulePicker />
+      <SchedulePicker schedules={schedules} />
       <Schedules />
     </BaseLayout>
   );
