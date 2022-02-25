@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Image from 'next/image';
 import Modal from 'react-bootstrap/Modal';
 
-const Error = ({ className }) => {
+const Loading = ({ className }) => {
   const { isLoading } = useSelector((state) => state.loading);
   const router = useRouter();
 
@@ -37,9 +37,9 @@ const Error = ({ className }) => {
         src='/loader.svg'
         width='200'
         height='200'
-        alt='Cinemama logo'
+        alt='Loader image that spins'
       />
     </Modal>
   );
 };
-export default Error;
+export default Loading;
