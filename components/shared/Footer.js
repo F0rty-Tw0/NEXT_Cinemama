@@ -4,7 +4,7 @@ const Footer = ({ className }) => {
       <div className='footer__text'>
         &copy; Designed and developed by:{' '}
         <span className='footer__names'>
-         Pawel Stepien
+         Artiom Tofan
         </span>
       </div>
     </footer>
