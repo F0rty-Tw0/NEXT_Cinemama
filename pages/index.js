@@ -22,8 +22,9 @@ const Home = () => {
 };
 
 const getStaticProps = wrapper.getStaticProps((store) => async () => {
-  const today = dayjs().format('YYYY-MM-DD');
-  const dayAfterTomorrow = dayjs().add(2, 'day').format('YYYY-MM-DD');
+  const fakeToday = new Date(2021, 12, 10)
+  const today = dayjs(fakeToday).format('YYYY-MM-DD');
+  const dayAfterTomorrow = dayjs(fakeToday).add(2, 'day').format('YYYY-MM-DD');
   try {
     const schedules = await getSchedulesBetweenDates(today, dayAfterTomorrow);
     if (schedules.length > 0) {
